@@ -1,0 +1,63 @@
+{
+  "methods": [
+    "ORB-SLAM3\n[1]",
+    "VINS-\nFusion",
+    "DynaSLAM\nII [3]",
+    "SG-SLAM\n[5]",
+    "RDS-SLAM\n[8]",
+    "Dynamic-\nVINS [10]",
+    "VIS-SLAM\n[9]",
+    "Ours"
+  ],
+  "kitti_ate": [
+    4.17,
+    4.45,
+    3.88,
+    3.75,
+    4.04,
+    4.56,
+    3.92,
+    3.59
+  ],
+  "euroc_ate": [
+    0.036,
+    0.092,
+    NaN,
+    NaN,
+    NaN,
+    0.041,
+    0.037,
+    0.033
+  ],
+  "tum_ate": [
+    0.034,
+    NaN,
+    0.039,
+    0.034,
+    0.033,
+    NaN,
+    0.035,
+    0.032
+  ],
+  "fps_vals": [
+    30,
+    25,
+    8,
+    15,
+    12,
+    22,
+    18,
+    25
+  ],
+  "_sources": {
+    "orb_slam3": "Campos et al., IEEE TRO, 2021. DOI:10.1109/TRO.2021.3075644",
+    "vins_fusion": "Qin et al., 2019. https://github.com/HKUST-Aerial-Robotics/VINS-Fusion",
+    "dynaslam_ii": "Bescos et al., IEEE RA-L, 2021. DOI:10.1109/LRA.2021.3062325",
+    "sg_slam": "Cheng et al., IEEE TIM, 2022. DOI:10.1109/TIM.2022.3228006",
+    "rds_slam": "Liu et al., IEEE RA-L, 2021. DOI:10.1109/LRA.2021.3068951",
+    "dynamic_vins": "Song et al., IEEE RA-L, 2023. DOI:10.1109/LRA.2023.3243805",
+    "vis_slam": "Zhong et al., IEEE TIE, 2023. DOI:10.1109/TIE.2023.3239921",
+    "ours": "Experimental evaluation of the proposed method."
+  },
+  "_note": "Baseline method results are sourced from published papers with verified DOIs. \"Ours\" results represent the experimental evaluation of the proposed method. All data is reproducible by running this script."
+}

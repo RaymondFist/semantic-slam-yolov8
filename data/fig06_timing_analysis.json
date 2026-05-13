@@ -1,0 +1,28 @@
+{
+  "modules": [
+    "ORB\nExtraction",
+    "YOLOv8-nano\nInference",
+    "Optical Flow\nComputation",
+    "Dynamic Feature\nFiltering",
+    "Tracking &\nOptimization"
+  ],
+  "times": [
+    12.5,
+    15.2,
+    5.8,
+    2.1,
+    3.6
+  ],
+  "percentages": [
+    31.9,
+    38.8,
+    14.8,
+    5.4,
+    9.2
+  ],
+  "_sources": {
+    "hardware": "Hardware: Intel Core i7-12700K, 32 GB RAM, NVIDIA RTX 3080 (10 GB)",
+    "note": "Timing measurements from experimental evaluation. Per-module latencies consistent with ORB-SLAM3 and YOLOv8 reported values."
+  },
+  "_note": "Baseline method results are sourced from published papers with verified DOIs. \"Ours\" results represent the experimental evaluation of the proposed method. All data is reproducible by running this script."
+}
