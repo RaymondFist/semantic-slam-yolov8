@@ -1,0 +1,23 @@
+	Command being timed: "xvfb-run -a timeout --signal=TERM --kill-after=5 1200 /root/autodl-tmp/Script/semantic-slam-yolov8/src/cpp/build/semantic_slam_benchmark euroc /root/autodl-tmp/Script/semantic-slam-yolov8/data/datasets/EuRoC /root/autodl-tmp/Script/semantic-slam-yolov8/models/ORBvoc.txt /root/autodl-tmp/Script/semantic-slam-yolov8/src/cpp/config/EuRoC_MH_03_medium_semantic.yaml MH_03_medium /root/autodl-tmp/Script/semantic-slam-yolov8/output"
+	User time (seconds): 219.76
+	System time (seconds): 68.32
+	Percent of CPU this job got: 336%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:25.54
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 740780
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 488336
+	Minor (reclaiming a frame) page faults: 2028413
+	Voluntary context switches: 263341
+	Involuntary context switches: 11797
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 24
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

@@ -1,0 +1,89 @@
+{
+  "frame_id": 4360,
+  "timestamp": 4360.0,
+  "image_path": "image_0/004360.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.7663,
+      "bbox": [
+        153.1,
+        187.4,
+        267.5,
+        243.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.7145,
+      "bbox": [
+        465.7,
+        181.1,
+        553.2,
+        239.9
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 7,
+      "class_name": "truck",
+      "confidence": 0.5895,
+      "bbox": [
+        369.7,
+        163.2,
+        475.5,
+        236.9
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.4967,
+      "bbox": [
+        305.3,
+        186.1,
+        375.1,
+        238.8
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 72,
+      "class_name": "refrigerator",
+      "confidence": 0.474,
+      "bbox": [
+        967.3,
+        98.9,
+        1240.4,
+        375.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 5,
+  "num_dynamic": 4
+}

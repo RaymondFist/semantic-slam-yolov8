@@ -1,0 +1,25 @@
+{
+  "frame_id": 2605,
+  "timestamp": 1403636710.0135555,
+  "image_path": "mav0/cam0/data/1403636710013555456.png",
+  "detections": [
+    {
+      "class_id": 6,
+      "class_name": "train",
+      "confidence": 0.4707,
+      "bbox": [
+        503.8,
+        0.9,
+        751.1,
+        472.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

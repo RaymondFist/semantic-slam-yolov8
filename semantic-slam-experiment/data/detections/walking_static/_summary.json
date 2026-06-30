@@ -1,0 +1,19 @@
+{
+  "dataset": "/root/autodl-tmp/Script/semantic-slam-yolov8/data/datasets/TUM/rgbd_dataset_freiburg3_walking_static",
+  "model": "yolov8n-seg.pt",
+  "conf_threshold": 0.45,
+  "iou_threshold": 0.45,
+  "total_frames": 743,
+  "total_detections": 4632,
+  "total_dynamic": 1129,
+  "dynamic_class_ids": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    7,
+    16,
+    17
+  ]
+}

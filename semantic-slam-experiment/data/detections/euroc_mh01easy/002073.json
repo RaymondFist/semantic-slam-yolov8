@@ -1,0 +1,41 @@
+{
+  "frame_id": 2073,
+  "timestamp": 1403636683.4135556,
+  "image_path": "mav0/cam0/data/1403636683413555456.png",
+  "detections": [
+    {
+      "class_id": 3,
+      "class_name": "motorcycle",
+      "confidence": 0.5609,
+      "bbox": [
+        487.2,
+        263.9,
+        751.3,
+        480.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 71,
+      "class_name": "sink",
+      "confidence": 0.4881,
+      "bbox": [
+        210.2,
+        402.4,
+        479.1,
+        480.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 1
+}

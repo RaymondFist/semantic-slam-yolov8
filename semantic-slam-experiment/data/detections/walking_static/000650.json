@@ -1,0 +1,121 @@
+{
+  "frame_id": 650,
+  "timestamp": 1341846248.675831,
+  "image_path": "rgb/1341846248.675831.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9352,
+      "bbox": [
+        0.6,
+        205.2,
+        251.0,
+        479.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9045,
+      "bbox": [
+        368.8,
+        227.2,
+        570.9,
+        479.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8633,
+      "bbox": [
+        162.9,
+        250.3,
+        248.7,
+        320.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.7901,
+      "bbox": [
+        144.9,
+        331.7,
+        239.8,
+        351.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.7213,
+      "bbox": [
+        463.4,
+        384.1,
+        571.0,
+        479.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.7192,
+      "bbox": [
+        339.8,
+        243.6,
+        434.5,
+        331.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.5642,
+      "bbox": [
+        245.8,
+        348.4,
+        263.6,
+        358.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 7,
+  "num_dynamic": 2
+}

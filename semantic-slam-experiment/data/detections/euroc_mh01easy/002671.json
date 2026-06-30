@@ -1,0 +1,25 @@
+{
+  "frame_id": 2671,
+  "timestamp": 1403636713.3135555,
+  "image_path": "mav0/cam0/data/1403636713313555456.png",
+  "detections": [
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.5236,
+      "bbox": [
+        257.9,
+        264.9,
+        284.6,
+        340.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

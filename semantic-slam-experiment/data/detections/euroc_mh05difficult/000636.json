@@ -1,0 +1,41 @@
+{
+  "frame_id": 636,
+  "timestamp": 1403638549.8778296,
+  "image_path": "mav0/cam0/data/1403638549877829376.png",
+  "detections": [
+    {
+      "class_id": 4,
+      "class_name": "airplane",
+      "confidence": 0.5316,
+      "bbox": [
+        1.5,
+        13.0,
+        435.1,
+        467.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 3,
+      "class_name": "motorcycle",
+      "confidence": 0.4542,
+      "bbox": [
+        615.2,
+        301.8,
+        722.5,
+        396.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 1
+}

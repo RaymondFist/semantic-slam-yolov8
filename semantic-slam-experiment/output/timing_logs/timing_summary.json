@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "source": "autodl_deploy.sh timing_profiling",
+    "generated": "2026-06-17T12:28:24.815969Z"
+  },
+  "tum_walking_xyz": {
+    "wall_clock_sec": "0:37.42",
+    "user_time_sec": "125.87",
+    "system_time_sec": "24.80",
+    "max_rss_kb": "895236",
+    "cpu_percent": "402"
+  },
+  "kitti_00": {
+    "wall_clock_sec": "1:05.66",
+    "user_time_sec": "257.57",
+    "system_time_sec": "52.05",
+    "max_rss_kb": "1184488",
+    "cpu_percent": "471"
+  },
+  "euroc_mh_03": {
+    "wall_clock_sec": "1:25.54",
+    "user_time_sec": "219.76",
+    "system_time_sec": "68.32",
+    "max_rss_kb": "740780",
+    "cpu_percent": "336"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "frame_id": 832,
+  "timestamp": 832.0,
+  "image_path": "image_0/000832.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.6238,
+      "bbox": [
+        620.0,
+        184.6,
+        685.8,
+        228.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 1
+}

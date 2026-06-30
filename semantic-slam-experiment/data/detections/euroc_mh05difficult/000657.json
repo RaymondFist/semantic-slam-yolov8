@@ -1,0 +1,25 @@
+{
+  "frame_id": 657,
+  "timestamp": 1403638550.9278295,
+  "image_path": "mav0/cam0/data/1403638550927829504.png",
+  "detections": [
+    {
+      "class_id": 4,
+      "class_name": "airplane",
+      "confidence": 0.6979,
+      "bbox": [
+        0.8,
+        65.4,
+        460.5,
+        475.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

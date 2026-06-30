@@ -1,0 +1,25 @@
+{
+  "frame_id": 5,
+  "timestamp": 1403637130.788319,
+  "image_path": "mav0/cam0/data/1403637130788318976.png",
+  "detections": [
+    {
+      "class_id": 74,
+      "class_name": "clock",
+      "confidence": 0.4703,
+      "bbox": [
+        106.6,
+        43.7,
+        138.2,
+        75.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

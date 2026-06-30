@@ -1,0 +1,105 @@
+{
+  "frame_id": 241,
+  "timestamp": 1341846442.822072,
+  "image_path": "rgb/1341846442.822072.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8557,
+      "bbox": [
+        327.2,
+        0.0,
+        621.0,
+        479.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.8386,
+      "bbox": [
+        191.0,
+        316.4,
+        304.1,
+        354.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8173,
+      "bbox": [
+        142.1,
+        199.5,
+        290.6,
+        302.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.6368,
+      "bbox": [
+        286.8,
+        264.6,
+        303.3,
+        312.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 73,
+      "class_name": "book",
+      "confidence": 0.4593,
+      "bbox": [
+        112.4,
+        312.9,
+        192.9,
+        366.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.4578,
+      "bbox": [
+        52.4,
+        361.9,
+        75.1,
+        381.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 6,
+  "num_dynamic": 1
+}

@@ -1,0 +1,5 @@
+﻿Sequence,Challenge Type,Track Lost Count,Status
+TUM walking_halfsphere,Dynamic occlusion + fast rotation,0,Completed
+TUM walking_xyz,Dynamic occlusion,0,Completed
+KITTI 00 (challenge),Outdoor large-scale + loop closure,0,Completed
+EuRoC MH_05_difficult,Low texture + motion blur,0,Completed

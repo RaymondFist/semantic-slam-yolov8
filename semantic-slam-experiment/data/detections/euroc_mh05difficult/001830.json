@@ -1,0 +1,41 @@
+{
+  "frame_id": 1830,
+  "timestamp": 1403638609.5778294,
+  "image_path": "mav0/cam0/data/1403638609577829376.png",
+  "detections": [
+    {
+      "class_id": 3,
+      "class_name": "motorcycle",
+      "confidence": 0.5421,
+      "bbox": [
+        401.5,
+        362.5,
+        552.1,
+        478.6
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.4749,
+      "bbox": [
+        0.4,
+        174.7,
+        93.7,
+        479.8
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 2
+}

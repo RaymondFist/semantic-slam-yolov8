@@ -1,0 +1,25 @@
+{
+  "frame_id": 1774,
+  "timestamp": 1403638606.7778294,
+  "image_path": "mav0/cam0/data/1403638606777829376.png",
+  "detections": [
+    {
+      "class_id": 40,
+      "class_name": "wine glass",
+      "confidence": 0.4615,
+      "bbox": [
+        553.4,
+        187.4,
+        704.5,
+        474.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

@@ -1,0 +1,41 @@
+{
+  "frame_id": 1810,
+  "timestamp": 1403637221.038319,
+  "image_path": "mav0/cam0/data/1403637221038319104.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.6289,
+      "bbox": [
+        50.0,
+        122.7,
+        112.6,
+        219.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 19,
+      "class_name": "cow",
+      "confidence": 0.4562,
+      "bbox": [
+        0.2,
+        197.2,
+        177.3,
+        415.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 1
+}

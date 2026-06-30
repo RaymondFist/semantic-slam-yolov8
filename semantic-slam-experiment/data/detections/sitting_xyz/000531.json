@@ -1,0 +1,89 @@
+{
+  "frame_id": 531,
+  "timestamp": 1341845838.64169,
+  "image_path": "rgb/1341845838.641690.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9066,
+      "bbox": [
+        361.7,
+        351.2,
+        571.0,
+        479.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.8824,
+      "bbox": [
+        83.7,
+        426.6,
+        192.0,
+        451.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8666,
+      "bbox": [
+        0.3,
+        291.3,
+        93.6,
+        479.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8315,
+      "bbox": [
+        107.9,
+        328.5,
+        203.4,
+        403.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.5872,
+      "bbox": [
+        326.0,
+        439.3,
+        398.0,
+        457.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 5,
+  "num_dynamic": 2
+}

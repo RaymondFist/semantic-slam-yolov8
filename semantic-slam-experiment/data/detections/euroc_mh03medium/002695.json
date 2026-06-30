@@ -1,0 +1,25 @@
+{
+  "frame_id": 2695,
+  "timestamp": 1403637265.288319,
+  "image_path": "mav0/cam0/data/1403637265288318976.png",
+  "detections": [
+    {
+      "class_id": 59,
+      "class_name": "bed",
+      "confidence": 0.5116,
+      "bbox": [
+        0.3,
+        43.5,
+        746.3,
+        463.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

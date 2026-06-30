@@ -1,0 +1,57 @@
+{
+  "frame_id": 546,
+  "timestamp": 1341846453.11141,
+  "image_path": "rgb/1341846453.111410.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9034,
+      "bbox": [
+        217.1,
+        0.0,
+        449.2,
+        476.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8874,
+      "bbox": [
+        409.5,
+        133.2,
+        598.6,
+        467.9
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.6197,
+      "bbox": [
+        149.1,
+        237.8,
+        245.0,
+        267.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 3,
+  "num_dynamic": 2
+}

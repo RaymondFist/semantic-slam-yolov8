@@ -1,0 +1,137 @@
+{
+  "frame_id": 428,
+  "timestamp": 1341845835.15775,
+  "image_path": "rgb/1341845835.157750.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9002,
+      "bbox": [
+        179.0,
+        161.5,
+        524.1,
+        477.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8378,
+      "bbox": [
+        89.5,
+        191.5,
+        180.7,
+        264.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.7716,
+      "bbox": [
+        0.2,
+        138.2,
+        168.7,
+        472.8
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.6261,
+      "bbox": [
+        178.6,
+        292.2,
+        196.3,
+        304.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.6145,
+      "bbox": [
+        330.2,
+        311.2,
+        523.4,
+        479.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.5549,
+      "bbox": [
+        281.4,
+        174.4,
+        410.9,
+        266.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.5404,
+      "bbox": [
+        66.6,
+        280.1,
+        171.5,
+        298.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 63,
+      "class_name": "laptop",
+      "confidence": 0.496,
+      "bbox": [
+        281.2,
+        174.1,
+        408.6,
+        269.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 8,
+  "num_dynamic": 2
+}

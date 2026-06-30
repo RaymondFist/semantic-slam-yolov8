@@ -1,0 +1,25 @@
+{
+  "frame_id": 17,
+  "timestamp": 1403636580.6135554,
+  "image_path": "mav0/cam0/data/1403636580613555456.png",
+  "detections": [
+    {
+      "class_id": 8,
+      "class_name": "boat",
+      "confidence": 0.5447,
+      "bbox": [
+        0.7,
+        68.4,
+        644.9,
+        474.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

@@ -1,0 +1,6 @@
+dynthresh_0.3=0.283685
+dynthresh_0.4=0.271894
+dynthresh_0.5=0.279017
+dynthresh_0.6=0.277027
+dynthresh_0.7=0.278439
+dynthresh_0.8=0.275720

@@ -1,0 +1,57 @@
+{
+  "frame_id": 2389,
+  "timestamp": 2389.0,
+  "image_path": "image_0/002389.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.9298,
+      "bbox": [
+        1.1,
+        226.5,
+        393.2,
+        372.6
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.8751,
+      "bbox": [
+        346.9,
+        204.6,
+        487.3,
+        310.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.6801,
+      "bbox": [
+        503.2,
+        196.5,
+        557.4,
+        232.2
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 3,
+  "num_dynamic": 3
+}

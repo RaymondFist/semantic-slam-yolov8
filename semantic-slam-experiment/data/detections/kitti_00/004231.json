@@ -1,0 +1,25 @@
+{
+  "frame_id": 4231,
+  "timestamp": 4231.0,
+  "image_path": "image_0/004231.png",
+  "detections": [
+    {
+      "class_id": 15,
+      "class_name": "cat",
+      "confidence": 0.6534,
+      "bbox": [
+        0.5,
+        54.5,
+        334.0,
+        336.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

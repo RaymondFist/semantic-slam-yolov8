@@ -1,0 +1,41 @@
+{
+  "frame_id": 2550,
+  "timestamp": 1403637258.038319,
+  "image_path": "mav0/cam0/data/1403637258038319104.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.5207,
+      "bbox": [
+        81.8,
+        103.6,
+        185.7,
+        258.6
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 74,
+      "class_name": "clock",
+      "confidence": 0.4979,
+      "bbox": [
+        82.4,
+        3.3,
+        116.8,
+        36.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 1
+}

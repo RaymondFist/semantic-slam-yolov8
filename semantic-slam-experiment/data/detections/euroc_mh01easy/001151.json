@@ -1,0 +1,25 @@
+{
+  "frame_id": 1151,
+  "timestamp": 1403636637.3135555,
+  "image_path": "mav0/cam0/data/1403636637313555456.png",
+  "detections": [
+    {
+      "class_id": 41,
+      "class_name": "cup",
+      "confidence": 0.4955,
+      "bbox": [
+        0.8,
+        411.3,
+        105.4,
+        480.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

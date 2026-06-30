@@ -1,0 +1,75 @@
+%YAML:1.0
+
+# ============================================================================
+# Ablation: YOLO + Geometric Constraints (no semantic weight) — KITTI 00 Stereo
+# ============================================================================
+# NOTE: OpenCV %YAML:1.0 does NOT support nested mappings. All keys must be
+# flat dot-separated at top level, matching ORB-SLAM3's format (Camera.fx, etc.)
+
+yolo_detector.onnx_path: "../../models/yolov8n-seg.onnx"
+yolo_detector.engine_path: "../../models/yolov8n-seg.trt"
+yolo_detector.class_names_path: "../../models/coco.names"
+yolo_detector.detection_dir: "TO_BE_OVERRIDDEN_BY_AUTODL_DEPLOY"
+yolo_detector.conf_threshold: 0.45
+yolo_detector.nms_threshold: 0.45
+yolo_detector.input_width: 640
+yolo_detector.input_height: 640
+yolo_detector.cache_frames: 3
+
+dynamic_filter.flow_threshold_px: 2.5
+dynamic_filter.lk_window_size: 21
+dynamic_filter.lk_max_level: 3
+dynamic_filter.min_corners_per_region: 10
+dynamic_filter.mask_dilation_kernel: 5
+
+semantic_weights.building_weight: 1.0
+semantic_weights.traffic_sign_weight: 1.0
+semantic_weights.traffic_light_weight: 1.0
+semantic_weights.road_weight: 1.0
+semantic_weights.vegetation_weight: 1.0
+semantic_weights.unknown_weight: 1.0
+semantic_weights.consistency_lambda: 0.0
+
+# ============================================================================
+# ORB-SLAM3 Standard Settings (KITTI Stereo)
+# ============================================================================
+Camera.type: "PinHole"
+
+Camera.fx: 718.856
+Camera.fy: 718.856
+Camera.cx: 607.1928
+Camera.cy: 185.2157
+
+Camera.k1: 0.0
+Camera.k2: 0.0
+Camera.p1: 0.0
+Camera.p2: 0.0
+Camera.k3: 0.0
+
+Camera.width: 1241
+Camera.height: 376
+
+Camera.fps: 10.0
+Camera.bf: 386.0
+Camera.RGB: 1
+
+ThDepth: 35.0
+
+ORBextractor.nFeatures: 1200
+ORBextractor.scaleFactor: 1.2
+ORBextractor.nLevels: 8
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+IMU: 0
+
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1.0
+Viewer.GraphLineWidth: 0.9
+Viewer.PointSize: 2.0
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3.0
+Viewer.ViewpointX: 0.0
+Viewer.ViewpointY: -0.7
+Viewer.ViewpointZ: -3.5
+Viewer.ViewpointF: 500.0

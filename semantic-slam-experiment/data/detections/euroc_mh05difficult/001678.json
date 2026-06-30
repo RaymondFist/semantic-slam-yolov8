@@ -1,0 +1,25 @@
+{
+  "frame_id": 1678,
+  "timestamp": 1403638601.9778295,
+  "image_path": "mav0/cam0/data/1403638601977829376.png",
+  "detections": [
+    {
+      "class_id": 69,
+      "class_name": "oven",
+      "confidence": 0.5514,
+      "bbox": [
+        6.5,
+        28.5,
+        750.0,
+        469.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

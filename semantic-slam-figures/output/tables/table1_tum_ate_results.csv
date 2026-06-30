@@ -1,0 +1,6 @@
+﻿Sequence,Baseline ATE (m),YOLO-Mask ATE (m),Improvement,Scene Type
+sitting_static,0.0072,0.0102,-41.4%,Static
+sitting_xyz,0.0092,0.0311,-239.5%,Static
+walking_static,0.0252,0.0117,+53.6%,Dynamic
+walking_xyz,0.2856,0.0168,+94.1%,Dynamic
+walking_halfsphere,0.2034,0.0271,+86.7%,Dynamic

@@ -1,0 +1,25 @@
+{
+  "frame_id": 1093,
+  "timestamp": 1403637185.188319,
+  "image_path": "mav0/cam0/data/1403637185188318976.png",
+  "detections": [
+    {
+      "class_id": 73,
+      "class_name": "book",
+      "confidence": 0.5408,
+      "bbox": [
+        416.7,
+        204.9,
+        604.8,
+        347.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

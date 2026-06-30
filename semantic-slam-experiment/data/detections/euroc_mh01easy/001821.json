@@ -1,0 +1,25 @@
+{
+  "frame_id": 1821,
+  "timestamp": 1403636670.8135555,
+  "image_path": "mav0/cam0/data/1403636670813555456.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.617,
+      "bbox": [
+        632.2,
+        242.6,
+        713.7,
+        375.2
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 1
+}

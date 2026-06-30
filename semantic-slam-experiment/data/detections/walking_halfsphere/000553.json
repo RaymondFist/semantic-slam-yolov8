@@ -1,0 +1,57 @@
+{
+  "frame_id": 553,
+  "timestamp": 1341846453.346478,
+  "image_path": "rgb/1341846453.346478.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9267,
+      "bbox": [
+        394.2,
+        171.1,
+        604.9,
+        479.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9266,
+      "bbox": [
+        174.0,
+        0.7,
+        425.3,
+        472.9
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 16,
+      "class_name": "dog",
+      "confidence": 0.5454,
+      "bbox": [
+        377.0,
+        370.2,
+        469.0,
+        479.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 3,
+  "num_dynamic": 3
+}

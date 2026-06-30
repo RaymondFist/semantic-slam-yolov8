@@ -1,0 +1,25 @@
+{
+  "frame_id": 2740,
+  "timestamp": 1403636716.7635558,
+  "image_path": "mav0/cam0/data/1403636716763555584.png",
+  "detections": [
+    {
+      "class_id": 61,
+      "class_name": "toilet",
+      "confidence": 0.5518,
+      "bbox": [
+        175.1,
+        263.9,
+        238.7,
+        344.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

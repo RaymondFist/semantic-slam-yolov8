@@ -1,0 +1,25 @@
+{
+  "frame_id": 1825,
+  "timestamp": 1403637221.788319,
+  "image_path": "mav0/cam0/data/1403637221788318976.png",
+  "detections": [
+    {
+      "class_id": 19,
+      "class_name": "cow",
+      "confidence": 0.4854,
+      "bbox": [
+        44.2,
+        144.7,
+        241.5,
+        326.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "source": "autodl_deploy.sh parameter_sweep",
+    "generated": "2026-06-17T12:55:20.989719Z",
+    "representative_sequence": "TUM fr3/walking_xyz",
+    "note": "ATE RMSE values for parameter grid search. null indicates experiment failure."
+  },
+  "orb_features": {
+    "orb_500": 0.280548,
+    "orb_800": 0.281851,
+    "orb_1000": 0.273511,
+    "orb_1200": 0.280186,
+    "orb_1500": 0.284893,
+    "orb_2000": 0.276629
+  },
+  "semantic_weight": {
+    "semweight_0.0": 0.271473,
+    "semweight_0.2": 0.283091,
+    "semweight_0.4": 0.269283,
+    "semweight_0.5": 0.28111,
+    "semweight_0.8": 0.278646,
+    "semweight_1.0": 0.286891
+  },
+  "dynamic_threshold": {
+    "dynthresh_0.3": 0.283685,
+    "dynthresh_0.4": 0.271894,
+    "dynthresh_0.5": 0.279017,
+    "dynthresh_0.6": 0.277027,
+    "dynthresh_0.7": 0.278439,
+    "dynthresh_0.8": 0.27572
+  }
+}

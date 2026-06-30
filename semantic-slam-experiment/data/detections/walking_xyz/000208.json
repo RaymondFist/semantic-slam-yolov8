@@ -1,0 +1,25 @@
+{
+  "frame_id": 208,
+  "timestamp": 1341846320.525911,
+  "image_path": "rgb/1341846320.525911.png",
+  "detections": [
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.653,
+      "bbox": [
+        356.0,
+        321.9,
+        430.1,
+        392.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

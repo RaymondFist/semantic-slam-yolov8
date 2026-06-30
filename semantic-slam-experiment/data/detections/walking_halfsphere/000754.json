@@ -1,0 +1,25 @@
+{
+  "frame_id": 754,
+  "timestamp": 1341846460.113981,
+  "image_path": "rgb/1341846460.113981.png",
+  "detections": [
+    {
+      "class_id": 76,
+      "class_name": "scissors",
+      "confidence": 0.6421,
+      "bbox": [
+        22.6,
+        245.6,
+        202.7,
+        423.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

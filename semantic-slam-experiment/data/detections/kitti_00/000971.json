@@ -1,0 +1,25 @@
+{
+  "frame_id": 971,
+  "timestamp": 971.0,
+  "image_path": "image_0/000971.png",
+  "detections": [
+    {
+      "class_id": 5,
+      "class_name": "bus",
+      "confidence": 0.7696,
+      "bbox": [
+        389.6,
+        150.4,
+        510.8,
+        258.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 1
+}

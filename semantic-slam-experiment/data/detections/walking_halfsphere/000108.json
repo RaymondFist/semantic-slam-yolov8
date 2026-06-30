@@ -1,0 +1,137 @@
+{
+  "frame_id": 108,
+  "timestamp": 1341846438.329987,
+  "image_path": "rgb/1341846438.329987.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9182,
+      "bbox": [
+        0.1,
+        109.4,
+        124.7,
+        479.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.8008,
+      "bbox": [
+        305.5,
+        312.5,
+        392.3,
+        343.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.7586,
+      "bbox": [
+        340.2,
+        229.8,
+        416.8,
+        302.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.669,
+      "bbox": [
+        506.9,
+        356.9,
+        639.0,
+        404.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.6555,
+      "bbox": [
+        520.4,
+        218.0,
+        639.5,
+        345.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.6239,
+      "bbox": [
+        366.5,
+        299.6,
+        402.1,
+        315.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.4615,
+      "bbox": [
+        388.7,
+        339.5,
+        413.1,
+        352.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.4612,
+      "bbox": [
+        469.8,
+        325.2,
+        487.6,
+        343.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 8,
+  "num_dynamic": 1
+}

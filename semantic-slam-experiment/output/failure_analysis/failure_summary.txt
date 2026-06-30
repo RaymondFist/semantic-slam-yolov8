@@ -1,0 +1,8 @@
+tum_walking_halfsphere||0
+0
+tum_walking_xyz||0
+0
+kitti_00_challenge||0
+0
+euroc_MH_05_difficult|low_texture_motion_blur|0
+0

@@ -1,0 +1,57 @@
+{
+  "frame_id": 168,
+  "timestamp": 1341846319.186069,
+  "image_path": "rgb/1341846319.186069.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8127,
+      "bbox": [
+        327.0,
+        43.0,
+        507.2,
+        478.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.6946,
+      "bbox": [
+        538.7,
+        280.0,
+        639.6,
+        383.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 71,
+      "class_name": "sink",
+      "confidence": 0.5769,
+      "bbox": [
+        305.7,
+        366.6,
+        345.6,
+        427.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 3,
+  "num_dynamic": 1
+}

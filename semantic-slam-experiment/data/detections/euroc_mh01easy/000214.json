@@ -1,0 +1,25 @@
+{
+  "frame_id": 214,
+  "timestamp": 1403636590.4635556,
+  "image_path": "mav0/cam0/data/1403636590463555584.png",
+  "detections": [
+    {
+      "class_id": 28,
+      "class_name": "suitcase",
+      "confidence": 0.4718,
+      "bbox": [
+        48.3,
+        192.3,
+        184.9,
+        305.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

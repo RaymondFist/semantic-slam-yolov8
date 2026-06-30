@@ -1,0 +1,137 @@
+{
+  "frame_id": 1021,
+  "timestamp": 1341845855.233747,
+  "image_path": "rgb/1341845855.233747.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.923,
+      "bbox": [
+        61.0,
+        98.2,
+        274.0,
+        449.9
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.894,
+      "bbox": [
+        185.7,
+        165.7,
+        271.9,
+        237.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8877,
+      "bbox": [
+        306.6,
+        130.7,
+        639.0,
+        452.6
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.8388,
+      "bbox": [
+        433.4,
+        299.7,
+        637.6,
+        479.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8368,
+      "bbox": [
+        371.5,
+        154.0,
+        506.7,
+        249.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.7155,
+      "bbox": [
+        280.6,
+        262.0,
+        297.6,
+        273.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.5467,
+      "bbox": [
+        500.9,
+        218.4,
+        517.1,
+        262.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 36,
+      "class_name": "skateboard",
+      "confidence": 0.4615,
+      "bbox": [
+        82.0,
+        425.2,
+        243.6,
+        479.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 8,
+  "num_dynamic": 2
+}

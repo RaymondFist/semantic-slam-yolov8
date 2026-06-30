@@ -1,0 +1,41 @@
+{
+  "frame_id": 3772,
+  "timestamp": 3772.0,
+  "image_path": "image_0/003772.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.878,
+      "bbox": [
+        728.3,
+        199.7,
+        858.2,
+        290.5
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 11,
+      "class_name": "stop sign",
+      "confidence": 0.4535,
+      "bbox": [
+        7.9,
+        54.4,
+        51.7,
+        109.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 1
+}

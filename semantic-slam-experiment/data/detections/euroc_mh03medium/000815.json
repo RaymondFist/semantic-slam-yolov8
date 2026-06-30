@@ -1,0 +1,25 @@
+{
+  "frame_id": 815,
+  "timestamp": 1403637171.288319,
+  "image_path": "mav0/cam0/data/1403637171288318976.png",
+  "detections": [
+    {
+      "class_id": 68,
+      "class_name": "microwave",
+      "confidence": 0.518,
+      "bbox": [
+        146.4,
+        96.2,
+        743.9,
+        435.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

@@ -1,0 +1,57 @@
+{
+  "frame_id": 2809,
+  "timestamp": 2809.0,
+  "image_path": "image_0/002809.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.6805,
+      "bbox": [
+        256.7,
+        194.0,
+        437.0,
+        322.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.5842,
+      "bbox": [
+        412.9,
+        186.8,
+        463.6,
+        236.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 9,
+      "class_name": "traffic light",
+      "confidence": 0.527,
+      "bbox": [
+        160.5,
+        43.9,
+        188.5,
+        79.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 3,
+  "num_dynamic": 2
+}

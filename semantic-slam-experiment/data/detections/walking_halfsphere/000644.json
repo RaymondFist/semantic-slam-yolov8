@@ -1,0 +1,41 @@
+{
+  "frame_id": 644,
+  "timestamp": 1341846456.42993,
+  "image_path": "rgb/1341846456.429930.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8834,
+      "bbox": [
+        44.3,
+        266.6,
+        429.6,
+        479.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.6103,
+      "bbox": [
+        504.3,
+        2.3,
+        639.4,
+        476.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 2
+}

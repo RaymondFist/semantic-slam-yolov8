@@ -1,0 +1,25 @@
+{
+  "frame_id": 1089,
+  "timestamp": 1403638572.5278296,
+  "image_path": "mav0/cam0/data/1403638572527829504.png",
+  "detections": [
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.4889,
+      "bbox": [
+        429.6,
+        217.9,
+        539.8,
+        341.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

@@ -1,0 +1,73 @@
+{
+  "frame_id": 4401,
+  "timestamp": 4401.0,
+  "image_path": "image_0/004401.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8361,
+      "bbox": [
+        930.9,
+        178.3,
+        1025.1,
+        363.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.8355,
+      "bbox": [
+        0.2,
+        185.9,
+        89.7,
+        257.5
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.763,
+      "bbox": [
+        259.7,
+        181.0,
+        372.5,
+        227.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 36,
+      "class_name": "skateboard",
+      "confidence": 0.5164,
+      "bbox": [
+        935.2,
+        344.7,
+        1021.0,
+        375.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 4,
+  "num_dynamic": 3
+}

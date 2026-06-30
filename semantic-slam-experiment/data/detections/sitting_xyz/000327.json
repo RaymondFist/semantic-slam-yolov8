@@ -1,0 +1,105 @@
+{
+  "frame_id": 327,
+  "timestamp": 1341845831.773629,
+  "image_path": "rgb/1341845831.773629.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8937,
+      "bbox": [
+        275.7,
+        213.2,
+        555.9,
+        479.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.848,
+      "bbox": [
+        103.1,
+        247.8,
+        196.8,
+        325.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.6519,
+      "bbox": [
+        297.2,
+        226.3,
+        429.2,
+        325.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.6462,
+      "bbox": [
+        0.0,
+        199.7,
+        187.3,
+        479.5
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.5042,
+      "bbox": [
+        195.8,
+        349.7,
+        214.9,
+        363.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.4597,
+      "bbox": [
+        427.8,
+        284.8,
+        445.0,
+        333.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 6,
+  "num_dynamic": 2
+}

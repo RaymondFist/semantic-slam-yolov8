@@ -1,0 +1,73 @@
+{
+  "frame_id": 188,
+  "timestamp": 1341845827.045694,
+  "image_path": "rgb/1341845827.045694.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8747,
+      "bbox": [
+        194.2,
+        167.6,
+        428.0,
+        479.2
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.7793,
+      "bbox": [
+        480.5,
+        174.6,
+        629.1,
+        274.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.6899,
+      "bbox": [
+        287.6,
+        204.5,
+        382.3,
+        286.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.4696,
+      "bbox": [
+        478.8,
+        322.0,
+        639.6,
+        478.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 4,
+  "num_dynamic": 2
+}

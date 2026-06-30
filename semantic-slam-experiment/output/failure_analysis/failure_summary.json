@@ -1,0 +1,36 @@
+{
+  "_meta": {
+    "source": "autodl_deploy.sh failure_analysis",
+    "generated": "2026-06-17T12:34:21.353572Z",
+    "note": "track_lost_count=0 \u8868\u793a\u5168\u7a0b\u8ddf\u8e2a\u6210\u529f\u3002>0 \u8868\u793a\u5b58\u5728\u8ddf\u8e2a\u4e22\u5931\u6bb5\uff0c\u9700\u4eba\u5de5\u8fdb\u4e00\u6b65\u6807\u6ce8\u6545\u969c\u7c7b\u578b\u3002"
+  },
+  "challenge_sequences": {
+    "tum_walking_halfsphere": {
+      "challenge_type": "",
+      "track_lost_count": 0,
+      "status": "completed"
+    },
+    "tum_walking_xyz": {
+      "challenge_type": "",
+      "track_lost_count": 0,
+      "status": "completed"
+    },
+    "kitti_00_challenge": {
+      "challenge_type": "",
+      "track_lost_count": 0,
+      "status": "completed"
+    },
+    "euroc_MH_05_difficult": {
+      "challenge_type": "low_texture_motion_blur",
+      "track_lost_count": 0,
+      "status": "completed"
+    }
+  },
+  "failure_categories": [
+    "dynamic_occlusion",
+    "fast_motion",
+    "outdoor_large_scale",
+    "low_texture_motion_blur",
+    "lighting_change"
+  ]
+}

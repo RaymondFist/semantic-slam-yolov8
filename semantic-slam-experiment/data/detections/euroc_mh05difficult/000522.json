@@ -1,0 +1,41 @@
+{
+  "frame_id": 522,
+  "timestamp": 1403638544.1778295,
+  "image_path": "mav0/cam0/data/1403638544177829376.png",
+  "detections": [
+    {
+      "class_id": 71,
+      "class_name": "sink",
+      "confidence": 0.4818,
+      "bbox": [
+        402.9,
+        279.6,
+        751.6,
+        476.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.4603,
+      "bbox": [
+        119.9,
+        370.0,
+        165.5,
+        477.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 0
+}

@@ -1,0 +1,137 @@
+{
+  "frame_id": 793,
+  "timestamp": 1341845847.525805,
+  "image_path": "rgb/1341845847.525805.png",
+  "detections": [
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.9216,
+      "bbox": [
+        417.0,
+        215.0,
+        637.9,
+        473.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9032,
+      "bbox": [
+        17.6,
+        39.5,
+        245.3,
+        396.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8962,
+      "bbox": [
+        300.0,
+        61.9,
+        639.4,
+        419.2
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8128,
+      "bbox": [
+        161.0,
+        125.0,
+        252.6,
+        195.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8067,
+      "bbox": [
+        355.2,
+        107.8,
+        495.1,
+        205.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.6348,
+      "bbox": [
+        258.1,
+        217.8,
+        275.5,
+        227.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.5689,
+      "bbox": [
+        167.2,
+        208.7,
+        247.4,
+        225.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.4758,
+      "bbox": [
+        383.2,
+        212.1,
+        453.7,
+        226.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 8,
+  "num_dynamic": 2
+}

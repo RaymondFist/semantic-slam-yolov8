@@ -1,0 +1,25 @@
+{
+  "frame_id": 220,
+  "timestamp": 1403636590.7635558,
+  "image_path": "mav0/cam0/data/1403636590763555584.png",
+  "detections": [
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.5698,
+      "bbox": [
+        0.1,
+        206.3,
+        109.3,
+        310.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

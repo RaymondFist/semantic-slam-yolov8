@@ -1,0 +1,7 @@
+﻿Sequence,Baseline ATE (m),YOLO-Mask ATE (m),Improvement,Interpretation
+TUM sitting_static,0.0072,0.0102,-41.4%,False dynamic: sitting person masked
+TUM sitting_xyz,0.0092,0.0311,-239.5%,False dynamic: person occupies large area
+TUM walking_static,0.0252,0.0117,+53.6%,Dynamic features removed successfully
+TUM walking_xyz,0.2856,0.0168,+94.1%,Strongest improvement: two people walking
+TUM walking_halfsphere,0.2034,0.0271,+86.7%,Rotation + walking handled well
+KITTI 00,0.9671,1.1130,-15.1%,Sparse dynamics + loop closure; false dynamic dominates

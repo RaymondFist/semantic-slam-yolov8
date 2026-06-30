@@ -1,0 +1,41 @@
+{
+  "frame_id": 857,
+  "timestamp": 1403638560.9278295,
+  "image_path": "mav0/cam0/data/1403638560927829504.png",
+  "detections": [
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.6107,
+      "bbox": [
+        403.8,
+        234.0,
+        536.4,
+        477.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.464,
+      "bbox": [
+        516.2,
+        205.5,
+        614.1,
+        476.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 0
+}

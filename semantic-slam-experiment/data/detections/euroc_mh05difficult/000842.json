@@ -1,0 +1,25 @@
+{
+  "frame_id": 842,
+  "timestamp": 1403638560.1778295,
+  "image_path": "mav0/cam0/data/1403638560177829376.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.4685,
+      "bbox": [
+        1.8,
+        180.6,
+        237.5,
+        476.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 1
+}

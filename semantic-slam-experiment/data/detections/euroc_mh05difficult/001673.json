@@ -1,0 +1,41 @@
+{
+  "frame_id": 1673,
+  "timestamp": 1403638601.7278297,
+  "image_path": "mav0/cam0/data/1403638601727829504.png",
+  "detections": [
+    {
+      "class_id": 69,
+      "class_name": "oven",
+      "confidence": 0.6389,
+      "bbox": [
+        2.8,
+        14.7,
+        749.0,
+        474.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.5827,
+      "bbox": [
+        159.3,
+        124.9,
+        258.5,
+        441.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 0
+}

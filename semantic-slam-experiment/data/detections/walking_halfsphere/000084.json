@@ -1,0 +1,57 @@
+{
+  "frame_id": 84,
+  "timestamp": 1341846437.536428,
+  "image_path": "rgb/1341846437.536428.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9417,
+      "bbox": [
+        0.3,
+        92.8,
+        172.0,
+        478.6
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8227,
+      "bbox": [
+        341.2,
+        0.0,
+        580.4,
+        479.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 73,
+      "class_name": "book",
+      "confidence": 0.5497,
+      "bbox": [
+        523.5,
+        274.9,
+        599.4,
+        338.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 3,
+  "num_dynamic": 2
+}

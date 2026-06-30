@@ -1,0 +1,25 @@
+{
+  "frame_id": 2889,
+  "timestamp": 2889.0,
+  "image_path": "image_0/002889.png",
+  "detections": [
+    {
+      "class_id": 6,
+      "class_name": "train",
+      "confidence": 0.6464,
+      "bbox": [
+        1088.1,
+        261.7,
+        1240.4,
+        370.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

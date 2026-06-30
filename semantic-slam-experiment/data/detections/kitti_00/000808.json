@@ -1,0 +1,25 @@
+{
+  "frame_id": 808,
+  "timestamp": 808.0,
+  "image_path": "image_0/000808.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.5925,
+      "bbox": [
+        433.3,
+        166.6,
+        463.6,
+        237.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 1
+}

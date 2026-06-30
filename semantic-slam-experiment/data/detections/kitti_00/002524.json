@@ -1,0 +1,89 @@
+{
+  "frame_id": 2524,
+  "timestamp": 2524.0,
+  "image_path": "image_0/002524.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.8656,
+      "bbox": [
+        1.0,
+        215.6,
+        242.3,
+        371.9
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.8444,
+      "bbox": [
+        233.5,
+        182.9,
+        467.0,
+        338.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.6757,
+      "bbox": [
+        683.2,
+        165.6,
+        890.4,
+        240.8
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 12,
+      "class_name": "parking meter",
+      "confidence": 0.614,
+      "bbox": [
+        275.9,
+        0.7,
+        357.6,
+        129.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.5177,
+      "bbox": [
+        628.0,
+        156.9,
+        688.5,
+        219.8
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 5,
+  "num_dynamic": 4
+}

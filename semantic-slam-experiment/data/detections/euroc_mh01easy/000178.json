@@ -1,0 +1,25 @@
+{
+  "frame_id": 178,
+  "timestamp": 1403636588.6635556,
+  "image_path": "mav0/cam0/data/1403636588663555584.png",
+  "detections": [
+    {
+      "class_id": 13,
+      "class_name": "bench",
+      "confidence": 0.7868,
+      "bbox": [
+        1.1,
+        30.7,
+        612.2,
+        477.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

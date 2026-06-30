@@ -1,0 +1,25 @@
+{
+  "frame_id": 3971,
+  "timestamp": 3971.0,
+  "image_path": "image_0/003971.png",
+  "detections": [
+    {
+      "class_id": 7,
+      "class_name": "truck",
+      "confidence": 0.5312,
+      "bbox": [
+        0.4,
+        161.5,
+        121.2,
+        339.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 1
+}

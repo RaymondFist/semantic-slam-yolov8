@@ -1,0 +1,25 @@
+{
+  "frame_id": 1670,
+  "timestamp": 1403636663.2635558,
+  "image_path": "mav0/cam0/data/1403636663263555584.png",
+  "detections": [
+    {
+      "class_id": 71,
+      "class_name": "sink",
+      "confidence": 0.6779,
+      "bbox": [
+        547.6,
+        157.4,
+        751.5,
+        257.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

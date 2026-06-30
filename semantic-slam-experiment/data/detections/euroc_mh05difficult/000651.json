@@ -1,0 +1,41 @@
+{
+  "frame_id": 651,
+  "timestamp": 1403638550.6278296,
+  "image_path": "mav0/cam0/data/1403638550627829504.png",
+  "detections": [
+    {
+      "class_id": 4,
+      "class_name": "airplane",
+      "confidence": 0.6834,
+      "bbox": [
+        1.2,
+        41.3,
+        458.5,
+        455.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.5756,
+      "bbox": [
+        390.2,
+        371.8,
+        444.9,
+        480.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 0
+}

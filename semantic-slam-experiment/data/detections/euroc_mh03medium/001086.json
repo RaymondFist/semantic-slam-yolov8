@@ -1,0 +1,25 @@
+{
+  "frame_id": 1086,
+  "timestamp": 1403637184.8383193,
+  "image_path": "mav0/cam0/data/1403637184838319104.png",
+  "detections": [
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.47,
+      "bbox": [
+        569.1,
+        265.7,
+        611.8,
+        290.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

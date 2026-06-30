@@ -1,0 +1,41 @@
+{
+  "frame_id": 1441,
+  "timestamp": 1403637202.588319,
+  "image_path": "mav0/cam0/data/1403637202588318976.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.5553,
+      "bbox": [
+        163.2,
+        151.0,
+        193.5,
+        231.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 6,
+      "class_name": "train",
+      "confidence": 0.4579,
+      "bbox": [
+        370.7,
+        0.3,
+        750.0,
+        457.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 1
+}

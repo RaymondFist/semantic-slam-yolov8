@@ -1,0 +1,24 @@
+Command exited with non-zero status 139
+	Command being timed: "xvfb-run -a timeout --signal=TERM --kill-after=5 1200 /root/autodl-tmp/Script/semantic-slam-yolov8/src/cpp/build/semantic_slam_benchmark kitti /root/autodl-tmp/Script/semantic-slam-yolov8/data/datasets/KITTI /root/autodl-tmp/Script/semantic-slam-yolov8/models/ORBvoc.txt /root/autodl-tmp/Script/semantic-slam-yolov8/src/cpp/config/KITTI00_semantic.yaml /root/autodl-tmp/Script/semantic-slam-yolov8/output"
+	User time (seconds): 257.57
+	System time (seconds): 52.05
+	Percent of CPU this job got: 471%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:05.66
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1184488
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 215040
+	Minor (reclaiming a frame) page faults: 1969153
+	Voluntary context switches: 128453
+	Involuntary context switches: 7945
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 139

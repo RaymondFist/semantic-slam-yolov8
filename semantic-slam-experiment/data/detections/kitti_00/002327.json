@@ -1,0 +1,89 @@
+{
+  "frame_id": 2327,
+  "timestamp": 2327.0,
+  "image_path": "image_0/002327.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.9034,
+      "bbox": [
+        745.1,
+        170.6,
+        935.7,
+        270.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.7344,
+      "bbox": [
+        0.6,
+        247.0,
+        138.2,
+        373.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.6215,
+      "bbox": [
+        171.0,
+        220.4,
+        242.7,
+        291.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.6013,
+      "bbox": [
+        15.7,
+        215.5,
+        199.4,
+        324.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 11,
+      "class_name": "stop sign",
+      "confidence": 0.4799,
+      "bbox": [
+        1164.7,
+        29.7,
+        1222.7,
+        89.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 5,
+  "num_dynamic": 4
+}

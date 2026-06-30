@@ -1,0 +1,6 @@
+semweight_0.0=0.271473
+semweight_0.2=0.283091
+semweight_0.4=0.269283
+semweight_0.5=0.281110
+semweight_0.8=0.278646
+semweight_1.0=0.286891

@@ -1,0 +1,41 @@
+{
+  "frame_id": 1973,
+  "timestamp": 1973.0,
+  "image_path": "image_0/001973.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.8957,
+      "bbox": [
+        662.3,
+        200.0,
+        772.4,
+        290.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.6302,
+      "bbox": [
+        616.6,
+        193.0,
+        696.5,
+        253.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 2
+}

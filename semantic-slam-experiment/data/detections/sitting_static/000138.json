@@ -1,0 +1,105 @@
+{
+  "frame_id": 138,
+  "timestamp": 1341845693.221687,
+  "image_path": "rgb/1341845693.221687.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8885,
+      "bbox": [
+        267.9,
+        197.4,
+        594.9,
+        476.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.871,
+      "bbox": [
+        154.0,
+        195.9,
+        240.4,
+        268.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8535,
+      "bbox": [
+        29.0,
+        140.7,
+        232.5,
+        477.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8495,
+      "bbox": [
+        338.7,
+        187.8,
+        472.5,
+        288.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.5985,
+      "bbox": [
+        242.8,
+        299.5,
+        260.2,
+        312.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.5359,
+      "bbox": [
+        20.0,
+        292.0,
+        231.4,
+        479.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 6,
+  "num_dynamic": 2
+}

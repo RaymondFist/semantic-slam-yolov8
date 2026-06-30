@@ -1,0 +1,25 @@
+{
+  "frame_id": 2201,
+  "timestamp": 1403636689.8135555,
+  "image_path": "mav0/cam0/data/1403636689813555456.png",
+  "detections": [
+    {
+      "class_id": 79,
+      "class_name": "toothbrush",
+      "confidence": 0.4916,
+      "bbox": [
+        8.0,
+        3.1,
+        203.9,
+        449.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

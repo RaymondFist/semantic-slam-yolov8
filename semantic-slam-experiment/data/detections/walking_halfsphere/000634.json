@@ -1,0 +1,57 @@
+{
+  "frame_id": 634,
+  "timestamp": 1341846456.093945,
+  "image_path": "rgb/1341846456.093945.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9212,
+      "bbox": [
+        422.0,
+        0.1,
+        639.3,
+        477.6
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9132,
+      "bbox": [
+        28.4,
+        271.2,
+        368.7,
+        479.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.5094,
+      "bbox": [
+        114.7,
+        430.7,
+        273.9,
+        479.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 3,
+  "num_dynamic": 2
+}

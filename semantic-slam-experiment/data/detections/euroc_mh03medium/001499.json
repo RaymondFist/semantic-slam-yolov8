@@ -1,0 +1,25 @@
+{
+  "frame_id": 1499,
+  "timestamp": 1403637205.4883192,
+  "image_path": "mav0/cam0/data/1403637205488318976.png",
+  "detections": [
+    {
+      "class_id": 5,
+      "class_name": "bus",
+      "confidence": 0.5797,
+      "bbox": [
+        323.0,
+        0.0,
+        750.9,
+        456.6
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 1
+}

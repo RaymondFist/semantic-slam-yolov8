@@ -1,0 +1,41 @@
+{
+  "frame_id": 757,
+  "timestamp": 1341846460.218224,
+  "image_path": "rgb/1341846460.218224.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.871,
+      "bbox": [
+        146.1,
+        98.6,
+        403.5,
+        320.9
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 76,
+      "class_name": "scissors",
+      "confidence": 0.6261,
+      "bbox": [
+        27.8,
+        257.3,
+        206.6,
+        403.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 1
+}

@@ -1,0 +1,25 @@
+{
+  "frame_id": 3280,
+  "timestamp": 1403636743.7635558,
+  "image_path": "mav0/cam0/data/1403636743763555584.png",
+  "detections": [
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.4774,
+      "bbox": [
+        215.0,
+        253.1,
+        324.2,
+        462.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

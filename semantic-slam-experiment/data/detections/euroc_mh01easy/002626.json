@@ -1,0 +1,25 @@
+{
+  "frame_id": 2626,
+  "timestamp": 1403636711.0635557,
+  "image_path": "mav0/cam0/data/1403636711063555584.png",
+  "detections": [
+    {
+      "class_id": 3,
+      "class_name": "motorcycle",
+      "confidence": 0.5372,
+      "bbox": [
+        565.0,
+        143.7,
+        751.3,
+        459.2
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 1
+}

@@ -1,0 +1,25 @@
+{
+  "frame_id": 279,
+  "timestamp": 1403636593.7135556,
+  "image_path": "mav0/cam0/data/1403636593713555456.png",
+  "detections": [
+    {
+      "class_id": 63,
+      "class_name": "laptop",
+      "confidence": 0.5694,
+      "bbox": [
+        0.0,
+        51.7,
+        110.2,
+        207.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

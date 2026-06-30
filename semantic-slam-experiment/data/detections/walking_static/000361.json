@@ -1,0 +1,137 @@
+{
+  "frame_id": 361,
+  "timestamp": 1341846238.981942,
+  "image_path": "rgb/1341846238.981942.png",
+  "detections": [
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.8955,
+      "bbox": [
+        417.5,
+        343.7,
+        598.3,
+        479.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8911,
+      "bbox": [
+        361.7,
+        209.7,
+        486.3,
+        299.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8699,
+      "bbox": [
+        189.2,
+        220.8,
+        271.1,
+        286.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.7862,
+      "bbox": [
+        554.3,
+        129.8,
+        639.7,
+        468.6
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.5624,
+      "bbox": [
+        270.9,
+        313.6,
+        287.9,
+        324.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.5528,
+      "bbox": [
+        117.0,
+        306.8,
+        254.5,
+        479.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.5278,
+      "bbox": [
+        0.1,
+        153.6,
+        37.9,
+        277.5
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.4767,
+      "bbox": [
+        481.9,
+        270.1,
+        496.5,
+        312.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 8,
+  "num_dynamic": 2
+}

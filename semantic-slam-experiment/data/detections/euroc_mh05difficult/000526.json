@@ -1,0 +1,41 @@
+{
+  "frame_id": 526,
+  "timestamp": 1403638544.3778296,
+  "image_path": "mav0/cam0/data/1403638544377829376.png",
+  "detections": [
+    {
+      "class_id": 43,
+      "class_name": "knife",
+      "confidence": 0.504,
+      "bbox": [
+        695.2,
+        399.8,
+        751.7,
+        443.2
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 6,
+      "class_name": "train",
+      "confidence": 0.4984,
+      "bbox": [
+        270.1,
+        23.2,
+        750.8,
+        447.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 0
+}

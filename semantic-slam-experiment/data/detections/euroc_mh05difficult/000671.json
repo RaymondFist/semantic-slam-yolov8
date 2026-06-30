@@ -1,0 +1,41 @@
+{
+  "frame_id": 671,
+  "timestamp": 1403638551.6278296,
+  "image_path": "mav0/cam0/data/1403638551627829504.png",
+  "detections": [
+    {
+      "class_id": 4,
+      "class_name": "airplane",
+      "confidence": 0.6433,
+      "bbox": [
+        0.6,
+        102.2,
+        420.0,
+        469.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.6105,
+      "bbox": [
+        653.6,
+        158.3,
+        751.7,
+        269.9
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 2,
+  "num_dynamic": 1
+}

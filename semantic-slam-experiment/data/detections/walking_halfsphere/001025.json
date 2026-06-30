@@ -1,0 +1,169 @@
+{
+  "frame_id": 1025,
+  "timestamp": 1341846469.198284,
+  "image_path": "rgb/1341846469.198284.png",
+  "detections": [
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.899,
+      "bbox": [
+        362.0,
+        171.4,
+        500.8,
+        267.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8867,
+      "bbox": [
+        52.1,
+        181.7,
+        287.4,
+        479.5
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.8068,
+      "bbox": [
+        382.1,
+        285.2,
+        493.6,
+        302.6
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.7425,
+      "bbox": [
+        413.5,
+        305.8,
+        608.2,
+        479.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.7147,
+      "bbox": [
+        182.2,
+        193.0,
+        262.4,
+        266.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.6917,
+      "bbox": [
+        264.2,
+        291.5,
+        283.9,
+        303.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.654,
+      "bbox": [
+        264.6,
+        78.2,
+        306.2,
+        124.4
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.6228,
+      "bbox": [
+        499.2,
+        235.7,
+        516.0,
+        284.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.5222,
+      "bbox": [
+        34.8,
+        307.0,
+        163.4,
+        478.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.5001,
+      "bbox": [
+        175.3,
+        280.2,
+        255.4,
+        299.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 10,
+  "num_dynamic": 2
+}

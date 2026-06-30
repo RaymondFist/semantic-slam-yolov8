@@ -1,0 +1,25 @@
+{
+  "frame_id": 510,
+  "timestamp": 1403637156.038319,
+  "image_path": "mav0/cam0/data/1403637156038319104.png",
+  "detections": [
+    {
+      "class_id": 25,
+      "class_name": "umbrella",
+      "confidence": 0.5306,
+      "bbox": [
+        665.7,
+        68.0,
+        751.7,
+        128.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

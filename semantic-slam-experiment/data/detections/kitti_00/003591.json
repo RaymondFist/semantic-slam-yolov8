@@ -1,0 +1,121 @@
+{
+  "frame_id": 3591,
+  "timestamp": 3591.0,
+  "image_path": "image_0/003591.png",
+  "detections": [
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.8977,
+      "bbox": [
+        766.8,
+        192.5,
+        1030.3,
+        322.5
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.7721,
+      "bbox": [
+        702.4,
+        181.8,
+        799.0,
+        246.2
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.7685,
+      "bbox": [
+        0.6,
+        211.3,
+        135.2,
+        366.0
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.7295,
+      "bbox": [
+        222.2,
+        205.7,
+        348.7,
+        264.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.689,
+      "bbox": [
+        670.3,
+        178.6,
+        724.6,
+        228.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.582,
+      "bbox": [
+        284.6,
+        197.4,
+        418.8,
+        253.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "car",
+      "confidence": 0.5681,
+      "bbox": [
+        55.3,
+        207.0,
+        254.3,
+        323.1
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        224,
+        640
+      ]
+    }
+  ],
+  "num_detections": 7,
+  "num_dynamic": 7
+}

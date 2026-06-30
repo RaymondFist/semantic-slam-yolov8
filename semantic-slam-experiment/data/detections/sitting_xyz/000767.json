@@ -1,0 +1,105 @@
+{
+  "frame_id": 767,
+  "timestamp": 1341845846.653735,
+  "image_path": "rgb/1341845846.653735.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9025,
+      "bbox": [
+        0.2,
+        0.6,
+        243.9,
+        304.8
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.8433,
+      "bbox": [
+        421.0,
+        78.0,
+        638.4,
+        384.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8397,
+      "bbox": [
+        289.7,
+        0.0,
+        638.9,
+        317.7
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8283,
+      "bbox": [
+        354.3,
+        2.8,
+        502.3,
+        108.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.752,
+      "bbox": [
+        151.5,
+        27.6,
+        248.9,
+        113.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 36,
+      "class_name": "skateboard",
+      "confidence": 0.6595,
+      "bbox": [
+        51.4,
+        289.7,
+        223.2,
+        353.8
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 6,
+  "num_dynamic": 2
+}

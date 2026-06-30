@@ -1,0 +1,89 @@
+{
+  "frame_id": 500,
+  "timestamp": 1341846330.415934,
+  "image_path": "rgb/1341846330.415934.png",
+  "detections": [
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8829,
+      "bbox": [
+        187.0,
+        244.7,
+        273.3,
+        317.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.8566,
+      "bbox": [
+        171.6,
+        331.5,
+        265.4,
+        351.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8374,
+      "bbox": [
+        373.6,
+        234.0,
+        510.5,
+        333.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 66,
+      "class_name": "keyboard",
+      "confidence": 0.6265,
+      "bbox": [
+        396.2,
+        345.5,
+        510.0,
+        367.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 64,
+      "class_name": "mouse",
+      "confidence": 0.4662,
+      "bbox": [
+        277.1,
+        345.4,
+        297.0,
+        359.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 5,
+  "num_dynamic": 0
+}

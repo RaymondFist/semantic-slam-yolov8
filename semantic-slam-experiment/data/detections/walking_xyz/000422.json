@@ -1,0 +1,105 @@
+{
+  "frame_id": 422,
+  "timestamp": 1341846327.766017,
+  "image_path": "rgb/1341846327.766017.png",
+  "detections": [
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.9262,
+      "bbox": [
+        348.6,
+        183.1,
+        515.4,
+        438.4
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.8613,
+      "bbox": [
+        80.2,
+        0.0,
+        350.8,
+        477.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.7651,
+      "bbox": [
+        100.8,
+        130.0,
+        197.0,
+        209.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.7284,
+      "bbox": [
+        304.2,
+        112.8,
+        435.2,
+        208.0
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 72,
+      "class_name": "refrigerator",
+      "confidence": 0.5254,
+      "bbox": [
+        476.1,
+        159.2,
+        552.9,
+        316.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.4834,
+      "bbox": [
+        17.2,
+        176.9,
+        159.1,
+        407.7
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 6,
+  "num_dynamic": 1
+}

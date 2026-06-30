@@ -1,0 +1,25 @@
+{
+  "frame_id": 1330,
+  "timestamp": 1403637197.038319,
+  "image_path": "mav0/cam0/data/1403637197038319104.png",
+  "detections": [
+    {
+      "class_id": 72,
+      "class_name": "refrigerator",
+      "confidence": 0.7357,
+      "bbox": [
+        1.4,
+        0.2,
+        378.2,
+        445.5
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        416,
+        640
+      ]
+    }
+  ],
+  "num_detections": 1,
+  "num_dynamic": 0
+}

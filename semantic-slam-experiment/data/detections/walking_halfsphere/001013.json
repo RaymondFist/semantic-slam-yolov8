@@ -1,0 +1,89 @@
+{
+  "frame_id": 1013,
+  "timestamp": 1341846468.797962,
+  "image_path": "rgb/1341846468.797962.png",
+  "detections": [
+    {
+      "class_id": 0,
+      "class_name": "person",
+      "confidence": 0.9127,
+      "bbox": [
+        86.0,
+        150.6,
+        332.1,
+        478.3
+      ],
+      "is_dynamic": true,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.8558,
+      "bbox": [
+        378.0,
+        149.3,
+        517.6,
+        252.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 56,
+      "class_name": "chair",
+      "confidence": 0.7806,
+      "bbox": [
+        425.7,
+        286.0,
+        624.8,
+        431.3
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 62,
+      "class_name": "tv",
+      "confidence": 0.7109,
+      "bbox": [
+        193.5,
+        170.9,
+        276.4,
+        247.1
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    },
+    {
+      "class_id": 39,
+      "class_name": "bottle",
+      "confidence": 0.6703,
+      "bbox": [
+        513.8,
+        214.3,
+        531.9,
+        263.9
+      ],
+      "is_dynamic": false,
+      "mask_bbox_shape": [
+        480,
+        640
+      ]
+    }
+  ],
+  "num_detections": 5,
+  "num_dynamic": 1
+}
