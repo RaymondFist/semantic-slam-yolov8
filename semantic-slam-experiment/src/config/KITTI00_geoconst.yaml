@@ -1,7 +1,7 @@
 %YAML:1.0
 
 # ============================================================================
-# Ablation: YOLO + Geometric Constraints (no semantic weight) — KITTI 00 Stereo
+# Ablation: YOLO + Geometric Constraints (no semantic weight), KITTI 00 Stereo
 # ============================================================================
 # NOTE: OpenCV %YAML:1.0 does NOT support nested mappings. All keys must be
 # flat dot-separated at top level, matching ORB-SLAM3's format (Camera.fx, etc.)

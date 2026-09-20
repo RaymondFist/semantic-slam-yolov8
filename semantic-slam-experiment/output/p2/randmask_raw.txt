@@ -1,0 +1,5 @@
+sitting_static 0.007849
+sitting_xyz 0.153309
+walking_static 0.025335
+walking_xyz 0.271441
+walking_halfsphere 0.285659

@@ -394,7 +394,7 @@ DetectionResult YoloDetector::loadOfflineDetection(int64_t frame_id, double time
                  _config.detection_dir.c_str(), (long long)frame_id);
         f.open(fallback_path);
         if (!f.is_open()) {
-            // No detection file for this frame — return empty but valid result
+            // No detection file for this frame; return an empty but valid result
             result.valid = true;
             return result;
         }
@@ -481,7 +481,7 @@ DetectionResult YoloDetector::loadOfflineDetection(int64_t frame_id, double time
             result.instances.push_back(im);
         } catch (const std::exception& e) {
             std::cerr << "[YoloDetector] JSON parse error in " << json_path
-                      << ": " << e.what() << " — skipping entry" << std::endl;
+                      << ": " << e.what() << "; skipping entry" << std::endl;
         }
         size_t next_brace = det_array.find('}', pos);
         if (next_brace == std::string::npos) break;

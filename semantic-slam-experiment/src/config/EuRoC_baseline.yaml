@@ -1,7 +1,7 @@
 %YAML:1.0
 
 # ============================================================================
-# ORB-SLAM3 Baseline — EuRoC MAV (Stereo, no semantic)
+# ORB-SLAM3 Baseline: EuRoC MAV (Stereo, no semantic)
 # ============================================================================
 Camera.type: "PinHole"
 

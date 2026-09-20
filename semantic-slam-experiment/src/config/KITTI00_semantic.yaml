@@ -1,7 +1,7 @@
 %YAML:1.0
 
 # ============================================================================
-# Semantic SLAM — YOLOv8 Configuration (KITTI 00)
+# Semantic SLAM: YOLOv8 Configuration (KITTI 00)
 # ============================================================================
 # NOTE: OpenCV %YAML:1.0 does NOT support nested mappings. All keys must be
 # flat dot-separated at top level, matching ORB-SLAM3's format (Camera.fx, etc.)

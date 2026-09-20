@@ -51,7 +51,7 @@ def is_patched(content, marker):
 
 
 # ============================================================================
-# Patch 1: Frame.h — Add dynamic feature mask
+# Patch 1: Frame.h - Add dynamic feature mask
 # ============================================================================
 def patch_frame_h():
     filepath = os.path.join(ORB_SLAM3_ROOT, "include", "Frame.h")
@@ -105,7 +105,7 @@ def patch_frame_h():
 
 
 # ============================================================================
-# Patch 1b: Frame.cc — Add mvDynamicMask to copy constructor initializer list
+# Patch 1b: Frame.cc - Add mvDynamicMask to copy constructor initializer list
 # ============================================================================
 def patch_frame_cc():
     filepath = os.path.join(ORB_SLAM3_ROOT, "src", "Frame.cc")
@@ -131,7 +131,7 @@ def patch_frame_cc():
 
 
 # ============================================================================
-# Patch 2: MapPoint.h — Add semantic class and weight
+# Patch 2: MapPoint.h - Add semantic class and weight
 # ============================================================================
 def patch_mappoint_h():
     filepath = os.path.join(ORB_SLAM3_ROOT, "include", "MapPoint.h")
@@ -143,7 +143,7 @@ def patch_mappoint_h():
 
     backup_file(filepath)
 
-    # Add semantic members after nObs — keep them in the same access section
+    # Add semantic members after nObs - keep them in the same access section
     # (nObs is public, so the new members stay public too)
     content = content.replace(
         "int nObs;",
@@ -165,7 +165,7 @@ def patch_mappoint_h():
 
 
 # ============================================================================
-# Patch 3: Tracking.h — Add SemanticSLAM pointer
+# Patch 3: Tracking.h - Add SemanticSLAM pointer
 # ============================================================================
 def patch_tracking_h():
     filepath = os.path.join(ORB_SLAM3_ROOT, "include", "Tracking.h")
@@ -220,7 +220,7 @@ def patch_tracking_h():
 
 
 # ============================================================================
-# Patch 4: System.h — Add SemanticSLAM member
+# Patch 4: System.h - Add SemanticSLAM member
 # ============================================================================
 def patch_system_h():
     filepath = os.path.join(ORB_SLAM3_ROOT, "include", "System.h")
@@ -255,7 +255,7 @@ def patch_system_h():
         "        ::semantic_slam::SemanticSLAM* mpSemanticSLAM = nullptr;"
     )
 
-    # Add public accessor — insert before the first "private:"
+    # Add public accessor - insert before the first "private:"
     accessor = (
         "\n"
         "    // SEMANTIC_SLAM_PATCH_SYSTEM: Accessor\n"
@@ -269,7 +269,7 @@ def patch_system_h():
 
 
 # ============================================================================
-# Patch 5: Tracking.cc — Inject semantic detection + filtering
+# Patch 5: Tracking.cc - Inject semantic detection + filtering
 #
 # CRITICAL FIX: The old script used sequential Track();\n replacement which
 # broke after the first replacement. Now we use regex to find each GrabImage*
@@ -300,7 +300,7 @@ def patch_tracking_cc():
     # NOTE: ORB-SLAM3 uses mImGray (member variable) not imGray
     # NOTE: Dynamic features are stored in mvDynamicMask via SetDynamicMask().
     #       They are filtered in SearchByProjection/SearchByBoW via IsDynamicFeature().
-    #       Do NOT set mvbOutlier directly — it causes g2o double-free in PoseOptimization.
+    #       Do NOT set mvbOutlier directly - it causes g2o double-free in PoseOptimization.
     # NOTE: Added mImGray.empty() guard to prevent crashes when Track() is called
     #       in error states (e.g., NO_IMAGES_YET).
     # NOTE: mCurrentFrame is a Frame object (not a pointer), so .mvKeysUn is safe.
@@ -343,14 +343,14 @@ def patch_tracking_cc():
         '                // and SearchByBoW via IsDynamicFeature(mvDynamicMask).\n'
         '            } catch(const std::exception& e) {\n'
         '                std::cerr << "[SemanticSLAM] filterDynamicFeatures exception: "\n'
-        '                          << e.what() << " — skipping dynamic filtering" << std::endl;\n'
+        '                          << e.what() << " - skipping dynamic filtering" << std::endl;\n'
         '                // CRITICAL: Initialize empty mask on exception to prevent\n'
         '                // mvDynamicMask from being empty (causes g2o crash)\n'
         '                std::vector<bool> empty_mask(mCurrentFrame.mvKeysUn.size(), false);\n'
         '                mCurrentFrame.SetDynamicMask(empty_mask);\n'
         '            } catch(...) {\n'
         '                std::cerr << "[SemanticSLAM] filterDynamicFeatures unknown exception"\n'
-        '                          << " — skipping dynamic filtering" << std::endl;\n'
+        '                          << " - skipping dynamic filtering" << std::endl;\n'
         '                std::vector<bool> empty_mask(mCurrentFrame.mvKeysUn.size(), false);\n'
         '                mCurrentFrame.SetDynamicMask(empty_mask);\n'
         '            }\n'
@@ -394,10 +394,10 @@ def patch_tracking_cc():
         '            }\n'
         '        } catch(const std::exception& e) {\n'
         '            std::cerr << "[SemanticSLAM] mappoint assignment exception: "\n'
-        '                      << e.what() << " — skipping" << std::endl;\n'
+        '                      << e.what() << " - skipping" << std::endl;\n'
         '        } catch(...) {\n'
         '            std::cerr << "[SemanticSLAM] mappoint assignment unknown exception"\n'
-        '                      << " — skipping" << std::endl;\n'
+        '                      << " - skipping" << std::endl;\n'
         '        }\n'
         '    }\n'
     )
@@ -416,7 +416,7 @@ def patch_tracking_cc():
     # This is more robust than the previous approach of matching GrabImage*
     # function signatures, which failed with ORB-SLAM3 v1.0.
 
-    # Find "void Tracking::Track()" — the function definition in Tracking.cc
+    # Find "void Tracking::Track()" - the function definition in Tracking.cc
     track_pattern = re.compile(r'void\s+Tracking::Track\s*\(\s*\)')
     m = track_pattern.search(content)
     if m:
@@ -472,7 +472,7 @@ def patch_tracking_cc():
 
 
 # ============================================================================
-# Patch 6: System.cc — Initialize/shutdown SemanticSLAM
+# Patch 6: System.cc - Initialize/shutdown SemanticSLAM
 #
 # CRITICAL FIXES:
 # - Old script inserted init code BEFORE mpTracker creation, but referenced
@@ -562,7 +562,7 @@ def patch_system_cc():
         '        }\n'
         '\n'
         '        if(!has_yolo_config) {\n'
-        '            // No yolo_detector section in YAML → pure ORB-SLAM3 baseline\n'
+        '            // No yolo_detector section in YAML -> pure ORB-SLAM3 baseline\n'
         '            mpSemanticSLAM = nullptr;\n'
         '            std::cout << "[SemanticSLAM] No yolo_detector config, running baseline." << std::endl;\n'
         '        } else {\n'
@@ -630,7 +630,7 @@ def patch_system_cc():
 
 
 # ============================================================================
-# Patch 7: Optimizer.cc — Use semantic weights in LocalBA
+# Patch 7: Optimizer.cc - Use semantic weights in LocalBA
 #
 # In LocalBundleAdjustment, after setting the robust kernel on each edge,
 # check if the MapPoint has a semantic weight < 1.0 and increase the
@@ -732,7 +732,7 @@ def patch_optimizer_cc():
 
 
 # ============================================================================
-# Patch 7b: Optimizer.cc — Fix PoseOptimization g2o crash (BUG FIX #2)
+# Patch 7b: Optimizer.cc - Fix PoseOptimization g2o crash (BUG FIX #2)
 #
 # The patched ORB-SLAM3 crashes with SIGSEGV in PoseOptimization:
 #   Eigen::LDLT::compute() -> g2o::LinearSolverDense::solve()
@@ -811,13 +811,13 @@ def patch_optimizer_pose_optimization():
 
 
 # ============================================================================
-# Patch 7c: Optimizer.cc — Fix OptimizeSim3 g2o crash (BUG FIX #4)
+# Patch 7c: Optimizer.cc - Fix OptimizeSim3 g2o crash (BUG FIX #4)
 #
 # OptimizeSim3 also uses LinearSolverDense with BlockSolverX,
 # causing the same Eigen::LDLT::compute SIGSEGV as PoseOptimization
 # when the Hessian matrix becomes singular during loop closing.
 #
-# Backtrace from deploylog (lines 22494-22511):
+# Backtrace (captured from runtime crash logs):
 #   Eigen::LDLT::compute() -> g2o::LinearSolverDense::solve()
 #     -> OptimizationAlgorithmLevenberg::solve() -> SparseOptimizer::optimize()
 #     -> Optimizer::OptimizeSim3() -> LoopClosing::DetectCommonRegionsFromBoW()
@@ -880,9 +880,9 @@ def patch_optimizer_sim3():
 
 
 # ============================================================================
-# Patch 7d: MLPnPsolver.cpp — Add minimum point guard (BUG FIX #5)
+# Patch 7d: MLPnPsolver.cpp - Add minimum point guard (BUG FIX #5)
 #
-# Backtrace from deploylog (lines 23914-23930, 24664-24680, 24773-24789):
+# Backtrace (captured from runtime crash logs):
 #   cfree -> MLPnPsolver::computePose -> MLPnPsolver::iterate
 #     -> Tracking::Relocalization -> Tracking::Track -> System::TrackStereo
 #
@@ -967,14 +967,14 @@ def patch_mlpnpsolver():
                     '    if(f.size() < 6 || p.size() < 6) {\n'
                     '        return;\n'
                     '    }\n'
-                    '    // SEMANTIC_SLAM_PATCH_MLPNP: Consistency check — input vectors\n'
+                    '    // SEMANTIC_SLAM_PATCH_MLPNP: Consistency check - input vectors\n'
                     '    // must have matching sizes. Mismatch indicates corrupted data\n'
                     '    // from dynamic feature filtering, which causes heap corruption\n'
                     '    // in Eigen aligned_allocator (cfree SIGSEGV at +0x326c).\n'
                     '    if(f.size() != p.size() || f.size() != covMats.size()) {\n'
                     '        return;\n'
                     '    }\n'
-                    '    // SEMANTIC_SLAM_PATCH_MLPNP: Validity check — all indices must\n'
+                    '    // SEMANTIC_SLAM_PATCH_MLPNP: Validity check - all indices must\n'
                     '    // be in range. Invalid indices cause out-of-bounds access in\n'
                     '    // Eigen matrices (cfree SIGSEGV).\n'
                     '    for(int idx : indices) {\n'
@@ -982,7 +982,7 @@ def patch_mlpnpsolver():
                     '            return;\n'
                     '        }\n'
                     '    }\n'
-                    '    // SEMANTIC_SLAM_PATCH_MLPNP: NaN check — NaN values in bearing\n'
+                    '    // SEMANTIC_SLAM_PATCH_MLPNP: NaN check - NaN values in bearing\n'
                     '    // vectors or 3D points cause degenerate computations in MLPnP\n'
                     '    // leading to heap corruption in Eigen (cfree SIGSEGV).\n'
                     '    for(size_t i = 0; i < f.size(); ++i) {\n'
@@ -991,7 +991,7 @@ def patch_mlpnpsolver():
                     '        if(!std::isfinite(p[i](0)) || !std::isfinite(p[i](1)) || !std::isfinite(p[i](2)))\n'
                     '            return;\n'
                     '    }\n'
-                    '    // SEMANTIC_SLAM_PATCH_MLPNP: Covariance NaN check — degenerate\n'
+                    '    // SEMANTIC_SLAM_PATCH_MLPNP: Covariance NaN check - degenerate\n'
                     '    // covariance matrices (from near-zero-depth points) cause\n'
                     '    // Eigen LDLT factorization failures in null-space computation,\n'
                     '    // leading to heap corruption (cfree SIGSEGV at +0x326c).\n'
@@ -1018,7 +1018,7 @@ def patch_mlpnpsolver():
 
 
 # ============================================================================
-# Patch 8: ORBmatcher.cc — Skip dynamic features in matching
+# Patch 8: ORBmatcher.cc - Skip dynamic features in matching
 #
 # In SearchByProjection and SearchByBoW, skip keypoints that are marked
 # as dynamic. This prevents dynamic features from being matched and
@@ -1057,7 +1057,7 @@ def patch_orbmatcher_cc():
         '                        if(F.IsDynamicFeature(idx))\n'
         '                            continue;\n'
     )
-    # Match SearchByProjection — use [\s\S]*? instead of [^)]* to handle nested templates
+    # Match SearchByProjection - use [\s\S]*? instead of [^)]* to handle nested templates
     pattern_sbp = r'(int\s+ORBmatcher::SearchByProjection\s*\([\s\S]*?Frame\s+&F[\s\S]*?\))'
     m_sbp = re.search(pattern_sbp, content)
     if m_sbp:
@@ -1105,7 +1105,7 @@ def patch_orbmatcher_cc():
 
 
 # ============================================================================
-# Patch 9: CMakeLists.txt — Link SemanticSLAM library
+# Patch 9: CMakeLists.txt - Link SemanticSLAM library
 # ============================================================================
 def patch_cmakelists():
     filepath = os.path.join(ORB_SLAM3_ROOT, "CMakeLists.txt")
@@ -1127,7 +1127,7 @@ def patch_cmakelists():
         f"include_directories(${{SEMANTIC_SLAM_DIR}}/include)\n"
     )
 
-    # Insert after project() command — always top-level, never inside if/else
+    # Insert after project() command - always top-level, never inside if/else
     proj_match = re.search(r'project\s*\([^)]*\)', content)
     if proj_match:
         insert_pos = proj_match.end()
@@ -1152,7 +1152,7 @@ def patch_cmakelists():
         content = sem_include + content
         print("  [WARN] Inserted SEMANTIC_SLAM_DIR at file beginning (last resort)")
 
-    # Add library link to target_link_libraries — use FULL PATH to avoid link_directories issues
+    # Add library link to target_link_libraries - use FULL PATH to avoid link_directories issues
     sem_link = f" ${{SEMANTIC_SLAM_DIR}}/build/libSemanticSLAM.so"
     if "target_link_libraries(" in content:
         # Find the main target_link_libraries for ORB_SLAM3

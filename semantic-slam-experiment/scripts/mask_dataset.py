@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-数据集动态区域掩码脚本 (Plan C: Image Masking)
+Dynamic Region Masking Script for Datasets (Plan C: Image Masking)
 ==============================================
-读取 YOLOv8 检测 JSON，将动态物体区域在 RGB 图像中置零（黑色），
-生成掩码后的数据集副本。掩码后的数据集直接用原生 ORB-SLAM3 运行，
-无需任何 SemanticSLAM patch。
+Reads YOLOv8 detection JSON and zeros out (blackens) dynamic object regions in the RGB images,
+producing a masked copy of the dataset. The masked dataset is run directly with stock ORB-SLAM3,
+no SemanticSLAM patch required.
 
-支持: TUM RGB-D, KITTI, EuRoC
+Supports: TUM RGB-D, KITTI, EuRoC
 
-用法:
+Usage:
     python3 scripts/mask_dataset.py \
         --detections data/detections/walking_xyz \
         --dataset   data/datasets/TUM/rgbd_dataset_freiburg3_walking_xyz \
         --output    data/datasets_masked/TUM/rgbd_dataset_freiburg3_walking_xyz \
         --dataset-type tum
 
-    # 批量处理:
+    # Batch processing:
     python3 scripts/mask_dataset.py --all --datasets data/datasets --detections data/detections --output data/datasets_masked
 """
 
@@ -29,15 +29,15 @@ import numpy as np
 from pathlib import Path
 
 
-# 动态 COCO 类别 ID
+# Dynamic COCO class IDs
 DYNAMIC_COCO_IDS = {0, 1, 2, 3, 5, 7, 16, 17}
 
 
 def load_detection_map(detection_dir):
-    """加载所有检测 JSON，建立 frame_id -> detections 的映射。"""
+    """Load all detection JSON files and build a frame_id -> detections mapping."""
     det_map = {}
     if not os.path.isdir(detection_dir):
-        print(f"  [WARN] 检测目录不存在: {detection_dir}")
+        print(f"  [WARN] detection directory not found: {detection_dir}")
         return det_map
 
     for fname in os.listdir(detection_dir):
@@ -54,18 +54,18 @@ def load_detection_map(detection_dir):
                 data = json.load(f)
             det_map[frame_id] = data.get("detections", [])
         except (json.JSONDecodeError, IOError) as e:
-            print(f"  [WARN] 读取失败 {fpath}: {e}")
+            print(f"  [WARN] failed to read {fpath}: {e}")
 
     return det_map
 
 
 def mask_image(image, detections, dilate_px=3):
-    """将动态物体 bbox 区域在图像中置零。
+    """Zero out dynamic object bbox regions in the image.
 
     Args:
         image: BGR numpy array
         detections: YOLO detection list
-        dilate_px: bbox 向外扩展像素数（避免边缘特征残留）
+        dilate_px: pixels to expand the bbox outward (avoid leftover edge features)
 
     Returns:
         masked image (in-place modified)
@@ -92,34 +92,34 @@ def mask_image(image, detections, dilate_px=3):
 
 
 def mask_dataset_tum(dataset_dir, detection_dir, output_dir):
-    """掩码 TUM RGB-D 数据集。
+    """Mask a TUM RGB-D dataset.
 
-    TUM 目录结构:
-        rgb/              ← RGB 图像（需要掩码）
-        depth/            ← 深度图（直接复制/链接）
-        rgb.txt           ← 帧列表
+    TUM directory layout:
+        rgb/              <- RGB images (to be masked)
+        depth/            <- depth images (copied/linked directly)
+        rgb.txt           <- frame list
         depth.txt
         associate.txt
         groundtruth.txt
-        accelerometer.txt (可选)
+        accelerometer.txt (optional)
     """
     os.makedirs(output_dir, exist_ok=True)
 
     det_map = load_detection_map(detection_dir)
     if not det_map:
-        print(f"  [ERROR] 无检测数据，跳过")
+        print(f"  [ERROR] no detection data, skipping")
         return False
 
     rgb_dir = os.path.join(dataset_dir, "rgb")
     if not os.path.isdir(rgb_dir):
-        print(f"  [ERROR] RGB 目录不存在: {rgb_dir}")
+        print(f"  [ERROR] RGB directory not found: {rgb_dir}")
         return False
 
-    # 创建输出 RGB 目录
+    # Create the output RGB directory
     output_rgb_dir = os.path.join(output_dir, "rgb")
     os.makedirs(output_rgb_dir, exist_ok=True)
 
-    # 复制/链接其他文件
+    # Copy/link other files
     for item in ["depth", "rgb.txt", "depth.txt", "associate.txt",
                  "groundtruth.txt", "accelerometer.txt"]:
         src = os.path.join(dataset_dir, item)
@@ -127,7 +127,7 @@ def mask_dataset_tum(dataset_dir, detection_dir, output_dir):
             dst = os.path.join(output_dir, item)
             if os.path.isdir(src):
                 if not os.path.exists(dst):
-                    # 深度图目录 — 不需要修改，直接复制符号链接或用硬链接
+                    # Depth directory needs no changes; copy as a symlink or fall back to a hard copy
                     try:
                         os.symlink(os.path.abspath(src), dst)
                     except OSError:
@@ -136,7 +136,7 @@ def mask_dataset_tum(dataset_dir, detection_dir, output_dir):
                 if not os.path.exists(dst):
                     shutil.copy2(src, dst)
 
-    # 读取 rgb.txt 获取帧顺序
+    # Read rgb.txt for the frame order
     rgb_txt = os.path.join(dataset_dir, "rgb.txt")
     frames = []
     if os.path.isfile(rgb_txt):
@@ -149,7 +149,7 @@ def mask_dataset_tum(dataset_dir, detection_dir, output_dir):
                 if len(parts) >= 2:
                     frames.append((float(parts[0]), parts[1]))
 
-    print(f"  处理 {len(frames)} 帧...")
+    print(f"  Processing {len(frames)} frames...")
 
     masked_count = 0
     for idx, (timestamp, rgb_path) in enumerate(frames):
@@ -161,31 +161,31 @@ def mask_dataset_tum(dataset_dir, detection_dir, output_dir):
         if img is None:
             continue
 
-        # frame_id 对应 detection JSON 的文件名编号
+        # frame_id matches the file name number of the detection JSON
         dets = det_map.get(idx, [])
 
         if dets:
             mask_image(img, dets)
             masked_count += 1
 
-        # 保存掩码后的图像
+        # Save the masked image
         dst_path = os.path.join(output_dir, rgb_path)
         os.makedirs(os.path.dirname(dst_path), exist_ok=True)
         cv2.imwrite(dst_path, img)
 
         if (idx + 1) % 100 == 0:
-            print(f"    {idx + 1}/{len(frames)} 帧完成 ({masked_count} 帧含动态物体)")
+            print(f"    {idx + 1}/{len(frames)} frames done ({masked_count} with dynamic objects)")
 
-    print(f"  完成: {len(frames)} 帧, {masked_count} 帧含动态物体被掩码")
+    print(f"  Done: {len(frames)} frames, {masked_count} with dynamic objects masked")
     return True
 
 
 def mask_dataset_kitti(dataset_dir, detection_dir, output_dir):
-    """掩码 KITTI Odometry 数据集。
+    """Mask a KITTI Odometry dataset.
 
-    KITTI 目录结构:
-        image_0/    ← 左目灰度图 (需要掩码)
-        image_1/    ← 右目灰度图 (需要掩码)
+    KITTI directory layout:
+        image_0/    <- left grayscale images (to be masked)
+        image_1/    <- right grayscale images (to be masked)
         times.txt
         calib.txt
     """
@@ -193,7 +193,7 @@ def mask_dataset_kitti(dataset_dir, detection_dir, output_dir):
 
     det_map = load_detection_map(detection_dir)
     if not det_map:
-        print(f"  [ERROR] 无检测数据，跳过")
+        print(f"  [ERROR] no detection data, skipping")
         return False
 
     for img_dir_name in ["image_0", "image_1"]:
@@ -205,7 +205,7 @@ def mask_dataset_kitti(dataset_dir, detection_dir, output_dir):
         os.makedirs(dst_dir, exist_ok=True)
 
         images = sorted([f for f in os.listdir(src_dir) if f.endswith('.png')])
-        print(f"  处理 {img_dir_name}: {len(images)} 帧...")
+        print(f"  Processing {img_dir_name}: {len(images)} frames...")
 
         masked_count = 0
         for img_name in images:
@@ -218,16 +218,16 @@ def mask_dataset_kitti(dataset_dir, detection_dir, output_dir):
 
             dets = det_map.get(frame_id, [])
             if dets:
-                # 灰度图需要转 BGR 才能用颜色赋值, 但黑色在灰度图也是 0
+                # Grayscale images would need a BGR conversion for color assignment, but black is 0 in grayscale too
                 mask_image(img, dets)
                 masked_count += 1
 
             dst_path = os.path.join(dst_dir, img_name)
             cv2.imwrite(dst_path, img)
 
-        print(f"    {img_dir_name} 完成: {masked_count} 帧含动态物体被掩码")
+        print(f"    {img_dir_name} done: {masked_count} frames with dynamic objects masked")
 
-    # 复制其他文件
+    # Copy other files
     for item in ["times.txt", "calib.txt"]:
         src = os.path.join(dataset_dir, item)
         if os.path.exists(src):
@@ -239,12 +239,12 @@ def mask_dataset_kitti(dataset_dir, detection_dir, output_dir):
 
 
 def mask_dataset_euroc(dataset_dir, detection_dir, output_dir):
-    """掩码 EuRoC MAV 数据集。
+    """Mask an EuRoC MAV dataset.
 
-    EuRoC 目录结构:
-        mav0/cam0/data/   ← 灰度图 (需要掩码)
+    EuRoC directory layout:
+        mav0/cam0/data/   <- grayscale images (to be masked)
         mav0/cam0/sensor.yaml
-        mav0/cam1/data/   ← 灰度图 (可选)
+        mav0/cam1/data/   <- grayscale images (optional)
         mav0/imu0/data.csv
         ...
     """
@@ -252,7 +252,7 @@ def mask_dataset_euroc(dataset_dir, detection_dir, output_dir):
 
     det_map = load_detection_map(detection_dir)
     if not det_map:
-        print(f"  [ERROR] 无检测数据，跳过")
+        print(f"  [ERROR] no detection data, skipping")
         return False
 
     for cam_name in ["cam0", "cam1"]:
@@ -264,7 +264,7 @@ def mask_dataset_euroc(dataset_dir, detection_dir, output_dir):
         os.makedirs(dst_dir, exist_ok=True)
 
         images = sorted([f for f in os.listdir(src_dir) if f.endswith('.png')])
-        print(f"  处理 mav0/{cam_name}/data: {len(images)} 帧...")
+        print(f"  Processing mav0/{cam_name}/data: {len(images)} frames...")
 
         masked_count = 0
         for img_name in images:
@@ -283,9 +283,9 @@ def mask_dataset_euroc(dataset_dir, detection_dir, output_dir):
             dst_path = os.path.join(dst_dir, img_name)
             cv2.imwrite(dst_path, img)
 
-        print(f"    mav0/{cam_name}/data 完成: {masked_count} 帧含动态物体被掩码")
+        print(f"    mav0/{cam_name}/data done: {masked_count} frames with dynamic objects masked")
 
-    # 复制 sensor.yaml
+    # Copy sensor.yaml
     for cam_name in ["cam0", "cam1"]:
         src = os.path.join(dataset_dir, "mav0", cam_name, "sensor.yaml")
         if os.path.isfile(src):
@@ -294,7 +294,7 @@ def mask_dataset_euroc(dataset_dir, detection_dir, output_dir):
             if not os.path.exists(dst):
                 shutil.copy2(src, dst)
 
-    # 复制 IMU 和地面真值
+    # Copy IMU data and ground truth
     for sub in ["imu0", "state_groundtruth_estimate0"]:
         src = os.path.join(dataset_dir, "mav0", sub)
         if os.path.isdir(src):
@@ -309,7 +309,7 @@ def mask_dataset_euroc(dataset_dir, detection_dir, output_dir):
 
 
 def detect_dataset_type(dataset_dir):
-    """自动检测数据集类型。"""
+    """Detect the dataset type automatically."""
     if os.path.isdir(os.path.join(dataset_dir, "mav0", "cam0", "data")):
         return "euroc"
     elif os.path.isdir(os.path.join(dataset_dir, "image_0")):
@@ -321,39 +321,39 @@ def detect_dataset_type(dataset_dir):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="数据集动态区域掩码 (Plan C)")
-    parser.add_argument("--detections", help="检测 JSON 目录")
-    parser.add_argument("--dataset", help="原始数据集目录")
-    parser.add_argument("--output", help="掩码后数据集输出目录")
+    parser = argparse.ArgumentParser(description="Mask dynamic regions in datasets (Plan C)")
+    parser.add_argument("--detections", help="detection JSON directory")
+    parser.add_argument("--dataset", help="source dataset directory")
+    parser.add_argument("--output", help="output directory for the masked dataset")
     parser.add_argument("--dataset-type", choices=["tum", "kitti", "euroc", "auto"],
-                        default="auto", help="数据集类型 (默认自动检测)")
+                        default="auto", help="dataset type (default: auto detect)")
     parser.add_argument("--all", action="store_true",
-                        help="批量处理所有已知序列")
+                        help="batch process all known sequences")
     parser.add_argument("--datasets", default="data/datasets",
-                        help="数据集根目录 (--all 模式)")
+                        help="dataset root directory (--all mode)")
     parser.add_argument("--detections-root", default="data/detections",
-                        help="检测结果根目录 (--all 模式)")
+                        help="detection results root directory (--all mode)")
     args = parser.parse_args()
 
     if args.all:
-        # 批量处理模式
+        # Batch mode
         return batch_mask_all(args)
 
-    # 单序列处理模式
+    # Single sequence mode
     if not args.detections or not args.dataset or not args.output:
-        parser.error("单序列模式需要 --detections, --dataset, --output")
+        parser.error("single sequence mode requires --detections, --dataset, --output")
 
     ds_type = args.dataset_type
     if ds_type == "auto":
         ds_type = detect_dataset_type(args.dataset)
 
     if ds_type is None:
-        print(f"[ERROR] 无法检测数据集类型: {args.dataset}")
+        print(f"[ERROR] could not detect dataset type: {args.dataset}")
         sys.exit(1)
 
-    print(f"掩码数据集: {args.dataset} → {args.output}")
-    print(f"  类型: {ds_type}")
-    print(f"  检测: {args.detections}")
+    print(f"Masking dataset: {args.dataset} -> {args.output}")
+    print(f"  Type: {ds_type}")
+    print(f"  Detections: {args.detections}")
 
     if ds_type == "tum":
         ok = mask_dataset_tum(args.dataset, args.detections, args.output)
@@ -362,23 +362,23 @@ def main():
     elif ds_type == "euroc":
         ok = mask_dataset_euroc(args.dataset, args.detections, args.output)
     else:
-        print(f"[ERROR] 不支持的数据集类型: {ds_type}")
+        print(f"[ERROR] unsupported dataset type: {ds_type}")
         sys.exit(1)
 
     if ok:
-        print(f"\n掩码完成: {args.output}")
+        print(f"\nMasking complete: {args.output}")
     else:
-        print(f"\n掩码失败")
+        print(f"\nMasking failed")
         sys.exit(1)
 
 
 def batch_mask_all(args):
-    """批量处理所有已知的训练/评估序列。"""
+    """Batch process all known training/evaluation sequences."""
     datasets_root = args.datasets
     detections_root = args.detections_root
     output_root = os.path.join(os.path.dirname(datasets_root), "datasets_masked")
 
-    # 定义所有序列: (数据集类型, 数据集路径, 检测目录名)
+    # Define all sequences: (dataset type, dataset path, detection dir name)
     sequences = [
         # TUM
         ("tum", "TUM/rgbd_dataset_freiburg3_sitting_static", "sitting_static"),
@@ -402,10 +402,10 @@ def batch_mask_all(args):
         out_path = os.path.join(output_root, ds_rel_path)
 
         if not os.path.isdir(ds_path):
-            print(f"\n[SKIP] 数据集不存在: {ds_path}")
+            print(f"\n[SKIP] dataset not found: {ds_path}")
             continue
         if not os.path.isdir(det_path):
-            print(f"\n[SKIP] 检测数据不存在: {det_path}")
+            print(f"\n[SKIP] detection data not found: {det_path}")
             continue
 
         total += 1
@@ -426,8 +426,8 @@ def batch_mask_all(args):
             success += 1
 
     print(f"\n{'='*60}")
-    print(f"批量掩码完成: {success}/{total} 成功")
-    print(f"输出目录: {output_root}")
+    print(f"Batch masking done: {success}/{total} succeeded")
+    print(f"Output directory: {output_root}")
     print(f"{'='*60}")
 
     return 0 if success == total else 1

@@ -106,7 +106,7 @@
     "_meta": {
       "source": "autodl_deploy.sh failure_analysis",
       "generated": "2026-06-17T12:34:21.353572Z",
-      "note": "track_lost_count=0 表示全程跟踪成功。>0 表示存在跟踪丢失段，需人工进一步标注故障类型。"
+      "note": "track_lost_count=0 means tracking succeeded for the whole sequence; >0 means tracking was lost in some segments and manual labeling of the failure type is required."
     },
     "challenge_sequences": {
       "tum_walking_halfsphere": {

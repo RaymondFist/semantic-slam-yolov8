@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-离线语义过滤验证 — 不依赖 ORB-SLAM3 运行
-============================================
-分析 YOLOv8 检测结果，量化语义过滤的预期效果。
+Offline semantic filtering validation, without running ORB-SLAM3
+=================================================================
+Analyzes YOLOv8 detection results and quantifies the expected effect of semantic filtering.
 
-输出指标:
-  1. 动态物体覆盖率: YOLO 检测到的动态物体占图像面积百分比
-  2. 预期特征过滤率: 基于 bbox 面积估算将被过滤的 ORB 特征比例
-  3. 每帧统计: 检测数、动态检测数、动态覆盖面积
-  4. 序列级汇总: 均值/方差/中位数
+Output metrics:
+  1. Dynamic object coverage: percentage of image area occupied by YOLO-detected dynamic objects
+  2. Expected feature filter rate: estimated ratio of ORB features to be filtered, based on bbox area
+  3. Per-frame statistics: detection count, dynamic detection count, dynamic covered area
+  4. Sequence-level summary: mean / variance / median
 
-用法:
+Usage:
     python scripts/offline_semantic_validation.py
     python scripts/offline_semantic_validation.py --detections data/detections --output output/semantic_validation.json
 """
@@ -24,11 +24,11 @@ from collections import defaultdict
 import math
 
 
-# 动态 COCO 类别 ID — 与 C++ 端保持一致
+# Dynamic COCO class IDs, kept consistent with the C++ side
 DYNAMIC_COCO_IDS = {0, 1, 2, 3, 5, 7, 16, 17}
 # person, bicycle, car, motorcycle, bus, truck, dog, cat
 
-# 图像尺寸 (TUM: 640x480, KITTI: stereo pair 每个 1241x376, EuRoC: 752x480)
+# Image sizes (TUM: 640x480, KITTI: 1241x376 per stereo pair, EuRoC: 752x480)
 IMAGE_SIZES = {
     "tum": (640, 480),
     "kitti": (1241, 376),
@@ -37,7 +37,7 @@ IMAGE_SIZES = {
 
 
 def detect_dataset_type(det_dir):
-    """根据检测目录名推断数据集类型。"""
+    """Infer the dataset type from the detection directory name."""
     dirname = os.path.basename(det_dir)
     if "kitti" in dirname.lower():
         return "kitti"
@@ -48,17 +48,17 @@ def detect_dataset_type(det_dir):
 
 
 def load_detection_frame(filepath):
-    """加载单个检测 JSON 文件。"""
+    """Load a single detection JSON file."""
     try:
         with open(filepath) as f:
             return json.load(f)
     except (json.JSONDecodeError, IOError) as e:
-        print(f"  [WARN] 无法读取 {filepath}: {e}")
+        print(f"  [WARN] could not read {filepath}: {e}")
         return None
 
 
 def bbox_area(bbox):
-    """计算 bbox 面积。bbox 格式: [x1, y1, x2, y2]"""
+    """Compute the bbox area. bbox format: [x1, y1, x2, y2]"""
     if len(bbox) < 4:
         return 0
     w = max(0, bbox[2] - bbox[0])
@@ -67,7 +67,7 @@ def bbox_area(bbox):
 
 
 def analyze_sequence(det_dir, dataset_type=None):
-    """分析一个序列的所有检测结果。"""
+    """Analyze all detection results of a sequence."""
     if dataset_type is None:
         dataset_type = detect_dataset_type(det_dir)
 
@@ -75,7 +75,7 @@ def analyze_sequence(det_dir, dataset_type=None):
     total_area = img_w * img_h
 
     all_json = [f for f in os.listdir(det_dir) if f.endswith('.json')]
-    # 过滤掉非数字命名的 JSON 文件 (如 _summary.json)
+    # Drop JSON files whose names are not numeric (e.g. _summary.json)
     numeric_json = []
     for f in all_json:
         try:
@@ -113,7 +113,7 @@ def analyze_sequence(det_dir, dataset_type=None):
         if ndyn > 0:
             frames_with_dynamic += 1
 
-        # 计算动态物体覆盖面积
+        # Compute the area covered by dynamic objects
         dyn_area = sum(bbox_area(d["bbox"]) for d in detections if d.get("is_dynamic", False))
         dyn_ratio = dyn_area / total_area if total_area > 0 else 0
         dynamic_areas.append(dyn_area)
@@ -129,18 +129,18 @@ def analyze_sequence(det_dir, dataset_type=None):
 
     if dynamic_ratios:
         avg_dyn_ratio = sum(dynamic_ratios) / len(dynamic_ratios)
-        # 排序求中位数
+        # Sort and take the median
         sorted_ratios = sorted(dynamic_ratios)
         med_dyn_ratio = sorted_ratios[len(sorted_ratios) // 2]
     else:
         avg_dyn_ratio = 0
         med_dyn_ratio = 0
 
-    # 预期 ORB 特征过滤率估算
-    # ORB-SLAM3 默认提取 1000 个特征，均匀分布在全图
-    # 如果动态物体覆盖面积比为 R，则预期过滤率 ≈ R (假设特征均匀分布)
-    # 实际过滤率可能更高（因为特征往往检测在纹理区域，而动态物体如人物恰好有纹理）
-    expected_feature_filter_rate = min(avg_dyn_ratio * 1.5, 1.0)  # 1.5x 补偿因子
+    # Estimate the expected ORB feature filter rate
+    # ORB-SLAM3 extracts 1000 features by default, distributed evenly over the image
+    # If the dynamic object coverage ratio is R, the expected filter rate is about R (assuming features are evenly distributed)
+    # The actual rate can be higher (features tend to appear in textured regions, and dynamic objects such as people are textured)
+    expected_feature_filter_rate = min(avg_dyn_ratio * 1.5, 1.0)  # 1.5x compensation factor
 
     return {
         "dataset_type": dataset_type,
@@ -162,7 +162,7 @@ def analyze_sequence(det_dir, dataset_type=None):
 
 
 def categorize_sequence(dirname, stats):
-    """根据序列名和分析结果分类。"""
+    """Classify a sequence by its name and analysis results."""
     name = dirname.lower()
     categories = []
 
@@ -196,19 +196,19 @@ def categorize_sequence(dirname, stats):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="离线语义过滤验证")
+    parser = argparse.ArgumentParser(description="Offline semantic filtering validation")
     parser.add_argument("--detections", default="data/detections",
-                        help="检测结果根目录")
+                        help="Root directory of detection results")
     parser.add_argument("--output", default="output/semantic_validation.json",
-                        help="输出 JSON 文件路径")
+                        help="Output JSON file path")
     args = parser.parse_args()
 
     detections_root = args.detections
     if not os.path.isdir(detections_root):
-        print(f"[ERROR] 检测目录不存在: {detections_root}")
+        print(f"[ERROR] detection directory does not exist: {detections_root}")
         sys.exit(1)
 
-    # 查找所有序列目录
+    # Find all sequence directories
     sequences = []
     for item in sorted(os.listdir(detections_root)):
         item_path = os.path.join(detections_root, item)
@@ -218,17 +218,17 @@ def main():
                 sequences.append((item, item_path, json_count))
 
     if not sequences:
-        print("[ERROR] 未找到任何检测 JSON 文件")
+        print("[ERROR] no detection JSON files found")
         sys.exit(1)
 
-    print(f"找到 {len(sequences)} 个检测序列:")
+    print(f"Found {len(sequences)} detection sequences:")
     for name, path, count in sequences:
-        print(f"  {name}: {count} 帧")
+        print(f"  {name}: {count} frames")
 
-    # 分析每个序列
+    # Analyze each sequence
     results = {}
     for name, path, count in sequences:
-        print(f"\n分析 {name} ({count} 帧)...")
+        print(f"\nAnalyzing {name} ({count} frames)...")
         stats = analyze_sequence(path)
         if stats:
             cats = categorize_sequence(name, stats)
@@ -238,14 +238,14 @@ def main():
                 "categories": cats,
                 "statistics": stats,
             }
-            print(f"  动态帧占比: {stats['dynamic_frame_ratio']:.1%}")
-            print(f"  平均动态面积比: {stats['avg_dynamic_area_ratio']:.2%}")
-            print(f"  预期特征过滤率: {stats['expected_feature_filter_rate']:.2%}")
-            print(f"  分类: {', '.join(cats)}")
+            print(f"  dynamic frame ratio: {stats['dynamic_frame_ratio']:.1%}")
+            print(f"  avg dynamic area ratio: {stats['avg_dynamic_area_ratio']:.2%}")
+            print(f"  expected feature filter rate: {stats['expected_feature_filter_rate']:.2%}")
+            print(f"  categories: {', '.join(cats)}")
         else:
-            print(f"  [WARN] 无有效数据")
+            print(f"  [WARN] no valid data")
 
-    # 生成汇总
+    # Build the summary
     summary = {
         "total_sequences": len(results),
         "static_sequences": [],
@@ -259,7 +259,7 @@ def main():
         if "dynamic" in cats:
             summary["dynamic_sequences"].append(name)
 
-    # 计算"动态退化理论值"
+    # Compute the "theoretical dynamic degradation value"
     static_seqs = summary["static_sequences"]
     dynamic_seqs = summary["dynamic_sequences"]
 
@@ -271,18 +271,18 @@ def main():
             "dynamic_avg_dynamic_area": round(dynamic_avg_dyn, 4),
             "dynamic_factor": round(dynamic_avg_dyn / max(static_avg_dyn, 0.0001), 1),
             "interpretation": (
-                f"动态场景中动态物体覆盖率是静态场景的 {dynamic_avg_dyn / max(static_avg_dyn, 0.0001):.1f}x。"
-                f"ORB-SLAM3 基线在动态场景的 ATE 退化约 25x，与动态覆盖率增加趋势一致。"
-                f"如果语义过滤能移除 {dynamic_avg_dyn:.1%} 的干扰特征，理论可将 ATE 恢复至静态水平。"
+                f"Dynamic scenes have {dynamic_avg_dyn / max(static_avg_dyn, 0.0001):.1f}x the dynamic object coverage of static scenes. "
+                f"The ORB-SLAM3 baseline ATE degrades about 25x in dynamic scenes, matching the increase in dynamic coverage. "
+                f"If semantic filtering removes {dynamic_avg_dyn:.1%} of the interfering features, ATE could theoretically return to the static level."
             ),
         }
 
-    # 输出
+    # Output
     output = {
         "_meta": {
             "generated": "2026-06-14",
             "source": "scripts/offline_semantic_validation.py",
-            "description": "离线验证 YOLOv8 检测结果的语义过滤预期效果，不依赖 ORB-SLAM3 运行。",
+            "description": "Offline validation of the expected semantic filtering effect on YOLOv8 detection results, without running ORB-SLAM3.",
         },
         "sequences": results,
         "summary": summary,
@@ -293,17 +293,17 @@ def main():
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*60}")
-    print(f"验证完成! 结果已保存到: {args.output}")
+    print(f"Validation complete! Results saved to: {args.output}")
     print(f"{'='*60}")
-    print(f"\n关键发现:")
-    print(f"  静态序列 ({len(static_seqs)}个): {', '.join(static_seqs)}")
-    print(f"  动态序列 ({len(dynamic_seqs)}个): {', '.join(dynamic_seqs)}")
+    print(f"\nKey findings:")
+    print(f"  static sequences ({len(static_seqs)}): {', '.join(static_seqs)}")
+    print(f"  dynamic sequences ({len(dynamic_seqs)}): {', '.join(dynamic_seqs)}")
     if "theoretical_analysis" in summary:
         ta = summary["theoretical_analysis"]
-        print(f"\n  理论分析:")
-        print(f"    静态场景动态物体覆盖率: {ta['static_avg_dynamic_area']:.2%}")
-        print(f"    动态场景动态物体覆盖率: {ta['dynamic_avg_dynamic_area']:.2%}")
-        print(f"    动态/静态比: {ta['dynamic_factor']:.1f}x")
+        print(f"\n  Theoretical analysis:")
+        print(f"    static scene dynamic coverage: {ta['static_avg_dynamic_area']:.2%}")
+        print(f"    dynamic scene dynamic coverage: {ta['dynamic_avg_dynamic_area']:.2%}")
+        print(f"    dynamic/static ratio: {ta['dynamic_factor']:.1f}x")
         print(f"    {ta['interpretation']}")
 
 

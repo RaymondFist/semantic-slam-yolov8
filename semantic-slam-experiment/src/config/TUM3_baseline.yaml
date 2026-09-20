@@ -1,7 +1,7 @@
 %YAML:1.0
 
 # ============================================================================
-# ORB-SLAM3 Baseline — TUM fr3 (RGB-D, no semantic)
+# ORB-SLAM3 Baseline: TUM fr3 (RGB-D, no semantic)
 # ============================================================================
 Camera.type: "PinHole"
 

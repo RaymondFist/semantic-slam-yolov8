@@ -34,7 +34,7 @@ semantic_weights.unknown_weight: 1.0
 semantic_weights.consistency_lambda: 0.0
 
 # ============================================================================
-# ORB-SLAM3 Settings — TUM fr3 (RGB-D)
+# ORB-SLAM3 Settings: TUM fr3 (RGB-D)
 # ============================================================================
 Camera.type: "PinHole"
 

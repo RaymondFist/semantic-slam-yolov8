@@ -93,7 +93,7 @@ private:
 
     double _last_inference_ms{0.0};
 
-    // Sequential frame counter for offline mode — matches inference script's
+    // Sequential frame counter for offline mode; matches inference script's
     // sequential idx (0,1,2,...) instead of ORB-SLAM3's mnId which may not
     // be contiguous if extra Frame objects are created internally.
     int64_t _offline_frame_counter{0};

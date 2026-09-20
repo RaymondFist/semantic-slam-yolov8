@@ -1,7 +1,7 @@
 %YAML:1.0
 
 # ============================================================================
-# Ablation: YOLOv8 Only (no optical flow) — KITTI 00 Stereo
+# Ablation: YOLOv8 Only (no optical flow), KITTI 00 Stereo
 # ============================================================================
 # NOTE: OpenCV %YAML:1.0 does NOT support nested mappings. All keys must be
 # flat dot-separated at top level, matching ORB-SLAM3's format (Camera.fx, etc.)

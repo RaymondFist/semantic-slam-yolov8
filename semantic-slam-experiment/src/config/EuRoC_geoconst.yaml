@@ -1,7 +1,7 @@
 %YAML:1.0
 
 # ============================================================================
-# Ablation: YOLO + Geometric Constraints (no semantic weight) — EuRoC Stereo
+# Ablation: YOLO + Geometric Constraints (no semantic weight), EuRoC Stereo
 # ============================================================================
 # NOTE: OpenCV %YAML:1.0 does NOT support nested mappings. All keys must be
 # flat dot-separated at top level, matching ORB-SLAM3's format (Camera.fx, etc.)
@@ -31,7 +31,7 @@ semantic_weights.unknown_weight: 1.0
 semantic_weights.consistency_lambda: 0.0
 
 # ============================================================================
-# ORB-SLAM3 Settings — EuRoC MAV (Stereo)
+# ORB-SLAM3 Settings: EuRoC MAV (Stereo)
 # ============================================================================
 Camera.type: "PinHole"
 

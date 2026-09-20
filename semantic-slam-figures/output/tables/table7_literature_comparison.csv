@@ -1,0 +1,12 @@
+﻿Sequence,"ORB-SLAM2
+(Reported)","ORB-SLAM3
+(Ours Baseline)","DynaSLAM
+[Bescos2020]","DS-SLAM
+[Yu2018]","3DS-SLAM
+[Ghanta2023]","CFP-SLAM
+[3DS-SLAM2023]","Ours
+YOLO-Mask","Ours vs
+Best"
+TUM walking_xyz,0.7214,0.2856,0.0164,0.0247,0.0135,0.0141,0.0168,+24.4%
+TUM walking_half,0.4667,0.2034,0.0296,0.0303,0.0197,0.0237,0.0271,+37.6%
+TUM walking_static,0.3872,0.0252,0.0068,0.0081,0.0063,0.0066,0.0117,+85.7%

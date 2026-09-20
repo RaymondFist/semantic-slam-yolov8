@@ -39,7 +39,7 @@ struct AblationResult {
 // Generate a temporary YAML settings file for a given ablation config.
 // The patched ORB-SLAM3 reads yolo_detector / dynamic_filter / semantic_weights
 // sections from the YAML. By modifying these sections we control the behavior:
-//   BASELINE_ONLY: no yolo_detector section → init fails → mpSemanticSLAM = nullptr
+//   BASELINE_ONLY: no yolo_detector section -> init fails -> mpSemanticSLAM = nullptr
 //   YOLO_ONLY:     yolo_detector present, flow_threshold_px = 0 (disable flow)
 //   YOLO_FLOW:     yolo_detector + flow enabled, all weights = 1.0
 //   FULL_SYSTEM:   yolo_detector + flow + semantic weights
@@ -77,7 +77,7 @@ static std::string generateAblationYAML(const std::string& base_yaml,
                 skipping = false;
                 // Fall through to add this line
             } else {
-                // Still in a semantic section — skip this line
+                // Still in a semantic section; skip this line
                 continue;
             }
         }
@@ -225,7 +225,7 @@ public:
 
             double kitti_ate = 0.0, euroc_ate = 0.0, tum_ate = 0.0;
 
-            // KITTI (Stereo) — uses ablation-specific YAML
+            // KITTI (Stereo): uses ablation-specific YAML
             {
                 ORB_SLAM3::System SLAM(_vocab_path, kitti_yaml,
                                        ORB_SLAM3::System::STEREO, false);

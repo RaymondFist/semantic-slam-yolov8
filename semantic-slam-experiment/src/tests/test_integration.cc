@@ -76,7 +76,7 @@ TEST_F(IntegrationTest, SubmitFrameThenGetDetection) {
     _sem_slam->submitFrame(img, 1.0, 0);
 
     auto det = _sem_slam->getDetectionResult(0, 500.0);
-    // With stub ONNX model, may be invalid — but should not crash
+    // With stub ONNX model, may be invalid, but should not crash
     EXPECT_TRUE(det.valid || !det.valid);
 }
 
@@ -161,7 +161,7 @@ TEST_F(IntegrationTest, GetDetectionResultRespectsMaxDelay) {
 }
 
 // ============================================================================
-// TEST 10: Stress — rapid submit + get cycle
+// TEST 10: Stress: rapid submit + get cycle
 // ============================================================================
 TEST_F(IntegrationTest, StressTestRapidSubmitGet) {
     cv::Mat img = makeCheckerboard(IMG_W, IMG_H);

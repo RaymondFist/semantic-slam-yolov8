@@ -110,7 +110,7 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
             current_image.cols, current_image.rows,
             previous_image.cols, previous_image.rows);
 
-    // SEMANTIC_SLAM_FIX: Defensive guard — empty keypoints or invalid images
+    // SEMANTIC_SLAM_FIX: Defensive guard: empty keypoints or invalid images
     if (keypoints.empty()) {
         fprintf(stderr, "[DEBUG_DFF] processFrameMasked: empty keypoints, returning\n");
         return std::vector<bool>();
@@ -126,7 +126,7 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
 
     auto t0 = std::chrono::high_resolution_clock::now();
 
-    // SEMANTIC_SLAM_FIX: YOLO-only fast path — when flow_threshold_px == 0,
+    // SEMANTIC_SLAM_FIX: YOLO-only fast path: when flow_threshold_px == 0,
     // skip optical flow entirely and use only YOLO category for dynamic detection.
     // This avoids unnecessary/costly optical flow computation and prevents
     // potential crashes from lk_max_level=0 edge cases.
@@ -200,10 +200,10 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
 
     if (!tracked_points_prev.empty() && !tracked_points_curr.empty() &&
         tracked_points_prev.size() == tracked_points_curr.size()) {
-        // Caller provided pre-tracked points — skip optical flow computation
+        // Caller provided pre-tracked points; skip optical flow computation
         lk_status.resize(pts_curr.size(), 1);
     } else {
-        // SEMANTIC_SLAM_FIX: Boundary check — ensure all keypoints are within image bounds
+        // SEMANTIC_SLAM_FIX: Boundary check: ensure all keypoints are within image bounds
         // before calling calcOpticalFlowPyrLK, which can crash on out-of-bounds points
         for (size_t i = 0; i < pts_curr.size(); ++i) {
             if (pts_curr[i].x < 0 || pts_curr[i].x >= curr_gray.cols ||
@@ -216,8 +216,8 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
         // SEMANTIC_SLAM_FIX: Use square window (lk_window_size x lk_window_size),
         // NOT (lk_window_size x lk_max_level). The old code accidentally used
         // lk_max_level as the window height, which created invalid windows:
-        //   - YOLO-only (lk_max_level=0): Size(21,0) → SIGSEGV
-        //   - Semantic   (lk_max_level=3): Size(21,3) → abnormally narrow
+        //   - YOLO-only (lk_max_level=0): Size(21,0) -> SIGSEGV
+        //   - Semantic   (lk_max_level=3): Size(21,3) -> abnormally narrow
         try {
             cv::calcOpticalFlowPyrLK(curr_gray, prev_gray, pts_curr, pts_prev,
                                      lk_status, lk_err,
@@ -225,7 +225,7 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
                                      _config.lk_max_level);
         } catch (const cv::Exception& e) {
             std::cerr << "[DynamicFeatureFilter] Optical flow failed: "
-                      << e.what() << " — returning all static" << std::endl;
+                      << e.what() << "; returning all static" << std::endl;
             return std::vector<bool>(keypoints.size(), false);
         }
     }
@@ -235,7 +235,7 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
     if (lk_status.size() != pts_curr.size() || pts_prev.size() != pts_curr.size()) {
         std::cerr << "[DynamicFeatureFilter] Optical flow output size mismatch: "
                   << "status=" << lk_status.size() << " prev=" << pts_prev.size()
-                  << " curr=" << pts_curr.size() << " — returning all static" << std::endl;
+                  << " curr=" << pts_curr.size() << "; returning all static" << std::endl;
         return std::vector<bool>(keypoints.size(), false);
     }
 

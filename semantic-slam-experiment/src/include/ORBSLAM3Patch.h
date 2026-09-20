@@ -10,7 +10,7 @@
 // ============================================================================
 
 // ============================================================================
-// 1. MapPoint.h — Add semantic class ID
+// 1. MapPoint.h: Add semantic class ID
 // ============================================================================
 //
 // In class MapPoint, add the following member and accessor after line ~110
@@ -30,7 +30,7 @@
 //       double mSemanticWeight = 0.8;  // default unknown weight
 
 // ============================================================================
-// 2. Frame.h — Add dynamic feature mask
+// 2. Frame.h: Add dynamic feature mask
 // ============================================================================
 //
 // In class Frame, add after line ~200 (near mvbOutlier):
@@ -55,7 +55,7 @@
 //       std::vector<bool> mvDynamicMask;
 
 // ============================================================================
-// 3. Tracking.h — Add semantic system reference
+// 3. Tracking.h: Add semantic system reference
 // ============================================================================
 //
 // Add forward declaration near top:

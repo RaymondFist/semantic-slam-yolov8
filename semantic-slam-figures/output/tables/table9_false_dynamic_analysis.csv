@@ -1,0 +1,4 @@
+﻿Sequence,Scene Type,Baseline ATE (m),YOLO-Mask ATE (m),ATE Change,False Dynamic Root Cause,Affected Region
+TUM sitting_static,Static person seated,0.0072,0.0102,+41.4%,Person detected as dynamic; body pixels masked out,~62% of person pixels removed
+TUM sitting_xyz,Static person + camera motion,0.0092,0.0311,+239.5%,Large person area (~45% of frame) masked; critical features lost,Person occupies large image region
+KITTI 00,"Outdoor driving, sparse pedestrians",0.9671,1.1130,+15.1%,Distant pedestrians have few features; masking degrades already-sparse tracking,Low-impact due to sparse dynamics

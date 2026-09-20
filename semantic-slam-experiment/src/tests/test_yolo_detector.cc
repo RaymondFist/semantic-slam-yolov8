@@ -85,7 +85,7 @@ TEST_F(YoloDetectorTest, InitializeFailsGracefullyWithStubModel) {
 
     bool result = detector.initialize();
 
-    // Stub file contains no real weights — expect false without crashing
+    // Stub file contains no real weights; expect false without crashing
     EXPECT_FALSE(result) << "Stub ONNX should fail to initialize, not crash";
 }
 
@@ -256,7 +256,7 @@ TEST_F(YoloDetectorTest, LastInferenceTimeDefaultsToZero) {
 }
 
 // ============================================================================
-// TEST 15: stress test — many submissions without running thread
+// TEST 15: stress test (many submissions, no running thread)
 // ============================================================================
 TEST_F(YoloDetectorTest, StressTestManySubmissions) {
     auto cfg = makeValidConfig();
@@ -287,7 +287,7 @@ TEST_F(YoloDetectorTest, ThreadStartStopCycle) {
 }
 
 // ============================================================================
-// TEST 17: Config validation — default values
+// TEST 17: Config validation: default values
 // ============================================================================
 TEST_F(YoloDetectorTest, ConfigDefaultsAreReasonable) {
     YoloDetector::Config cfg;

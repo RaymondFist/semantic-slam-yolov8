@@ -214,7 +214,7 @@ TEST_F(DynamicFeatureFilterTest, IsRegionFlowingWithSignificantMotion) {
 }
 
 // ============================================================================
-// TEST 9：dilateMask expands mask region
+// TEST 9: dilateMask expands mask region
 // ============================================================================
 TEST_F(DynamicFeatureFilterTest, DilateMaskExpandsRegion) {
     cv::Mat mask = cv::Mat::zeros(IMG_H, IMG_W, CV_8UC1);
@@ -307,7 +307,7 @@ TEST_F(DynamicFeatureFilterTest, StressTestLargeKeypoints) {
 }
 
 // ============================================================================
-// TEST 14: temporal consistency — repeated static frames remain static
+// TEST 14: temporal consistency: repeated static frames remain static
 // ============================================================================
 TEST_F(DynamicFeatureFilterTest, TemporalConsistencyStaticScene) {
     cv::Mat img = makeCheckerboard(IMG_W, IMG_H);

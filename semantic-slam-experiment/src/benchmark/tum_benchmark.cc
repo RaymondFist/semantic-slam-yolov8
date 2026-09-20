@@ -165,7 +165,7 @@ public:
         // Save trajectory in TUM format (compatible with evo_ape tum)
         SLAM.SaveTrajectoryTUM(traj_file);
         SLAM.Shutdown();
-        // No need to stop semSlam — it's managed by ORB-SLAM3 internally
+        // No need to stop semSlam; it is managed by ORB-SLAM3 internally
 
         result.avg_fps = processed > 0 ? processed / total_time : 0.0;
 

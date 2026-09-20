@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 """
-generate_figures.py — 论文图表生成脚本
+generate_figures.py - paper figure generation script
 ===========================================
-论文: Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments
-用途: 根据实验数据生成所有论文图表，用于数据分析和评审提交
-依赖: matplotlib, numpy
-运行: python generate_figures.py
+Paper: Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments
+Purpose: generate all paper figures from experiment data, for analysis and review submission
+Dependencies: matplotlib, numpy
+Run: python generate_figures.py
 
-生成图表列表:
-  Figure 1: 系统架构图 (System Architecture)
-  Figure 2: TUM RGB-D ATE 对比 (Baseline vs YOLO-Mask)
-  Figure 3: 静态场景 vs 动态场景 平均ATE对比
-  Figure 4: KITTI Odometry Sequence 00 ATE 对比
-  Figure 5: 运行时性能分析 (Timing Profiling)
-  Figure 6: 参数敏感性分析 (Parameter Sensitivity)
+Generated figures:
+  Figure 1: System architecture
+  Figure 2: TUM RGB-D ATE comparison (Baseline vs YOLO-Mask)
+  Figure 3: Mean ATE comparison, static vs dynamic scenes
+  Figure 4: KITTI Odometry Sequence 00 ATE comparison
+  Figure 5: Runtime profiling
+  Figure 6: Parameter sensitivity
 
-数据来源: 全部来自 AutoDL 云平台上的真实实验运行结果
-评估结果: ../data/experiment_results.json
-输出目录: ../output/figures/
+Data source: real experiment runs on the AutoDL cloud platform
+Evaluation results: ../data/experiment_results.json
+Output directory: ../output/figures/
 """
 
 import matplotlib
@@ -30,21 +30,21 @@ import os
 import sys
 
 # ================================================================
-# 配置
+# Configuration
 # ================================================================
-# 输出目录 (相对于本脚本: ../output/figures/)
+# Output directory (relative to this script: ../output/figures/)
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(SCRIPT_DIR, '..', 'output', 'figures')
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ================================================================
-# 实验原始数据 (全部来自真实实验运行)
-# 来源: deploylog.txt 第 383598 行 "实验结果导出完成"
-# 评估工具: evo_traj (evo Python package)
-# 评估方法: ATE RMSE after SE(3) Umeyama alignment
+# Raw experiment data (all from real experiment runs)
+# Data source: ../data/experiment_results.json (autodl_deploy.sh evo_ape evaluation)
+# Evaluation tool: evo_traj (evo Python package)
+# Evaluation method: ATE RMSE after SE(3) Umeyama alignment
 # ================================================================
 
-# --- TUM RGB-D 数据集 ATE 数据 (单位: 米) ---
+# --- TUM RGB-D dataset ATE data (unit: meters) ---
 TUM_DATA = {
     'sitting_static':  {'baseline': 0.007228, 'mask': 0.010217, 'frames': 682,  'type': 'static'},
     'sitting_xyz':     {'baseline': 0.009150, 'mask': 0.031067, 'frames': 864,  'type': 'static'},
@@ -53,19 +53,19 @@ TUM_DATA = {
     'walking_halfsphere': {'baseline': 0.203419, 'mask': 0.027066, 'frames': 1020, 'type': 'dynamic'},
 }
 
-# --- KITTI Odometry 数据集 ATE 数据 (单位: 米) ---
+# --- KITTI Odometry dataset ATE data (unit: meters) ---
 KITTI_DATA = {
     '00': {'baseline': 0.967078, 'mask': 1.112997, 'frames': 4541},
 }
 
-# --- 时序性能分析数据 (来源: deploylog.txt 第 166465 行) ---
+# --- Timing profiling data (source: ../data/experiment_results.json['timing'] and output/timing_logs/*_timing.log) ---
 TIMING_DATA = {
     'TUM walking_xyz': {'wall_clock_s': 37.42, 'cpu_time_s': 125.87, 'max_rss_gb': 0.895, 'cpu_pct': 402, 'frames': 827},
     'KITTI 00':         {'wall_clock_s': 65.66, 'cpu_time_s': 257.57, 'max_rss_gb': 1.184, 'cpu_pct': 471, 'frames': 4541},
     'EuRoC MH_03':      {'wall_clock_s': 85.54, 'cpu_time_s': 219.76, 'max_rss_gb': 0.741, 'cpu_pct': 336, 'frames': 2700},
 }
 
-# --- 参数敏感性分析数据 (来源: deploylog.txt 第 383596 行, 在 TUM walking_xyz 上执行) ---
+# --- Parameter sensitivity data (run on TUM walking_xyz, source: ../data/experiment_results.json) ---
 PARAM_SWEEP = {
     'orb_features': {
         'values': [500, 800, 1000, 1200, 1500, 2000],
@@ -88,14 +88,14 @@ PARAM_SWEEP = {
 }
 
 # ================================================================
-# 辅助函数
+# Helper functions
 # ================================================================
 def calc_improvement(baseline, mask):
-    """计算 YOLO-Mask 相对 Baseline 的改进百分比"""
+    """Compute the improvement percentage of YOLO-Mask over Baseline"""
     return round((baseline - mask) / baseline * 100, 1)
 
 def save_figure(fig, filename):
-    """保存图表到输出目录"""
+    """Save a figure to the output directory"""
     path = os.path.join(OUTPUT_DIR, filename)
     fig.savefig(path, dpi=300, bbox_inches='tight')
     size_kb = os.path.getsize(path) / 1024
@@ -103,11 +103,11 @@ def save_figure(fig, filename):
     plt.close(fig)
 
 # ================================================================
-# Figure 1: 系统架构图
-# 对应论文 Section 3.1 System Overview
+# Figure 1: System architecture
+# Corresponds to paper Section 3.1 System Overview
 # ================================================================
 def generate_figure1_architecture():
-    """生成系统架构流程图"""
+    """Generate the system architecture flow diagram"""
     fig, ax = plt.subplots(1, 1, figsize=(12, 5))
     ax.set_xlim(0, 12)
     ax.set_ylim(0, 5)
@@ -115,11 +115,11 @@ def generate_figure1_architecture():
     ax.set_title('System Architecture of Semantic Masking Pipeline',
                  fontsize=14, fontweight='bold', pad=15)
 
-    # 组件定义: (x, y, w, h, label, color, sublabel)
+    # Component definitions: (x, y, w, h, label, color, sublabel)
     boxes = [
         (0.3, 2.0, 2.0, 1.2, 'Input Images\n(RGB / RGB-D)', '#4472C4', 'TUM / KITTI'),
         (3.0, 2.0, 2.0, 1.2, 'YOLOv8-nano\nInstance Segmentation', '#ED7D31', 'Offline Detection'),
-        (5.7, 2.0, 2.0, 1.2, 'mask_dataset.py\nImage Masking', '#2E7D32', 'BBox \u2192 Zero Out'),
+        (5.7, 2.0, 2.0, 1.2, 'mask_dataset.py\nImage Masking', '#2E7D32', 'BBox -> Zero Out'),
         (8.4, 2.0, 2.0, 1.2, 'ORB-SLAM3\n(Unmodified)', '#7030A0', 'Tracking + Mapping'),
         (8.4, 0.3, 2.0, 0.9, 'ATE Evaluation\n(evo_traj)', '#C00000', 'Trajectory Analysis'),
     ]
@@ -133,7 +133,7 @@ def generate_figure1_architecture():
         ax.text(x + w/2, y + h/2 - 0.35, sublabel, ha='center', va='center',
                 fontsize=7, color='white', alpha=0.85)
 
-    # 箭头
+    # Arrows
     arrows = [
         (2.3, 2.6, 3.0, 2.6), (5.0, 2.6, 5.7, 2.6),
         (7.7, 2.6, 8.4, 2.6), (9.4, 2.0, 9.4, 1.2),
@@ -143,7 +143,7 @@ def generate_figure1_architecture():
                     arrowprops=dict(arrowstyle='->', color='#333333', lw=2.5,
                                     connectionstyle='arc3,rad=0'))
 
-    # 离线/在线边界
+    # Offline/online boundary
     ax.axvline(x=7.9, ymin=0.15, ymax=0.95, color='#FF0000', linewidth=2,
                linestyle='--', alpha=0.5)
     ax.text(7.9, 4.5, 'OFFLINE', ha='center', fontsize=8, color='#FF0000',
@@ -153,7 +153,7 @@ def generate_figure1_architecture():
     ax.text(9.4, 4.5, 'OFFLINE', ha='center', fontsize=8, color='#FF0000',
             fontweight='bold', alpha=0.7)
 
-    # 数据流标注
+    # Data flow labels
     ax.text(2.65, 3.0, 'Detection\nJSON', ha='center', fontsize=6.5,
             color='#555555', fontstyle='italic')
     ax.text(5.35, 3.0, 'Masked\nImages', ha='center', fontsize=6.5,
@@ -170,11 +170,11 @@ def generate_figure1_architecture():
     save_figure(fig, 'fig1_system_architecture.png')
 
 # ================================================================
-# Figure 2: TUM RGB-D ATE 对比
-# 对应论文 Section 4.2 TUM RGB-D Results
+# Figure 2: TUM RGB-D ATE comparison
+# Corresponds to paper Section 4.2 TUM RGB-D Results
 # ================================================================
 def generate_figure2_tum_ate():
-    """生成 TUM RGB-D Baseline vs YOLO-Mask ATE 对比图"""
+    """Generate the TUM RGB-D Baseline vs YOLO-Mask ATE comparison figure"""
     sequences = list(TUM_DATA.keys())
     seq_labels = [s.replace('_', '\n') for s in sequences]
     baseline_ate = [TUM_DATA[s]['baseline'] for s in sequences]
@@ -183,7 +183,7 @@ def generate_figure2_tum_ate():
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5.5))
 
-    # (a) 绝对 ATE 值
+    # (a) Absolute ATE values
     x = np.arange(len(sequences))
     width = 0.35
     bars1 = ax1.bar(x - width/2, baseline_ate, width, label='Baseline (ORB-SLAM3)',
@@ -205,7 +205,7 @@ def generate_figure2_tum_ate():
         ax1.text(bar.get_x() + bar.get_width()/2., bar.get_height() + offset,
                  f'{val:.4f}', ha='center', va='bottom', fontsize=7, rotation=90, color='#333333')
 
-    # (b) 相对改进百分比
+    # (b) Relative improvement percentage
     colors = ['#C62828' if v < 0 else '#2E7D32' for v in improvements]
     bars3 = ax2.bar(x, improvements, color=colors, edgecolor='white', linewidth=0.5, alpha=0.85)
     ax2.axhline(y=0, color='black', linewidth=0.8)
@@ -227,17 +227,17 @@ def generate_figure2_tum_ate():
     ax2.text(3.0, max(improvements) * 0.85, 'Dynamic:\nSemantic Masking\nEffective',
              ha='center', fontsize=8, color='#2E7D32', fontstyle='italic')
 
-    plt.suptitle('Figure 2: TUM RGB-D ATE Comparison \u2014 Baseline vs YOLO-Mask',
+    plt.suptitle('Figure 2: TUM RGB-D ATE Comparison - Baseline vs YOLO-Mask',
                  fontsize=14, fontweight='bold', y=1.02)
     plt.tight_layout()
     save_figure(fig, 'fig2_tum_ate.png')
 
 # ================================================================
-# Figure 3: 静态场景 vs 动态场景 平均 ATE 对比
-# 对应论文 Section 4.2 TUM RGB-D Results (场景类型分析)
+# Figure 3: Mean ATE comparison for static vs dynamic scenes
+# Corresponds to paper Section 4.2 TUM RGB-D Results (scene type analysis)
 # ================================================================
 def generate_figure3_scene_type():
-    """生成 静态 vs 动态 场景平均 ATE 对比图"""
+    """Generate the static vs dynamic mean ATE comparison figure"""
     static_seqs = [s for s, d in TUM_DATA.items() if d['type'] == 'static']
     dynamic_seqs = [s for s, d in TUM_DATA.items() if d['type'] == 'dynamic']
 
@@ -259,14 +259,14 @@ def generate_figure3_scene_type():
     ax.bar(x + width/2, [static_mask_mean, dynamic_mask_mean], width,
            label='YOLO-Mask (Ours)', color='#ED7D31', edgecolor='white', linewidth=0.5)
     ax.set_ylabel('Mean ATE RMSE (m)', fontsize=12, fontweight='bold')
-    ax.set_title('Figure 3: Static vs Dynamic Scenes \u2014 Mean ATE Comparison',
+    ax.set_title('Figure 3: Static vs Dynamic Scenes - Mean ATE Comparison',
                  fontsize=13, fontweight='bold')
     ax.set_xticks(x)
     ax.set_xticklabels(categories, fontsize=11)
     ax.legend(fontsize=10, loc='upper left', framealpha=0.9)
     ax.grid(axis='y', alpha=0.3, linestyle='--')
 
-    # 标注数值
+    # Annotate values
     ax.text(0, static_baseline_mean + 0.003, f'{static_baseline_mean:.4f}',
             ha='center', fontsize=10, fontweight='bold', color='#4472C4')
     ax.text(0, static_mask_mean + 0.003, f'{static_mask_mean:.4f}',
@@ -276,7 +276,7 @@ def generate_figure3_scene_type():
     ax.text(1, dynamic_mask_mean + 0.005, f'{dynamic_mask_mean:.4f}',
             ha='center', fontsize=10, fontweight='bold', color='#ED7D31')
 
-    # 改进百分比标注
+    # Annotate improvement percentages
     ax.annotate(f'{static_imp:+.1f}%',
                 xy=(0, (static_baseline_mean + static_mask_mean)/2),
                 fontsize=12, fontweight='bold', color='#C62828', ha='center', va='center',
@@ -297,11 +297,11 @@ def generate_figure3_scene_type():
     save_figure(fig, 'fig3_scene_type.png')
 
 # ================================================================
-# Figure 4: KITTI Odometry Sequence 00 ATE 对比
-# 对应论文 Section 4.3 KITTI Odometry Results
+# Figure 4: KITTI Odometry Sequence 00 ATE comparison
+# Corresponds to paper Section 4.3 KITTI Odometry Results
 # ================================================================
 def generate_figure4_kitti_ate():
-    """生成 KITTI 00 ATE 对比图"""
+    """Generate the KITTI 00 ATE comparison figure"""
     kitti_baseline = KITTI_DATA['00']['baseline']
     kitti_mask = KITTI_DATA['00']['mask']
     improvement = calc_improvement(kitti_baseline, kitti_mask)
@@ -314,7 +314,7 @@ def generate_figure4_kitti_ate():
     ax.bar(x[0] + width/2, kitti_mask, width, label='YOLO-Mask (Ours)',
            color='#ED7D31', edgecolor='white', linewidth=0.5)
     ax.set_ylabel('ATE RMSE (m)', fontsize=12, fontweight='bold')
-    ax.set_title('Figure 4: KITTI Odometry Sequence 00 \u2014 ATE Comparison',
+    ax.set_title('Figure 4: KITTI Odometry Sequence 00 - ATE Comparison',
                  fontsize=13, fontweight='bold')
     ax.set_xticks(x)
     ax.set_xticklabels(['KITTI Sequence 00\n(4,541 frames, with loop closure)'], fontsize=11)
@@ -338,11 +338,11 @@ def generate_figure4_kitti_ate():
     save_figure(fig, 'fig4_kitti_ate.png')
 
 # ================================================================
-# Figure 5: 运行时性能分析
-# 对应论文 Section 4.5 Timing Analysis
+# Figure 5: Runtime profiling
+# Corresponds to paper Section 4.5 Timing Analysis
 # ================================================================
 def generate_figure5_timing():
-    """生成运行时性能分析图"""
+    """Generate the runtime profiling figure"""
     datasets = list(TIMING_DATA.keys())
     labels = ['TUM\nwalking_xyz\n(827 frames)', 'KITTI 00\n(4,541 frames)',
               'EuRoC\nMH_03\n(2,700 frames)']
@@ -394,11 +394,11 @@ def generate_figure5_timing():
     save_figure(fig, 'fig5_timing.png')
 
 # ================================================================
-# Figure 6: 参数敏感性分析
-# 对应论文 Section 4.7 Parameter Sensitivity
+# Figure 6: Parameter sensitivity
+# Corresponds to paper Section 4.7 Parameter Sensitivity
 # ================================================================
 def generate_figure6_parameter_sensitivity():
-    """生成参数敏感性分析图 (三组参数扫描)"""
+    """Generate the parameter sensitivity figure (three parameter sweeps)"""
     fig, axes = plt.subplots(1, 3, figsize=(16, 5))
     colors = ['#4472C4', '#ED7D31', '#2E7D32']
     markers = ['o', 's', 'D']
@@ -448,13 +448,13 @@ def generate_figure6_parameter_sensitivity():
     save_figure(fig, 'fig6_parameter_sensitivity.png')
 
 # ================================================================
-# 主入口
+# Main entry point
 # ================================================================
 if __name__ == '__main__':
     print('=' * 60)
-    print('论文图表生成脚本')
-    print('论文: Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments')
-    print(f'输出目录: {OUTPUT_DIR}')
+    print('Paper figure generation script')
+    print('Paper: Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments')
+    print(f'Output directory: {OUTPUT_DIR}')
     print('=' * 60)
     print()
 
@@ -466,5 +466,5 @@ if __name__ == '__main__':
     generate_figure6_parameter_sensitivity()
 
     print()
-    print(f'全部 6 张图表已生成到: {OUTPUT_DIR}')
-    print('完成!')
+    print(f'All 6 figures written to: {OUTPUT_DIR}')
+    print('Done!')

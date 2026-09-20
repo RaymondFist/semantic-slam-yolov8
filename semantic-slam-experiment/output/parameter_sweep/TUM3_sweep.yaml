@@ -1,7 +1,7 @@
 %YAML:1.0
 
 # ============================================================================
-# Semantic SLAM — YOLOv8 Configuration
+# Semantic SLAM: YOLOv8 Configuration
 # ============================================================================
 # NOTE: OpenCV %YAML:1.0 does NOT support nested mappings. All keys must be
 # flat dot-separated at top level, matching ORB-SLAM3's format (Camera.fx, etc.)
@@ -31,7 +31,7 @@ semantic_weights.unknown_weight: 0.8
 semantic_weights.consistency_lambda: 0.1
 
 # ============================================================================
-# ORB-SLAM3 Settings — TUM fr3 (RGB-D)
+# ORB-SLAM3 Settings: TUM fr3 (RGB-D)
 # ============================================================================
 Camera.type: "PinHole"
 

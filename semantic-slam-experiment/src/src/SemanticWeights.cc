@@ -28,7 +28,7 @@ static const std::unordered_map<int, SemanticClass> COCO_TO_SEMANTIC = {
     // Road infrastructure
     {6,  SemanticClass::ROAD},            // train (on rails = infrastructure)
 
-    // Dynamic objects — mapped to UNKNOWN so they get unknown_weight
+    // Dynamic objects: mapped to UNKNOWN so they get unknown_weight
     {0,  SemanticClass::UNKNOWN},         // person
     {1,  SemanticClass::UNKNOWN},         // bicycle
     {2,  SemanticClass::UNKNOWN},         // car
