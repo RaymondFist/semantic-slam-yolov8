@@ -9,7 +9,7 @@ Aggregate ATE across multiple runs of each (sequence, configuration) into:
   - Paired improvement: Baseline vs YOLO-Mask (Wilcoxon signed-rank; falls back to sign test / t-test for fewer than 6 pairs or ties)
 Outputs:
   - output/multi_run_statistics.json
-  - Console Markdown table (can be pasted directly into the paper)
+  - Console Markdown table
 
 Current data situation: the repo already contains several sets of trajectory files for the same sequence (baseline_*, mask_tum_*,
 parameter_sweep/*_traj.txt, output/*_trajectory.txt) treated as independent run draws.
@@ -30,8 +30,8 @@ BASE = os.path.join(SCRIPT_DIR, '..')
 OUT = os.path.join(BASE, 'output')
 
 # sequence -> (baseline config, mask config, gt)
-# Each config maps to a list of files (independent run draws; default 1 = the single run used in the paper).
-# IMPORTANT: the existing baseline_*/mask_tum_* files in the repo are trajectories from the single run used in the paper;
+# Each config maps to a list of files (independent run draws; default 1 = a single run).
+# IMPORTANT: the existing baseline_*/mask_tum_* files in the repo are single-run trajectories;
 # tests show that mixing in parameter_sweep/* or output/*_trajectory.txt produces wrong aggregates (they are not repeated runs of the same config).
 # So the default is 1 real file per config; once formal multi-run data (independent re-runs, N>=5) is available, append the new trajectory files to the list.
 TUM_GT = os.path.join(OUT, 'gt_trajectories', 'TUM')
@@ -125,7 +125,7 @@ def main():
             row['mask'] = {'n': int(len(m)), 'rmse_mean': float(m.mean()),
                            'rmse_std': float(m.std(ddof=1)) if len(m) > 1 else None,
                            'rmse_pairs': [float(x) for x in m]}
-        # Improvement % is computable for n>=1 (a single run gives the paper value); statistical tests only make sense for paired samples with n>=2
+        # Improvement % is computable for n>=1 (a single run gives a point estimate); statistical tests only make sense for paired samples with n>=2
         if len(b) == len(m) and len(b) > 0:
             imp = (b.mean() - m.mean()) / b.mean() * 100
             if len(b) >= 2:
@@ -157,13 +157,13 @@ def main():
     with open(json_path, 'w') as f:
         json.dump(out, f, indent=2, default=str)
 
-    print("== Multi-Run ATE Statistics (mean ± std, n runs) ==")
+    print("== Multi-Run ATE Statistics (mean +/- std, n runs) ==")
     print("| Sequence | Baseline ATE | YOLO-Mask ATE | Improvement | Paired test |")
     print("|---|---|---|---|---|")
     for r in md_rows:
         print(r)
     print(f"\nSaved: {json_path}")
-    print("NOTE: n is currently limited by the trajectory files already in the repo; for submission, run independent repeats (N>=5) per sequence and rerun this script.")
+    print("NOTE: n is currently limited by the trajectory files already in the repo; run independent repeats (N>=5) per sequence and rerun this script.")
 
 
 if __name__ == '__main__':

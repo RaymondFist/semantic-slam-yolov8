@@ -1,0 +1,15 @@
+# Runtime and generated files
+
+# Logs
+logs/
+*.log
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Build directories
+build/
+
+# Helper script written into the output directory at run time by autodl_p1p2.sh
+semantic-slam-experiment/output/p1/stats.py

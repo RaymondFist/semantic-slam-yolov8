@@ -3,7 +3,7 @@
 Plan B validation report generator
 ==================================
 Generates a comprehensive validation report, covering:
-  1. Baseline ATE comparison table (paper format)
+  1. Baseline ATE comparison table (Markdown format)
   2. Offline semantic filtering analysis (YOLO detection coverage)
   3. Dynamic degradation analysis (static vs dynamic scenes)
   4. Theoretical improvement estimate
@@ -268,11 +268,11 @@ def generate_report():
     lines.append("")
     lines.append('Plan B uses "pure traditional ORB-SLAM3 validation + theoretical argument"; its limitations are:')
     lines.append("")
-    lines.append("| Limitation | Impact | How the paper handles it |")
+    lines.append("| Limitation | Impact | Current handling |")
     lines.append("|------|------|-----------------|")
     lines.append("| No measured semantic SLAM ATE | cannot directly prove the semantic method improves results | provide theoretical estimates + ablation analysis |")
     lines.append("| No measured GeoConst data | cannot verify the geometric constraint effectiveness | show the sitting false-positive case to justify it |")
-    lines.append('| No end-to-end Full System metrics | paper experiments incomplete | marked as "theoretical validation", to be completed after the g2o crash is fixed |')
+    lines.append('| No end-to-end Full System metrics | experiments incomplete | marked as "theoretical validation", to be completed after the g2o crash is fixed |')
     lines.append("| No measured timing analysis | cannot provide real latency data | provide YOLO inference time statistics as a reference |")
     lines.append("")
     lines.append("---")

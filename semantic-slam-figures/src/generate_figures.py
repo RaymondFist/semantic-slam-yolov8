@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-generate_figures.py - paper figure generation script
+generate_figures.py - figure generation script
 ===========================================
-Paper: Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments
-Purpose: generate all paper figures from experiment data, for analysis and review submission
+Purpose: generate all figures from the experiment data
 Dependencies: matplotlib, numpy
 Run: python generate_figures.py
 
@@ -58,7 +57,7 @@ KITTI_DATA = {
     '00': {'baseline': 0.967078, 'mask': 1.112997, 'frames': 4541},
 }
 
-# --- Timing profiling data (source: ../data/experiment_results.json['timing'] and output/timing_logs/*_timing.log) ---
+# --- Timing profiling data (source: ../data/experiment_results.json['timing']) ---
 TIMING_DATA = {
     'TUM walking_xyz': {'wall_clock_s': 37.42, 'cpu_time_s': 125.87, 'max_rss_gb': 0.895, 'cpu_pct': 402, 'frames': 827},
     'KITTI 00':         {'wall_clock_s': 65.66, 'cpu_time_s': 257.57, 'max_rss_gb': 1.184, 'cpu_pct': 471, 'frames': 4541},
@@ -104,7 +103,7 @@ def save_figure(fig, filename):
 
 # ================================================================
 # Figure 1: System architecture
-# Corresponds to paper Section 3.1 System Overview
+# System architecture overview
 # ================================================================
 def generate_figure1_architecture():
     """Generate the system architecture flow diagram"""
@@ -171,7 +170,7 @@ def generate_figure1_architecture():
 
 # ================================================================
 # Figure 2: TUM RGB-D ATE comparison
-# Corresponds to paper Section 4.2 TUM RGB-D Results
+# TUM RGB-D sequence results
 # ================================================================
 def generate_figure2_tum_ate():
     """Generate the TUM RGB-D Baseline vs YOLO-Mask ATE comparison figure"""
@@ -234,7 +233,7 @@ def generate_figure2_tum_ate():
 
 # ================================================================
 # Figure 3: Mean ATE comparison for static vs dynamic scenes
-# Corresponds to paper Section 4.2 TUM RGB-D Results (scene type analysis)
+# Scene type analysis over the TUM RGB-D sequences
 # ================================================================
 def generate_figure3_scene_type():
     """Generate the static vs dynamic mean ATE comparison figure"""
@@ -298,7 +297,7 @@ def generate_figure3_scene_type():
 
 # ================================================================
 # Figure 4: KITTI Odometry Sequence 00 ATE comparison
-# Corresponds to paper Section 4.3 KITTI Odometry Results
+# KITTI Odometry sequence 00 results
 # ================================================================
 def generate_figure4_kitti_ate():
     """Generate the KITTI 00 ATE comparison figure"""
@@ -339,7 +338,7 @@ def generate_figure4_kitti_ate():
 
 # ================================================================
 # Figure 5: Runtime profiling
-# Corresponds to paper Section 4.5 Timing Analysis
+# Timing analysis
 # ================================================================
 def generate_figure5_timing():
     """Generate the runtime profiling figure"""
@@ -395,7 +394,7 @@ def generate_figure5_timing():
 
 # ================================================================
 # Figure 6: Parameter sensitivity
-# Corresponds to paper Section 4.7 Parameter Sensitivity
+# Parameter sensitivity analysis
 # ================================================================
 def generate_figure6_parameter_sensitivity():
     """Generate the parameter sensitivity figure (three parameter sweeps)"""
@@ -452,8 +451,7 @@ def generate_figure6_parameter_sensitivity():
 # ================================================================
 if __name__ == '__main__':
     print('=' * 60)
-    print('Paper figure generation script')
-    print('Paper: Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments')
+    print('Figure generation script')
     print(f'Output directory: {OUTPUT_DIR}')
     print('=' * 60)
     print()

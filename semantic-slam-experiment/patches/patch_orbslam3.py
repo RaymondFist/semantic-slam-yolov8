@@ -271,9 +271,9 @@ def patch_system_h():
 # ============================================================================
 # Patch 5: Tracking.cc - Inject semantic detection + filtering
 #
-# CRITICAL FIX: The old script used sequential Track();\n replacement which
-# broke after the first replacement. Now we use regex to find each GrabImage*
-# function body and inject the semantic filtering block before its Track() call.
+# Sequential Track(); replacement breaks after the first replacement, so the
+# injection is done with a regex that matches each GrabImage* function body
+# and inserts the semantic filtering block before its Track() call.
 # ============================================================================
 def patch_tracking_cc():
     filepath = os.path.join(ORB_SLAM3_ROOT, "src", "Tracking.cc")
@@ -915,7 +915,7 @@ def patch_mlpnpsolver():
     # The signature uses unnamed parameters; we add names so we can reference
     # the points_t parameter (p) in the guard.
     #
-    # We use a flexible regex to match the signature regardless of whitespace:
+    # A flexible regex matches the signature regardless of whitespace:
     old_sig_pat = (
         r'void\s+MLPnPsolver::computePose\s*\(\s*'
         r'const\s+bearingVectors_t\s*&\s*,'

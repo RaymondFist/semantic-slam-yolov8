@@ -31,7 +31,6 @@ struct AblationResult {
     double ate_euroc_mean;
     double ate_kitti_mean;
     double ate_tum_mean;
-    double avg_fps;
     std::vector<double> ate_per_sequence;
 };
 
@@ -211,7 +210,6 @@ public:
         result.config_name = configName(config);
 
         std::vector<double> kitti_ates, euroc_ates, tum_ates;
-        std::vector<double> fps_vals;
 
         // Generate ablation-specific YAML files
         // The patched ORB-SLAM3 internally creates SemanticSLAM based on YAML config
@@ -252,7 +250,6 @@ public:
             kitti_ates.push_back(kitti_ate);
             euroc_ates.push_back(euroc_ate);
             tum_ates.push_back(tum_ate);
-            fps_vals.push_back(25.0); // placeholder
 
             std::cout << " K=" << std::fixed << std::setprecision(2) << kitti_ate
                       << " E=" << std::setprecision(3) << euroc_ate
@@ -263,7 +260,6 @@ public:
         result.ate_kitti_mean = mean(kitti_ates);
         result.ate_euroc_mean = mean(euroc_ates);
         result.ate_tum_mean = mean(tum_ates);
-        result.avg_fps = mean(fps_vals);
         result.ate_per_sequence = kitti_ates; // store detailed
 
         return result;
@@ -512,8 +508,6 @@ public:
                   << r.ate_euroc_mean << " m\n";
         std::cout << "  TUM ATE:   " << std::setprecision(3)
                   << r.ate_tum_mean << " m\n";
-        std::cout << "  FPS:       " << std::setprecision(1)
-                  << r.avg_fps << "\n";
     }
 
     void saveResults(const std::vector<AblationResult>& results) {

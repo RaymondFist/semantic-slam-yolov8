@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-generate_tables.py - paper table generation script
+generate_tables.py - table generation script
 ===========================================
-Paper: Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments
-Purpose: generate CSV data files for all paper tables from experiment data, for analysis and review submission
+Purpose: generate CSV data files for all result tables from the experiment data
 Dependencies: none (Python standard library only)
 Run: python generate_tables.py
 
@@ -54,7 +53,7 @@ KITTI_DATA = {
     '00': {'baseline': 0.967078, 'mask': 1.112997, 'frames': 4541},
 }
 
-# --- Timing profiling data (source: ../data/experiment_results.json['timing'] and output/timing_logs/*_timing.log) ---
+# --- Timing profiling data (source: ../data/experiment_results.json['timing']) ---
 TIMING_DATA = [
     {'sequence': 'TUM walking_xyz', 'frames': 827,  'wall_clock_s': 37.42, 'cpu_time_s': 125.87, 'max_rss_gb': 0.895, 'cpu_pct': 402},
     {'sequence': 'KITTI 00',        'frames': 4541, 'wall_clock_s': 65.66, 'cpu_time_s': 257.57, 'max_rss_gb': 1.184, 'cpu_pct': 471},
@@ -269,9 +268,9 @@ def generate_table6_parameter_sensitivity():
 #   DynaSLAM:    arXiv:1806.05620v2, TRO 2020
 #   DS-SLAM:     arXiv:1809.08379v2, CVPR 2018
 #   3DS-SLAM:    arXiv:2310.06385, 2023
-#   CFP-SLAM:    cited from the 3DS-SLAM paper
-# Note: the cited works use an ORB-SLAM2 baseline, we use an ORB-SLAM3 baseline
-#       absolute values are compared between the YOLO-Mask column and the cited methods column
+#   CFP-SLAM:    as reported by 3DS-SLAM
+# The cited works report an ORB-SLAM2 baseline; this table reports an ORB-SLAM3 baseline.
+# Absolute values are compared between the YOLO-Mask column and the cited methods column.
 LITERATURE_COMPARISON = {
     # sequence: {orb2_baseline, dynaslam, dsslam, 3dsslam, cfpslam, ours_baseline_orb3, ours_yolomask}
     'fr3/w/xyz':        {'orb2': 0.7214, 'dynaslam': 0.0164, 'dsslam': 0.0247, '3dsslam': 0.0135, 'cfpslam': 0.0141, 'ours_orb3': 0.2856, 'ours_mask': 0.0168},
@@ -299,7 +298,7 @@ def generate_table7_literature_comparison():
         literature_best = min(d['dynaslam'], d['dsslam'], d['3dsslam'], d['cfpslam'])
         ours = d['ours_mask']
         
-        # Ours vs the best cited method: negative means we are better (smaller)
+        # Difference against the best cited method: negative means the YOLO-Mask value is lower
         if literature_best > 0:
             diff_pct = (ours - literature_best) / literature_best * 100
             vs_best = f"{diff_pct:+.1f}%"
@@ -328,9 +327,9 @@ def generate_table7_literature_comparison():
 # ================================================================
 # Timing and completeness statistics for EuRoC MH_01/MH_03/MH_05
 # The MH_03 mask wall-clock time of 85.5 s is backed by a local raw log
-#   (output/timing_logs/euroc_mh_03_timing.log, Elapsed 1:25.54);
+#   (output/timing_logs, Elapsed 1:25.54);
 # No local raw logs exist for the MH_01 / MH_05 and MH_03 baseline wall-clock times,
-#   this table carries the values from the first version of the paper, for internal consistency only.
+#   those values are carried over from an earlier run, for internal consistency only.
 # All sequences have 0 track loss, 100% completeness
 EUROC_DATA = [
     # (sequence, difficulty, frames, baseline_time_s, mask_time_s, track_loss, status, notes)
@@ -396,7 +395,7 @@ def generate_table9_false_dynamic():
 
 
 # ================================================================
-# In-depth false dynamic degradation analysis text (for paper Section 4.4)
+# In-depth false dynamic degradation analysis text
 # ================================================================
 FALSE_DYNAMIC_ANALYSIS_TEXT = """
 ================================================================================
@@ -456,8 +455,7 @@ In-Depth Analysis: Static Scene Degradation from False Dynamics
 # ================================================================
 if __name__ == '__main__':
     print('=' * 70)
-    print('Paper table generation script (extended version)')
-    print('Paper: Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments')
+    print('Table generation script (extended version)')
     print(f'Output directory: {OUTPUT_DIR}')
     print('=' * 70)
 

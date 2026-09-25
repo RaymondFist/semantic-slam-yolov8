@@ -5,7 +5,7 @@
 # Server: AutoDL (Ubuntu 20.04, x86_64, RTX 3090 24GB, 32GB RAM)
 # Usage:   bash autodl_deploy.sh
 #
-# Datasets (paper standard):
+# Datasets:
 #   TUM   - sitting_static, sitting_xyz, walking_static, walking_xyz, walking_halfsphere
 #   KITTI - 00 (4541 frames, loop closure + rich dynamics)
 #   EuRoC - MH_01_easy, MH_03_medium, MH_05_difficult
@@ -543,9 +543,9 @@ fi
 
 echo "  Model preparation: done"
 
-# ===================== 4. Download datasets (paper standard) =====================
+# ===================== 4. Download datasets =====================
 echo ""
-echo "[4/8] Downloading datasets (paper standard)..."
+echo "[4/8] Downloading datasets..."
 mkdir -p ${DATA_DIR}/datasets ${DATA_DIR}/detections
 
 # Disk space check (datasets ~18GB after extraction + build artifacts 5GB, at least 30GB recommended)
@@ -1656,7 +1656,7 @@ fi  # SKIP_SEMANTIC
 echo ""
 echo "[7.5/8] Enhanced experiments..."
 
-# ---- E4a: timing profiling (fig07) ----
+# ---- E4a: timing profiling ----
 run_timing_profiling() {
     echo ""
     echo "=== E4a: timing profiling ==="
@@ -1740,7 +1740,7 @@ print(f'  Timing summary: ${TIMING_JSON}')
 "
 }
 
-# ---- E4b: failure case analysis (fig09) ----
+# ---- E4b: failure case analysis ----
 run_failure_analysis() {
     echo ""
     echo "=== E4b: failure case analysis ==="
@@ -1816,7 +1816,7 @@ print(f'  Failure summary: ${FAIL_SUMMARY_JSON}')
     fi
 }
 
-# ---- E4c: parameter grid search (fig10) ----
+# ---- E4c: parameter grid search ----
 run_parameter_sweep() {
     echo ""
     echo "=== E4c: parameter grid search ==="
@@ -2389,7 +2389,7 @@ echo "    E2a:  YOLO-only  (skipped - g2o crash)"
 echo "    E2b:  GeoConst    (skipped - replaced by offline_semantic_validation.py)"
 echo "    E3:   Full System (skipped - marked as Future Work)"
 echo ""
-echo "  Paper data sources:"
+echo "  Data sources:"
 echo "    1. Baseline ATE vs YOLO-Mask ATE comparison table (real experiment data)"
 echo "    2. Offline semantic validation analysis (offline_semantic_validation.py) - sitting false-dynamic problem"
 echo "    3. Image masking visualization (YOLO detections -> before/after mask comparison)"

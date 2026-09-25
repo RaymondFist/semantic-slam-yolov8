@@ -33,7 +33,7 @@ mkdir -p "${TUM_DIR}"
 echo "  SLAM_ROOT = ${SEMANTIC_SLAM_ROOT}"
 echo "  DATA_DIR  = ${DATA_DIR}"
 
-# 5 TUM sequences (match the paper/P1)
+# 5 TUM sequences (match P1)
 TUM_SEQS=(sitting_static sitting_xyz walking_static walking_xyz walking_halfsphere)
 
 # =============================================================================

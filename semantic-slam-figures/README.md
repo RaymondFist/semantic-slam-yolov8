@@ -3,7 +3,7 @@
 [![Python 3.10](https://img.shields.io/badge/Python-3.10-blue)](https://www.python.org/)
 [![Matplotlib](https://img.shields.io/badge/Matplotlib-3.5+-orange)](https://matplotlib.org/)
 
-**Figure and table generation project for the paper**: generates all paper figures (6 figures + 6 tables) from the experiment data, for the paper *Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments*.
+**Figure and table generation**: produces the 6 figures and 9 CSV tables from the experiment data.
 
 ---
 
@@ -91,25 +91,25 @@ All data comes from `data/experiment_results.json`, which `autodl_deploy.sh` (in
 
 ### Figures (`generate_figures.py`)
 
-| Figure | File | Paper section | Content |
-|------|--------|-------------|------|
-| Figure 1 | `fig1_system_architecture.png` | Section 3.1 | System architecture flow (input -> YOLOv8 -> mask -> ORB-SLAM3 -> evaluation) |
-| Figure 2 | `fig2_tum_ate.png` | Section 4.2 | TUM RGB-D Baseline vs YOLO-Mask ATE, two panels: absolute ATE + relative improvement |
-| Figure 3 | `fig3_scene_type.png` | Section 4.2 | Mean ATE for static vs dynamic scenes |
-| Figure 4 | `fig4_kitti_ate.png` | Section 4.3 | KITTI 00 ATE comparison |
-| Figure 5 | `fig5_timing.png` | Section 4.5 | Runtime profiling (wall-clock time, CPU time, memory in one grouped bar chart) |
-| Figure 6 | `fig6_parameter_sensitivity.png` | Section 4.7 | Parameter sensitivity (ORB feature count, semantic weight, dynamic threshold, three line panels) |
+| Figure | File | Content |
+|------|--------|-------------|
+| Figure 1 | `fig1_system_architecture.png` | System architecture flow (input -> YOLOv8 -> mask -> ORB-SLAM3 -> evaluation) |
+| Figure 2 | `fig2_tum_ate.png` | TUM RGB-D Baseline vs YOLO-Mask ATE, two panels: absolute ATE + relative improvement |
+| Figure 3 | `fig3_scene_type.png` | Mean ATE for static vs dynamic scenes |
+| Figure 4 | `fig4_kitti_ate.png` | KITTI 00 ATE comparison |
+| Figure 5 | `fig5_timing.png` | Runtime profiling (wall-clock time, CPU time, memory in one grouped bar chart) |
+| Figure 6 | `fig6_parameter_sensitivity.png` | Parameter sensitivity (ORB feature count, semantic weight, dynamic threshold, three line panels) |
 
 ### Tables (`generate_tables.py`)
 
-| Table | File | Paper section | Content |
-|------|--------|-------------|------|
-| Table I | `table1_tum_ate_results.csv` | Section 4.2 | TUM RGB-D ATE results (5 sequences × 2 methods + scene types) |
-| Table II | `table2_kitti_ate_results.csv` | Section 4.3 | KITTI 00 ATE results |
-| Table III | `table3_ablation_study.csv` | Section 4.6 | Ablation study (6 sequences + interpretation) |
-| Table IV | `table4_timing_profiling.csv` | Section 4.5 | Runtime profiling (wall-clock, CPU, memory, CPU utilization) |
-| Table V | `table5_failure_analysis.csv` | Section 4.8 | Failure case analysis (failure types, tracking-loss counts) |
-| Table VI | `table6_parameter_sensitivity.csv` | Section 4.7 | Parameter sensitivity (3 parameters × 6 ATE levels) |
+| Table | File | Content |
+|------|--------|-------------|
+| Table I | `table1_tum_ate_results.csv` | TUM RGB-D ATE results (5 sequences × 2 methods + scene types) |
+| Table II | `table2_kitti_ate_results.csv` | KITTI 00 ATE results |
+| Table III | `table3_ablation_study.csv` | Ablation study (6 sequences + interpretation) |
+| Table IV | `table4_timing_profiling.csv` | Runtime profiling (wall-clock, CPU, memory, CPU utilization) |
+| Table V | `table5_failure_analysis.csv` | Failure case analysis (failure types, tracking-loss counts) |
+| Table VI | `table6_parameter_sensitivity.csv` | Parameter sensitivity (3 parameters × 6 ATE levels) |
 
 ---
 
@@ -149,7 +149,7 @@ python generate_figures.py
 python generate_tables.py
 ```
 
-Both scripts fall back to hardcoded experiment values when `experiment_results.json` is missing, but they read from the JSON file first. To change the data, just update the JSON file; no changes to the Python scripts are needed.
+Both scripts carry the values recorded from the experiment runs; they do not read `experiment_results.json` at runtime. To change the data, update the value tables at the top of each script and re-run them.
 
 ---
 
@@ -168,20 +168,6 @@ Both scripts fall back to hardcoded experiment values when `experiment_results.j
 - **Output format**: CSV (UTF-8 BOM, opens directly in Excel)
 - **Output directory**: `output/tables/`
 - **Notes**: zero external dependencies, runs on any Python 3 environment
-
----
-
-## Citation
-
-```bibtex
-@article{chen2025semantic,
-  title={Semantic Visual-Inertial SLAM with YOLOv8 for Dynamic Environments},
-  author={Chen, Hantao},
-  journal={arXiv preprint},
-  year={2025},
-  note={Source code: https://github.com/RaymondFist/semantic-slam-yolov8}
-}
-```
 
 ---
 

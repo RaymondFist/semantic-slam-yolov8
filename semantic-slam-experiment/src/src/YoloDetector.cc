@@ -238,7 +238,7 @@ void YoloDetector::inferenceLoop() {
                 // Capture sequential index under lock to avoid race:
                 // submitFrame may be called again before we reach loadOfflineDetection,
                 // which would increment _offline_frame_counter. Capturing it here
-                // ensures we use the correct index for *this* frame.
+                // ensures the correct index is used for this frame.
                 seq_idx = _offline_frame_counter - 1;
                 _has_new_frame = false;
             }

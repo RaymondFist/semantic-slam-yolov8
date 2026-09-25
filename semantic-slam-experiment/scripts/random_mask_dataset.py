@@ -2,7 +2,7 @@
 """
 Random Mask Control Dataset Generation Script (E1.6 Random-Mask Baseline)
 ========================================================
-Provided for the paper's supplementary experiments. Generates a "random mask" control dataset
+Generates a "random mask" control dataset
 to rule out the confound that the improvement comes only from fewer features,
 so the YOLO-Mask gain can be attributed to semantic localization itself.
 
