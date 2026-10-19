@@ -137,15 +137,7 @@ public:
             // Semantic detection is handled internally by patched ORB-SLAM3
 
             auto t0 = std::chrono::high_resolution_clock::now();
-            if (i < 5 || i % 100 == 0) {
-                std::cout << "[DEBUG] Frame " << i << "/" << n_frames
-                          << " size=" << im0.cols << "x" << im0.rows
-                          << " calling TrackStereo..." << std::flush;
-            }
             Sophus::SE3f Tcw = SLAM.TrackStereo(im0, im1, ts_sec);
-            if (i < 5 || i % 100 == 0) {
-                std::cout << " OK" << std::endl;
-            }
             auto t1 = std::chrono::high_resolution_clock::now();
 
             total_time += std::chrono::duration<double>(t1 - t0).count();

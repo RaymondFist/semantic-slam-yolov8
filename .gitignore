@@ -11,5 +11,12 @@ __pycache__/
 # Build directories
 build/
 
+# Model weights and the model directory (populated at run time; not committed)
+*.pt
+semantic-slam-experiment/models/
+
+# Dataset directories (large; downloaded and generated locally)
+semantic-slam-experiment/data/datasets*/
+
 # Helper script written into the output directory at run time by autodl_p1p2.sh
 semantic-slam-experiment/output/p1/stats.py

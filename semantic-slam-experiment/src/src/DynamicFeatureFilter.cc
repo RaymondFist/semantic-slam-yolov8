@@ -104,23 +104,14 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
     const std::vector<cv::Point2f>& tracked_points_prev,
     const std::vector<cv::Point2f>& tracked_points_curr) {
 
-    fprintf(stderr, "[DEBUG_DFF] processFrameMasked entry: kp=%zu det_inst=%zu flow_th=%f "
-            "curr=%dx%d prev=%dx%d\n",
-            keypoints.size(), detection.instances.size(), _config.flow_threshold_px,
-            current_image.cols, current_image.rows,
-            previous_image.cols, previous_image.rows);
-
     // SEMANTIC_SLAM_FIX: Defensive guard: empty keypoints or invalid images
     if (keypoints.empty()) {
-        fprintf(stderr, "[DEBUG_DFF] processFrameMasked: empty keypoints, returning\n");
         return std::vector<bool>();
     }
     if (current_image.empty() || previous_image.empty()) {
-        fprintf(stderr, "[DEBUG_DFF] processFrameMasked: empty images, returning\n");
         return std::vector<bool>(keypoints.size(), false);
     }
     if (!detection.valid || detection.instances.empty()) {
-        fprintf(stderr, "[DEBUG_DFF] processFrameMasked: no valid detections, returning\n");
         return std::vector<bool>(keypoints.size(), false);
     }
 
@@ -131,7 +122,6 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
     // This avoids unnecessary/costly optical flow computation and prevents
     // potential crashes from lk_max_level=0 edge cases.
     if (_config.flow_threshold_px == 0.0f) {
-        fprintf(stderr, "[DEBUG_DFF] YOLO-only fast path (flow_th=%f)\n", _config.flow_threshold_px);
         std::vector<bool> dynamic(keypoints.size(), false);
         for (const auto& det : detection.instances) {
             if (det.category == 0) continue;
@@ -154,12 +144,8 @@ std::vector<bool> DynamicFeatureFilter::processFrameMasked(
         auto t1 = std::chrono::high_resolution_clock::now();
         _last_processing_ms = std::chrono::duration<double, std::milli>(t1 - t0).count();
         _dynamic_frame_dynamic_count = std::count(dynamic.begin(), dynamic.end(), true);
-        fprintf(stderr, "[DEBUG_DFF] YOLO-only done: dynamic_count=%zu time=%.2fms\n",
-                _dynamic_frame_dynamic_count, _last_processing_ms);
         return dynamic;
     }
-
-    fprintf(stderr, "[DEBUG_DFF] Optical flow path (flow_th=%f > 0)\n", _config.flow_threshold_px);
 
     cv::Mat curr_gray, prev_gray;
     if (current_image.channels() == 3)

@@ -57,7 +57,7 @@ static void printUsage() {
 }
 
 int main(int argc, char** argv) {
-    // Install crash handler for debugging segfaults
+    // Install crash handler for signal diagnostics
     signal(SIGSEGV, crashHandler);
     signal(SIGABRT, crashHandler);
     signal(SIGFPE,  crashHandler);

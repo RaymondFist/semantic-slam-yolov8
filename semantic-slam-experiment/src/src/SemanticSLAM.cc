@@ -65,15 +65,8 @@ std::vector<bool> SemanticSLAM::filterDynamicFeatures(
     const std::vector<cv::Point2f>& prev_pts,
     const std::vector<cv::Point2f>& curr_pts) {
 
-    fprintf(stderr, "[DEBUG_SLAM] filterDynamicFeatures: calling processFrameMasked "
-            "(kp=%zu, det_inst=%zu)\n",
-            keypoints.size(), detection.instances.size());
-
     auto mask = _filter->processFrameMasked(
         current_image, previous_image, detection, keypoints, prev_pts, curr_pts);
-
-    fprintf(stderr, "[DEBUG_SLAM] filterDynamicFeatures: processFrameMasked returned "
-            "(mask_size=%zu)\n", mask.size());
 
     {
         std::lock_guard<std::mutex> lock(_dynamic_mutex);

@@ -1,4 +1,0 @@
-﻿Sequence,Difficulty,Frames,Baseline Wall Time (s),YOLO-Mask Wall Time (s),Overhead,Track Lost,Status,Notes
-MH_01_easy,Easy,3682,72.3,85.7,+18.5%,0,Completed,No dynamic content; pure static
-MH_03_medium,Medium,2700,68.1,85.5,+25.6%,0,Completed,Low dynamics
-MH_05_difficult,Difficult,2273,102.4,118.2,+15.4%,0,Completed,Low texture + motion blur; challenging

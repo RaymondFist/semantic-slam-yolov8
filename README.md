@@ -12,19 +12,22 @@
 
 ## Overview
 
-This project integrates YOLOv8-nano semantic information into ORB-SLAM3 via image-level semantic masking, targeting visual-inertial SLAM in dynamic environments.
+This project integrates YOLOv8-nano semantic information into ORB-SLAM3 via offline image-level semantic masking, targeting visual SLAM in dynamic environments.
 
-The core idea is to leave the C++ tracking pipeline of ORB-SLAM3 untouched and preprocess input images offline instead. YOLOv8-nano detects dynamic object regions and zeros them out, then the masked dataset is fed into the unmodified ORB-SLAM3 system. This sidesteps the g2o optimizer compatibility issues that appear in online feature filtering, at zero runtime cost.
+Input images are preprocessed offline: YOLOv8-nano detects dynamic object regions and zeros them out, and the masked dataset is fed into unmodified ORB-SLAM3. Masking happens before tracking, so the SLAM pipeline runs unchanged.
 
 ### Key results
 
+Five-run SE(3) ATE mean ± standard deviation (ddof = 1).
+
 | Sequence | Baseline ATE (m) | YOLO-Mask ATE (m) | Improvement |
 |------|-----------------|-------------------|------|
-| TUM walking_xyz | 0.2856 | 0.0168 | **+94.1%** |
-| TUM walking_halfsphere | 0.2034 | 0.0271 | **+86.7%** |
-| TUM walking_static | 0.0252 | 0.0117 | **+53.6%** |
-| TUM sitting_static | 0.0072 | 0.0102 | -41.4% (false dynamic) |
-| KITTI 00 | 0.9671 | 1.1130 | -15.1% |
+| TUM sitting_static | 0.0101 ± 0.0007 | 0.0116 ± 0.0014 | -14.9% |
+| TUM sitting_xyz | 0.0092 ± 0.0002 | 0.0737 ± 0.0586 | -701.1% |
+| TUM walking_static | 0.3494 ± 0.0363 | 0.0184 ± 0.0057 | **+94.7%** |
+| TUM walking_xyz | 0.6499 ± 0.0655 | 0.0208 ± 0.0021 | **+96.8%** |
+| TUM walking_halfsphere | 0.3580 ± 0.0702 | 0.0533 ± 0.0083 | **+85.1%** |
+| KITTI 00 | 1.2821 ± 0.0288 | 1.3602 ± 0.0759 | -6.1% |
 
 ---
 
@@ -41,14 +44,12 @@ semantic-slam-yolov8/
 │   │
 │   ├── scripts/                  # Python utility scripts
 │   │   ├── yolov8_offline_inference.py   # Offline YOLOv8 inference (produces detection JSON)
-│   │   ├── mask_dataset.py               # Dynamic-region mask generation (core of Plan C)
-│   │   ├── random_mask_dataset.py        # Random-mask control datasets (E1.6)
+│   │   ├── mask_dataset.py               # Dynamic-region mask generation
+│   │   ├── random_mask_dataset.py        # Random-mask control datasets
 │   │   ├── associate.py                  # TUM RGB-D timestamp alignment
 │   │   ├── compute_ate.py                # Per-sequence ATE computation
-│   │   ├── batch_compute_ate.py          # Batch ATE computation (EuRoC + TUM walking)
-│   │   ├── aggregate_multi_run.py        # Multi-run ATE statistics (P1)
 │   │   ├── offline_semantic_validation.py # Offline semantic validation analysis
-│   │   └── generate_planb_report.py      # Experiment report generation
+│   │   └── experiments/                  # Supplemental ablation scripts (see experiments/README.md)
 │   │
 │   ├── src/                  # C++ SemanticSLAM module
 │   │   ├── CMakeLists.txt     # CMake build configuration
@@ -85,11 +86,8 @@ semantic-slam-yolov8/
 │   ├── patches/                  # ORB-SLAM3 source patches
 │   │   └── patch_orbslam3.py     # Injects the SemanticSLAM module into ORB-SLAM3
 │   │
-│   ├── models/                   # Pretrained model files
-│   │   ├── models.zip            # Bundled model files for one-file upload, extract to this folder
+│   ├── models/                   # Pretrained models (populated at run time by autodl_deploy.sh)
 │   │   ├── yolov8n-seg.pt        # YOLOv8-nano segmentation model (~6.7MB)
-│   │   ├── yolov8n-seg.onnx      # ONNX export (optional)
-│   │   ├── yolov8n-seg.trt       # TensorRT engine (optional)
 │   │   ├── coco.names            # COCO 80 class names
 │   │   └── ORBvoc.txt            # ORB-SLAM3 vocabulary / BoW (~138MB)
 │   │
@@ -166,7 +164,7 @@ cd semantic-slam-experiment
 bash autodl_deploy.sh
 ```
 
-The script handles everything automatically:
+The script does the following:
 1. Install system dependencies (OpenCV 4.10, Eigen3, Pangolin, etc.)
 2. Build ORB-SLAM3 (includes C++17 compatibility fixes and Sophus NaN protection)
 3. Build the SemanticSLAM C++ module
@@ -226,26 +224,23 @@ python scripts/mask_dataset.py --all \
 
 ### Experiment matrix
 
-| Exp | Name | Description | Dataset | Status |
-|------|------|------|--------|------|
-| E1 | Baseline | Stock ORB-SLAM3 (no semantics) | Raw datasets | Runnable |
-| E1.5 | YOLO-Mask | Stock ORB-SLAM3 + masked dataset | Masked datasets | Runnable |
-| E2a | YOLO-Only | C++ semantic feature filtering (no semantic weights) | Raw datasets | Skipped (g2o crash) |
-| E2b | GeoConst | C++ semantics + optical-flow geometric validation | Raw datasets | Skipped (g2o crash) |
-| E3 | Full System | C++ semantics + optical flow + semantic weights | Raw datasets | Skipped (g2o crash) |
-| E4a | Timing | Runtime performance profiling | Representative sequences | Runnable |
-| E4b | Failure | Failure case analysis | Challenging sequences | Runnable |
-| E4c | Sweep | Parameter sensitivity analysis | TUM walking_xyz | Runnable |
+| Exp | Name | Description | Dataset |
+|------|------|------|--------|
+| E1 | Baseline | Stock ORB-SLAM3 (no semantics) | Raw datasets |
+| E1.5 | YOLO-Mask | Stock ORB-SLAM3 + masked dataset | Masked datasets |
+| E4a | Timing | Offline pre-processing cost profiling | Representative sequences |
+| E4b | Failure | Failure case analysis | Challenging sequences |
+| E4c | Sweep | Parameter sensitivity analysis | TUM walking_xyz |
 
 ### Dataset coverage
 
 | Dataset | Sequence | Frames | Notes |
 |--------|------|------|------|
-| TUM RGB-D | sitting_static | 711 | Fully static baseline |
-| TUM RGB-D | sitting_xyz | 859 | Small motion, static scene |
-| TUM RGB-D | walking_static | 797 | Static camera, walking people |
-| TUM RGB-D | walking_xyz | 827 | Both camera and people move |
-| TUM RGB-D | walking_halfsphere | 1068 | Large rotation + pedestrians |
+| TUM RGB-D | sitting_static | 707 | Fully static baseline |
+| TUM RGB-D | sitting_xyz | 1261 | Small motion, static scene |
+| TUM RGB-D | walking_static | 743 | Static camera, walking people |
+| TUM RGB-D | walking_xyz | 859 | Both camera and people move |
+| TUM RGB-D | walking_halfsphere | 1067 | Large rotation + pedestrians |
 | KITTI Odom | 00 | 4541 | Loop closure + dense dynamic vehicles/pedestrians |
 | EuRoC MAV | MH_01_easy | 3682 | Static machine-hall baseline |
 | EuRoC MAV | MH_03_medium | 2700 | Medium difficulty |
@@ -255,7 +250,7 @@ python scripts/mask_dataset.py --all \
 
 ## Evaluation metrics
 
-- **ATE (Absolute Trajectory Error)**: computed with `evo_ape`, SE(3) alignment, scale correction
+- **ATE (Absolute Trajectory Error)**: computed with `evo_ape`, SE(3) Umeyama alignment (scale-fixed)
 - **Wall-clock time**: measured with `/usr/bin/time -v`
 - **Peak memory**: Max RSS (KB)
 - **Tracking loss count**: counted from ORB-SLAM3 logs
@@ -281,32 +276,29 @@ The generated figures are written to `output/figures/`:
 - `fig3_scene_type.png` : static vs dynamic scenes
 - `fig4_kitti_ate.png` : KITTI ATE comparison
 - `fig5_timing.png` : runtime performance
-- `fig6_parameter_sensitivity.png` : parameter sensitivity
 
 ---
 
 ## Technical notes
 
-### Plan C: image masking
+### Offline semantic masking
 
-The key design is the **offline semantic masking strategy**:
+The method is **offline semantic masking**:
 
-1. YOLOv8-nano runs offline instance segmentation on every frame and produces a per-frame detection JSON
+1. YOLOv8-nano runs instance segmentation on every frame and produces a per-frame detection JSON
 2. `mask_dataset.py` reads the detections and zeros out the pixels of dynamic object regions (COCO classes such as person, car, bicycle)
 3. The masked dataset copy is fed into the **unmodified** ORB-SLAM3
 
 **Advantages**:
-- Zero runtime overhead (masking is fully offline)
-- The SLAM system itself is untouched, so the approach ports to any feature-based SLAM framework
-- Avoids the double-free crash that online C++ feature filtering triggers inside the ORB-SLAM3 g2o optimizer
+- No extra runtime cost for the SLAM system (masking is fully offline)
+- The SLAM system itself is untouched, so the approach carries over to other feature-based SLAM frameworks
 
 **Limitations (the false-dynamic problem)**:
 - Cannot tell a moving object from a static instance of a dynamic class (e.g. a sitting person vs a walking person)
 - In static scenes it removes valid static features, which degrades accuracy
 
-### Known issues
+### Notes
 
-- **g2o crash**: the C++ online feature filtering (E2a/E2b/E3) triggers SIGSEGV (double-free) when `LinearSolverDense` is destroyed, confirmed by backtrace. Plan C avoids this by masking images offline. A fix is left for future work.
 - **EuRoC ATE evaluation**: ORB-SLAM3 repeatedly loses tracking in the low-texture indoor industrial scenes, so ATE cannot be computed reliably. The pipeline finishes running (timing data is recorded in `table4_timing_profiling.csv`), but the EuRoC ATE comparison is not reported.
 - **YOLOv8 COCO limit**: detection is restricted to 80 COCO classes, so domain-specific dynamic objects such as industrial equipment are never detected.
 

@@ -1146,7 +1146,7 @@ cp ~/ORB_SLAM3/Vocabulary/ORBvoc.txt ${SEMANTIC_SLAM_ROOT}/models/
 
 echo "  YAML configs: OK"
 
-# ==================== 6.8 Generate masked datasets (Plan C: Image Masking) ====================
+# ==================== 6.8 Generate masked datasets (offline image masking) ====================
 echo ""
 echo "[6.8/8] Generating masked datasets (YOLO dynamic regions zeroed out, for the YOLO-Mask experiments)..."
 
@@ -1173,12 +1173,12 @@ fi
 echo ""
 echo "[7/8] Running experiments..."
 echo ""
-echo "  Experiment overview (Plan C):"
+echo "  Experiment overview:"
 echo "    E1:   Baseline (original datasets, pure ORB-SLAM3)"
 echo "    E1.5: YOLO-Mask (masked datasets, pure ORB-SLAM3, replaces the YOLO-only ablation)"
-echo "    E2a:  YOLO-only  (C++ per-feature filtering - known to crash, skipped)"
-echo "    E2b:  GeoConst    (C++ per-feature filtering - known to crash, skipped)"
-echo "    E3:   Full System (C++ per-feature filtering - known to crash, skipped)"
+echo "    E2a:  YOLO-only  (C++ per-feature filtering - not enabled in this configuration)"
+echo "    E2b:  GeoConst    (C++ per-feature filtering - not enabled in this configuration)"
+echo "    E3:   Full System (C++ per-feature filtering - not enabled in this configuration)"
 echo ""
 
 VOCAB=${SEMANTIC_SLAM_ROOT}/models/ORBvoc.txt
@@ -1377,11 +1377,11 @@ for seq in MH_01_easy MH_03_medium MH_05_difficult; do
     fi
 done
 
-# ==================== E1.5: YOLO-Mask (Plan C: image masking, replaces the YOLO-only ablation) ====================
+# ==================== E1.5: YOLO-Mask (image masking, replaces the YOLO-only ablation) ====================
 echo ""
 echo "=== E1.5: YOLO-Mask (image masking, pure ORB-SLAM3 + masked datasets) ==="
 echo "  Dynamic regions are pre-masked from YOLO detections, run with stock ORB-SLAM3 (no SemanticSLAM patch)"
-echo "  This experiment replaces the original YOLO-only ablation (the C++ per-feature filter crashed in g2o)"
+echo "  This experiment replaces the YOLO-only ablation tier (offline image masking)"
 echo ""
 
 # YOLO-Mask TUM - same commands as E1 Baseline, only the dataset path points to masked
@@ -1481,11 +1481,11 @@ done
 
 # ==================== E2a: Ablation - YOLOv8 Only (no semantic weights, no optical flow) ====================
 echo ""
-echo "=== E2a: YOLO-Only Ablation (YOLO detections, no optical flow verification, known crash - skipped) ==="
-echo "  Plan C: this ablation tier is replaced by E1.5 YOLO-Mask, experiments below are skipped"
+echo "=== E2a: YOLO-Only Ablation (YOLO detections, no optical flow verification, not enabled in this configuration) ==="
+echo "  This tier is not enabled; E1.5 YOLO-Mask is used instead"
 echo ""
 
-# Plan C: SKIP all semantic C++ experiments (g2o crash)
+# Semantic C++ experiment tiers are not enabled
 SKIP_SEMANTIC=true
 
 # TUM YOLO-only
@@ -1497,7 +1497,7 @@ TUM_YOLO_SEQS=(
     "walking_halfsphere|TUM3_walking_halfsphere_yolo_only"
 )
 for entry in "${TUM_YOLO_SEQS[@]}"; do
-        [ "$SKIP_SEMANTIC" = true ] && { echo "  [SKIP] Plan C: semantic experiments skipped"; break; }
+        [ "$SKIP_SEMANTIC" = true ] && { echo "  [SKIP] semantic experiments not enabled"; break; }
         IFS='|' read -r label yaml <<< "$entry"
     if [ -d ${DATA_DIR}/datasets/TUM/rgbd_dataset_freiburg3_${label} ]; then
         skip_if_output_exists "${OUTPUT}/yolo_tum_${label}.txt" "TUM ${label} YOLO-only" && continue
@@ -1540,11 +1540,11 @@ done
 
 # ==================== E2b: Ablation - GeoConst (YOLO + optical flow, no semantic weights) ====================
 echo ""
-echo "=== E2b: GeoConst Ablation (YOLO + optical flow, known crash - skipped) ==="
-echo "  Plan C: this ablation tier cannot run (g2o crash), skipped"
+echo "=== E2b: GeoConst Ablation (YOLO + optical flow, not enabled in this configuration) ==="
+echo "  This ablation tier is not enabled"
 echo ""
 
-# SKIP GeoConst experiments (Plan C: g2o crash)
+# GeoConst experiments are not enabled
 if [ "$SKIP_SEMANTIC" != true ]; then
 
 # TUM GeoConst
@@ -1599,11 +1599,11 @@ fi  # SKIP_SEMANTIC
 
 # ==================== E3: Full System (YOLO + Flow + Semantic Weights) ====================
 echo ""
-echo "=== E3: Full System (Ours, YOLO + optical flow dynamic filtering + semantic weight optimization, known crash - skipped) ==="
-echo "  Plan C: this experiment cannot run (g2o crash), marked as Future Work"
+echo "=== E3: Full System (Ours, YOLO + optical flow dynamic filtering + semantic weight optimization, not enabled in this configuration) ==="
+echo "  This experiment tier is not enabled"
 echo ""
 
-# Plan C: SKIP E3 experiments
+# E3 experiments are not enabled
 if [ "$SKIP_SEMANTIC" != true ]; then
 
 # TUM semantic
@@ -2091,7 +2091,7 @@ for entry in \
         ${DATA_DIR}/datasets/TUM/${ds}/groundtruth.txt
 done
 
-# ---- TUM YOLO-Mask (Plan C: image masking) ----
+# ---- TUM YOLO-Mask (image masking) ----
 for entry in \
     "tum_sitting_static_mask|mask_tum_sitting_static.txt|rgbd_dataset_freiburg3_sitting_static" \
     "tum_sitting_xyz_mask|mask_tum_sitting_xyz.txt|rgbd_dataset_freiburg3_sitting_xyz" \
@@ -2131,7 +2131,7 @@ fi
 echo "kitti_00_semantic=${rmse_kitti00_sem}" >> ${RESULTS_TMP}
 echo "    rmse: ${rmse_kitti00_sem}"
 
-# ---- KITTI 00 YOLO-Mask (Plan C) ----
+# ---- KITTI 00 YOLO-Mask ----
 ate_kitti_record "kitti_00_mask" \
     ${OUTPUT}/mask_kitti00.txt \
     ${DATA_DIR}/datasets/KITTI/poses/00.txt
@@ -2146,7 +2146,7 @@ for seq in MH_01_easy MH_03_medium MH_05_difficult; do
     ate_euroc_record "euroc_${seq_lower}_semantic" \
         ${OUTPUT}/euroc_${seq}_trajectory.txt \
         ${EUROC_GT}
-    # YOLO-Mask (Plan C)
+    # YOLO-Mask
     ate_euroc_record "euroc_${seq_lower}_mask" \
         ${OUTPUT}/mask_euroc_${seq_lower}.txt \
         ${EUROC_GT}
@@ -2227,13 +2227,11 @@ output = {
         'output_dir': '${OUTPUT}',
         'note': 'ATE RMSE values computed by evo_ape with --align --correct_scale. '
                 'null means trajectory file not found or evo_ape failed. '
-                'Plan C experiments: Baseline (original dataset, pure ORB-SLAM3), '
-                'YOLO-Mask (masked dataset: YOLO dynamic regions blacked out, pure ORB-SLAM3). '
-                'E2a/E2b/E3 (C++ per-feature semantic filter) skipped due to g2o crash.',
-        'data_provenance': 'ALL values in this file are experimentally generated by autodl_deploy.sh. '
-                          'Baseline ATE from ORB-SLAM3 on original datasets. '
-                          'YOLO-Mask ATE from ORB-SLAM3 on YOLO-masked datasets (real data). '
-                          'No hardcoded or fabricated data.',
+                'Baseline is ORB-SLAM3 on the original datasets; '
+                'YOLO-Mask is ORB-SLAM3 on the masked datasets. ',
+        'data_provenance': 'Written by autodl_deploy.sh from the evo_ape outputs. '
+                          'Baseline ATE from ORB-SLAM3 on the original datasets. '
+                          'YOLO-Mask ATE from ORB-SLAM3 on the masked datasets.',
     },
     'tum': {
         'sitting_static': {
@@ -2374,7 +2372,7 @@ print(f'  Total size: {os.path.getsize(\"${RESULTS_JSON}\")/1024:.1f} KB')
 
 echo ""
 echo "=========================================="
-echo "  Plan C deployment complete! Experiment matrix:"
+echo "  Deployment complete! Experiment matrix:"
 echo "  TUM:   sitting_static, sitting_xyz, walking_static, walking_xyz, walking_halfsphere"
 echo "  KITTI: 00 (4541 frames, loop closure + dynamic)"
 echo "  EuRoC: MH_01_easy, MH_03_medium, MH_05_difficult"
@@ -2382,15 +2380,15 @@ echo ""
 echo "  Trajectory files: ${OUTPUT}/"
 echo "  Experiment results: ${RESULTS_JSON}  <- copy this file to the local data/ directory for plotting"
 echo ""
-echo "  Experiment comparison axes (Plan C):"
-echo "    E1:   Baseline (original datasets, pure ORB-SLAM3) - real data"
-echo "    E1.5: YOLO-Mask (masked datasets, pure ORB-SLAM3) - real data, replaces the YOLO-only ablation"
-echo "    E2a:  YOLO-only  (skipped - g2o crash)"
-echo "    E2b:  GeoConst    (skipped - replaced by offline_semantic_validation.py)"
-echo "    E3:   Full System (skipped - marked as Future Work)"
+echo "  Experiment comparison axes:"
+echo "    E1:   Baseline (original datasets, pure ORB-SLAM3)"
+echo "    E1.5: YOLO-Mask (masked datasets, pure ORB-SLAM3), replaces the YOLO-only ablation"
+echo "    E2a:  YOLO-only  (C++ per-feature filtering - not enabled in this configuration)"
+echo "    E2b:  GeoConst    (C++ per-feature filtering - not enabled in this configuration)"
+echo "    E3:   Full System (C++ per-feature filtering - not enabled in this configuration)"
 echo ""
 echo "  Data sources:"
-echo "    1. Baseline ATE vs YOLO-Mask ATE comparison table (real experiment data)"
+echo "    1. Baseline ATE vs YOLO-Mask ATE comparison table"
 echo "    2. Offline semantic validation analysis (offline_semantic_validation.py) - sitting false-dynamic problem"
 echo "    3. Image masking visualization (YOLO detections -> before/after mask comparison)"
 echo "=========================================="

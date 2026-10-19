@@ -3,7 +3,7 @@
 [![Python 3.10](https://img.shields.io/badge/Python-3.10-blue)](https://www.python.org/)
 [![Matplotlib](https://img.shields.io/badge/Matplotlib-3.5+-orange)](https://matplotlib.org/)
 
-**Figure and table generation**: produces the 6 figures and 9 CSV tables from the experiment data.
+**Figure and table generation**: produces the 5 figures and 5 CSV tables from the experiment data.
 
 ---
 
@@ -16,26 +16,21 @@ semantic-slam-figures/
 ├── data/
 │   └── experiment_results.json   # Experiment data (exported by the ATE evaluation in autodl_deploy.sh)
 ├── src/
-│   ├── generate_figures.py       # Figure generation (6 PNGs)
-│   ├── generate_tables.py        # Table generation (9 CSVs)
+│   ├── generate_figures.py       # Figure generation (5 PNGs)
+│   ├── generate_tables.py        # Table generation (5 CSVs)
 └── output/
-    ├── figures/                  # Generated figures (300 DPI PNG)
+    ├── figures/                  # Generated figures (600 DPI PNG)
     │   ├── fig1_system_architecture.png
     │   ├── fig2_tum_ate.png
     │   ├── fig3_scene_type.png
     │   ├── fig4_kitti_ate.png
-    │   ├── fig5_timing.png
-    │   └── fig6_parameter_sensitivity.png
+    │   └── fig5_timing.png
     └── tables/                   # Generated tables (UTF-8 CSV)
         ├── table1_tum_ate_results.csv
         ├── table2_kitti_ate_results.csv
-        ├── table3_ablation_study.csv
         ├── table4_timing_profiling.csv
         ├── table5_failure_analysis.csv
-        ├── table6_parameter_sensitivity.csv
-        ├── table7_literature_comparison.csv
-        ├── table8_euroc_results.csv
-        └── table9_false_dynamic_analysis.csv
+        └── table7_literature_comparison.csv
 ```
 
 ---
@@ -57,7 +52,7 @@ cd src
 python generate_figures.py
 ```
 
-Writes 6 PNG figures to `output/figures/` at 300 DPI.
+Writes 5 PNG figures to `output/figures/` at 600 DPI.
 
 ### Generate tables
 
@@ -66,24 +61,21 @@ cd src
 python generate_tables.py
 ```
 
-Writes 9 CSV tables to `output/tables/` with a UTF-8 BOM.
+Writes 5 CSV tables to `output/tables/` with a UTF-8 BOM.
 
 ---
 
 ## Data source
 
-All data comes from `data/experiment_results.json`, which `autodl_deploy.sh` (in the parent `semantic-slam-experiment/` directory) exports automatically after running the real experiments on the AutoDL cloud. The JSON structure:
+All data comes from `data/experiment_results.json`, which `autodl_deploy.sh` (in the parent `semantic-slam-experiment/` directory) exports after the runs on the AutoDL cloud. The JSON structure:
 
 | Field | Description |
 |------|------|
-| `tum` | Baseline / YOLO-Mask ATE for the 5 TUM RGB-D sequences |
-| `kitti` | Baseline / YOLO-Mask ATE for the KITTI 00 sequence |
-| `euroc` | ATE for the 3 EuRoC sequences (MH_01/03/05), currently null, to be fixed |
-| `timing` | Wall-clock time, CPU time, and peak memory for 3 representative sequences |
-| `failure_analysis` | Tracking-loss counts and failure types for 4 challenging sequences |
-| `parameter_sensitivity` | ATE data for 3 parameter sweeps (ORB feature count, semantic weight, dynamic threshold) |
-
-> Every value is produced by the experiments. There is no hardcoded or simulated data.
+| `tum` | Baseline / YOLO-Mask SE(3) ATE (five-run mean ± std) for the 5 TUM RGB-D sequences |
+| `kitti` | Baseline / YOLO-Mask SE(3) ATE for the KITTI 00 sequence |
+| `timing` | Offline pre-processing cost (detection + masking time, per-frame cost, FPS, peak memory) for 2 representative sequences |
+| `failure_analysis` | Tracking-loss counts and failure types for 3 challenging sequences |
+| `parameter_sensitivity` | ATE data for the ORB feature-count sweep |
 
 ---
 
@@ -97,19 +89,17 @@ All data comes from `data/experiment_results.json`, which `autodl_deploy.sh` (in
 | Figure 2 | `fig2_tum_ate.png` | TUM RGB-D Baseline vs YOLO-Mask ATE, two panels: absolute ATE + relative improvement |
 | Figure 3 | `fig3_scene_type.png` | Mean ATE for static vs dynamic scenes |
 | Figure 4 | `fig4_kitti_ate.png` | KITTI 00 ATE comparison |
-| Figure 5 | `fig5_timing.png` | Runtime profiling (wall-clock time, CPU time, memory in one grouped bar chart) |
-| Figure 6 | `fig6_parameter_sensitivity.png` | Parameter sensitivity (ORB feature count, semantic weight, dynamic threshold, three line panels) |
+| Figure 5 | `fig5_timing.png` | Offline pre-processing cost (stacked detection + masking time per sequence, with peak memory overlaid) |
 
 ### Tables (`generate_tables.py`)
 
 | Table | File | Content |
 |------|--------|-------------|
 | Table I | `table1_tum_ate_results.csv` | TUM RGB-D ATE results (5 sequences × 2 methods + scene types) |
-| Table II | `table2_kitti_ate_results.csv` | KITTI 00 ATE results |
-| Table III | `table3_ablation_study.csv` | Ablation study (6 sequences + interpretation) |
-| Table IV | `table4_timing_profiling.csv` | Runtime profiling (wall-clock, CPU, memory, CPU utilization) |
+| Table II | `table2_kitti_ate_results.csv` | KITTI 00/01/04/07 ATE results |
+| Table IV | `table4_timing_profiling.csv` | Offline pre-processing cost (detection, masking, total, ms/frame, FPS, peak memory) |
 | Table V | `table5_failure_analysis.csv` | Failure case analysis (failure types, tracking-loss counts) |
-| Table VI | `table6_parameter_sensitivity.csv` | Parameter sensitivity (3 parameters × 6 ATE levels) |
+| Table VII | `table7_literature_comparison.csv` | Literature comparison on TUM walking sequences |
 
 ---
 
@@ -117,21 +107,26 @@ All data comes from `data/experiment_results.json`, which `autodl_deploy.sh` (in
 
 ### TUM RGB-D ATE results
 
+Five-run SE(3) (scale-fixed) mean ± sample standard deviation (ddof = 1).
+
 | Sequence | Baseline ATE (m) | YOLO-Mask ATE (m) | Improvement |
 |------|-----------------|-------------------|------|
-| sitting_static | 0.0072 | 0.0102 | -41.4% |
-| sitting_xyz | 0.0092 | 0.0311 | -239.5% |
-| walking_static | 0.0252 | 0.0117 | **+53.6%** |
-| walking_xyz | 0.2856 | 0.0168 | **+94.1%** |
-| walking_halfsphere | 0.2034 | 0.0271 | **+86.7%** |
+| sitting_static | 0.0101 ± 0.0007 | 0.0116 ± 0.0014 | -14.9% |
+| sitting_xyz | 0.0092 ± 0.0002 | 0.0737 ± 0.0586 | -701.1% |
+| walking_static | 0.3494 ± 0.0363 | 0.0184 ± 0.0057 | **+94.7%** |
+| walking_xyz | 0.6499 ± 0.0655 | 0.0208 ± 0.0021 | **+96.8%** |
+| walking_halfsphere | 0.3580 ± 0.0702 | 0.0533 ± 0.0083 | **+85.1%** |
 
-### Runtime performance
+### Offline pre-processing cost
 
-| Sequence | Frames | Wall-clock time | Peak memory |
-|------|------|---------|---------|
-| TUM walking_xyz | 827 | 37.42 s | 0.895 GB |
-| KITTI 00 | 4541 | 65.66 s | 1.184 GB |
-| EuRoC MH_03 | 2700 | 85.54 s | 0.741 GB |
+Detection plus masking, measured before SLAM. Both stages run once, ahead of the
+SLAM run; the SLAM runtime itself is identical across configurations and is not
+included here.
+
+| Sequence | Frames | Detection + masking (s) | ms/frame | FPS | Peak memory |
+|------|------|---------|---------|------|------|
+| TUM walking_xyz | 859 | 37.38 | 43.5 | 23.0 | 1.033 GB |
+| KITTI 00 | 4,541 | 167.24 | 36.8 | 27.2 | 1.039 GB |
 
 ---
 
@@ -158,7 +153,7 @@ Both scripts carry the values recorded from the experiment runs; they do not rea
 ### `generate_figures.py`
 
 - **Dependencies**: matplotlib, numpy
-- **Output format**: PNG (300 DPI)
+- **Output format**: PNG (600 DPI)
 - **Output directory**: `output/figures/`
 - **Notes**: uses the `Agg` backend, no GUI needed, suited to headless servers
 

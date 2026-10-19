@@ -23,13 +23,11 @@ semantic-slam-experiment/
 ├── scripts/                      # Python utility scripts
 │   ├── yolov8_offline_inference.py      # Offline YOLOv8 inference
 │   ├── mask_dataset.py                  # Dynamic-region mask generation
-│   ├── random_mask_dataset.py           # Random-mask control datasets (E1.6)
+│   ├── random_mask_dataset.py           # Random-mask control datasets
 │   ├── associate.py                     # TUM RGB-D timestamp alignment
 │   ├── compute_ate.py                   # Per-sequence ATE computation
-│   ├── batch_compute_ate.py             # Batch ATE computation (EuRoC + TUM walking)
-│   ├── aggregate_multi_run.py           # Multi-run ATE statistics (P1)
 │   ├── offline_semantic_validation.py   # Offline semantic filtering analysis
-│   └── generate_planb_report.py         # Experiment report generation
+│   └── experiments/                     # Supplemental ablation scripts (studies 1-10; see experiments/README.md)
 │
 ├── src/                          # C++ SemanticSLAM module
 │   ├── CMakeLists.txt            # CMake build configuration
@@ -43,8 +41,7 @@ semantic-slam-experiment/
 ├── patches/                      # ORB-SLAM3 source patches
 │   └── patch_orbslam3.py         # Injects the SemanticSLAM module into ORB-SLAM3
 │
-├── models/                       # Pretrained models
-│   ├── models.zip                # Bundled model files for one-file upload, extract to this folder
+├── models/                       # Pretrained models (populated at run time by autodl_deploy.sh)
 │   ├── yolov8n-seg.pt            # YOLOv8-nano segmentation model (~6.7MB)
 │   ├── coco.names                # COCO 80 classes
 │   └── ORBvoc.txt                # ORB-SLAM3 vocabulary / BoW (~138MB)
@@ -69,15 +66,12 @@ semantic-slam-experiment/
 
 ---
 
-## Experiment plans
+## Method
 
-| Plan | Method | Description | Status |
-|------|------|------|------|
-| **Plan A** | C++ online feature filtering | Modifies the ORB-SLAM3 tracking pipeline, filters dynamic features per frame inside Track() | Failed (g2o crash) |
-| **Plan B** | C++ semantic weights | Assigns low weights to semantic features before g2o optimization | Failed (g2o crash) |
-| **Plan C** | Offline image masking | Masks dynamic regions with YOLOv8 in a preprocessing stage, feeds unmodified ORB-SLAM3 | **Adopted** |
+### Offline semantic masking
 
-### Plan C workflow
+Dynamic regions are masked with YOLOv8 in a pre-processing stage, and the masked
+images are fed into unmodified ORB-SLAM3.
 
 ```
 raw images -> YOLOv8-nano offline inference -> detection JSON
@@ -86,10 +80,6 @@ raw images -> YOLOv8-nano offline inference -> detection JSON
                                         v
                           unmodified ORB-SLAM3 -> trajectories
 ```
-
-### Why g2o crashed
-
-Plans A/B crash at runtime. The backtrace points to a double-free in the destructor of `g2o::LinearSolverDense`. The root cause is that `Optimizer::PoseOptimization()` and `Tracking::Track()` in ORB-SLAM3 never properly synchronize the g2o optimizer lifecycle with the feature-pointer lifecycle. After semantic feature filtering, deleted feature pointers are still referenced internally by g2o. The full backtrace is in the Plan B section of `autodl_deploy.sh`.
 
 ---
 
@@ -110,7 +100,7 @@ The script runs 8 stages automatically:
 4. **[3/8]** Download the YOLOv8-nano model (PT + ONNX + TensorRT)
 5. **[4/8]** Download datasets (TUM fr3 x5, KITTI 00, EuRoC MH x3)
 6. **[5/8]** Run offline YOLOv8 inference (produces detection JSON)
-7. **[6/8]** Generate the masked dataset (core step of Plan C)
+7. **[6/8]** Generate the masked dataset (offline dynamic-region masking)
 8. **[7/8]** Run all experiments (Baseline, YOLO-Mask, ablation, parameter sweep)
 9. **[8/8]** Run ATE evaluation and produce `experiment_results.json`
 
@@ -182,7 +172,7 @@ Per-frame JSON format:
 
 Reads the YOLO detections, zeros out pixels of dynamic object regions, and produces a masked copy of the dataset.
 
-**Dynamic classes** (COCO IDs): `person(0), bicycle(1), car(2), motorcycle(3), bus(5), truck(7), cat(16), dog(17)`
+**Dynamic classes** (COCO IDs): `person(0), bicycle(1), car(2), motorcycle(3), bus(5), truck(7), dog(16), cat(17)`
 
 ```bash
 python scripts/mask_dataset.py --all \
@@ -204,15 +194,6 @@ Outputs:
 python scripts/offline_semantic_validation.py \
     --detections data/detections \
     --output output/semantic_validation.json
-```
-
-### `generate_planb_report.py`
-
-Builds a combined validation report with the Baseline ATE comparison table, offline semantic filtering analysis, dynamic degradation analysis, and theoretical improvement estimates.
-
-```bash
-python scripts/generate_planb_report.py
-# output: output/planb_validation_report.md
 ```
 
 ### `associate.py`
@@ -320,11 +301,11 @@ Coverage:
 
 | Dataset | Sequence | Frames | Size | Notes |
 |--------|------|------|------|------|
-| TUM fr3 | sitting_static | 711 | ~423MB | Two people sitting and talking (static baseline) |
-| TUM fr3 | sitting_xyz | 859 | ~739MB | Next to a coffee machine, small motion |
-| TUM fr3 | walking_static | 797 | ~452MB | Static camera, two people walking |
-| TUM fr3 | walking_xyz | 827 | ~503MB | Camera and people both move |
-| TUM fr3 | walking_halfsphere | 1068 | ~610MB | Large rotation + pedestrians |
+| TUM fr3 | sitting_static | 707 | ~423MB | Two people sitting and talking (static baseline) |
+| TUM fr3 | sitting_xyz | 1261 | ~739MB | Next to a coffee machine, small motion |
+| TUM fr3 | walking_static | 743 | ~452MB | Static camera, two people walking |
+| TUM fr3 | walking_xyz | 859 | ~503MB | Camera and people both move |
+| TUM fr3 | walking_halfsphere | 1067 | ~610MB | Large rotation + pedestrians |
 | KITTI | 00 | 4541 | n/a | Loop closure + dynamic vehicles/pedestrians |
 | EuRoC | MH_01_easy | 3682 | ~150MB | Bright machine hall |
 | EuRoC | MH_03_medium | 2700 | ~105MB | Medium difficulty |
@@ -346,14 +327,16 @@ Coverage:
 
 ### Key results
 
+Five-run SE(3) ATE mean ± standard deviation (ddof = 1).
+
 | Sequence | Baseline ATE (m) | YOLO-Mask ATE (m) | Improvement |
 |------|-----------------|-------------------|------|
-| TUM walking_xyz | 0.2856 | 0.0168 | **+94.1%** |
-| TUM walking_halfsphere | 0.2034 | 0.0271 | **+86.7%** |
-| TUM walking_static | 0.0252 | 0.0117 | **+53.6%** |
-| TUM sitting_static | 0.0072 | 0.0102 | -41.4% |
-| TUM sitting_xyz | 0.0092 | 0.0311 | -239.5% |
-| KITTI 00 | 0.9671 | 1.1130 | -15.1% |
+| TUM sitting_static | 0.0101 ± 0.0007 | 0.0116 ± 0.0014 | -14.9% |
+| TUM sitting_xyz | 0.0092 ± 0.0002 | 0.0737 ± 0.0586 | -701.1% |
+| TUM walking_static | 0.3494 ± 0.0363 | 0.0184 ± 0.0057 | **+94.7%** |
+| TUM walking_xyz | 0.6499 ± 0.0655 | 0.0208 ± 0.0021 | **+96.8%** |
+| TUM walking_halfsphere | 0.3580 ± 0.0702 | 0.0533 ± 0.0083 | **+85.1%** |
+| KITTI 00 | 1.2821 ± 0.0288 | 1.3602 ± 0.0759 | -6.1% |
 
 ### Output files
 
@@ -399,25 +382,25 @@ output/
 
 ## Performance
 
-| Sequence | Wall-clock time | Peak memory | Model |
+| Sequence | Offline pre-processing time | Peak memory | Model |
 |------|---------|---------|------|
-| TUM walking_xyz | 37.4 s | <1.2 GB | YOLOv8-nano (3.2M params) |
-| KITTI 00 | 65.7 s | <1.2 GB | Same as above |
+| TUM walking_xyz | 37.38 s | <1.2 GB | YOLOv8-nano (3.2M params) |
+| KITTI 00 | 167.24 s | <1.2 GB | Same as above |
 | EuRoC MH_03 | 85.5 s | <1.2 GB | Same as above |
 
-Offline YOLOv8-nano inference runs at roughly 100 FPS on an RTX 3080. Masking is fully offline, so SLAM has zero extra runtime cost.
+Offline detection plus masking runs at 23-27 FPS on an RTX 3080 (per-sequence
+throughput is listed in the timing table). Masking is fully offline, so SLAM has
+no extra runtime cost.
 
 ---
 
 ## Known issues
 
-1. **g2o crash**: the C++ online feature filtering in Plans A/B triggers SIGSEGV (double-free) when `g2o::LinearSolverDense` is destroyed, confirmed by backtrace. Plan C avoids this entirely by masking images offline.
+1. **EuRoC ATE evaluation**: ORB-SLAM3 repeatedly loses tracking in the low-texture indoor industrial scenes, so ATE cannot be computed reliably. The pipeline finishes running (timing data is recorded in `table4_timing_profiling.csv`), but the EuRoC ATE comparison is not reported.
 
-2. **EuRoC ATE evaluation**: ORB-SLAM3 repeatedly loses tracking in the low-texture indoor industrial scenes, so ATE cannot be computed reliably. The pipeline finishes running (timing data is recorded in `table4_timing_profiling.csv`), but the EuRoC ATE comparison is not reported.
+2. **False-dynamic degradation**: instances of dynamic classes in static scenes (e.g. sitting people) get masked by mistake, which causes over-filtering. The method cannot tell a moving instance of a dynamic class from a static one.
 
-3. **False-dynamic degradation**: instances of dynamic classes in static scenes (e.g. sitting people) get masked by mistake, which causes over-filtering. Plan C cannot tell a moving instance of a dynamic class from a static one.
-
-4. **COCO class limit**: detection is restricted to 80 COCO classes, so domain-specific dynamic objects such as road signs and industrial equipment are never detected.
+3. **COCO class limit**: detection is restricted to 80 COCO classes, so domain-specific dynamic objects such as road signs and industrial equipment are never detected.
 
 ---
 

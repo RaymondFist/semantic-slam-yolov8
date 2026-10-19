@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dynamic Region Masking Script for Datasets (Plan C: Image Masking)
+Dynamic Region Masking Script for Datasets (offline dynamic-region masking)
 ==============================================
 Reads YOLOv8 detection JSON and zeros out (blackens) dynamic object regions in the RGB images,
 producing a masked copy of the dataset. The masked dataset is run directly with stock ORB-SLAM3,
@@ -32,6 +32,9 @@ from pathlib import Path
 # Dynamic COCO class IDs
 DYNAMIC_COCO_IDS = {0, 1, 2, 3, 5, 7, 16, 17}
 
+# Bounding-box expansion (pixels) applied when zeroing dynamic regions.
+DEFAULT_DILATE_PX = 3
+
 
 def load_detection_map(detection_dir):
     """Load all detection JSON files and build a frame_id -> detections mapping."""
@@ -59,7 +62,7 @@ def load_detection_map(detection_dir):
     return det_map
 
 
-def mask_image(image, detections, dilate_px=3):
+def mask_image(image, detections, dilate_px=DEFAULT_DILATE_PX):
     """Zero out dynamic object bbox regions in the image.
 
     Args:
@@ -91,7 +94,7 @@ def mask_image(image, detections, dilate_px=3):
     return image
 
 
-def mask_dataset_tum(dataset_dir, detection_dir, output_dir):
+def mask_dataset_tum(dataset_dir, detection_dir, output_dir, dilate_px=DEFAULT_DILATE_PX):
     """Mask a TUM RGB-D dataset.
 
     TUM directory layout:
@@ -165,7 +168,7 @@ def mask_dataset_tum(dataset_dir, detection_dir, output_dir):
         dets = det_map.get(idx, [])
 
         if dets:
-            mask_image(img, dets)
+            mask_image(img, dets, dilate_px)
             masked_count += 1
 
         # Save the masked image
@@ -180,7 +183,7 @@ def mask_dataset_tum(dataset_dir, detection_dir, output_dir):
     return True
 
 
-def mask_dataset_kitti(dataset_dir, detection_dir, output_dir):
+def mask_dataset_kitti(dataset_dir, detection_dir, output_dir, dilate_px=DEFAULT_DILATE_PX):
     """Mask a KITTI Odometry dataset.
 
     KITTI directory layout:
@@ -219,7 +222,7 @@ def mask_dataset_kitti(dataset_dir, detection_dir, output_dir):
             dets = det_map.get(frame_id, [])
             if dets:
                 # Grayscale images would need a BGR conversion for color assignment, but black is 0 in grayscale too
-                mask_image(img, dets)
+                mask_image(img, dets, dilate_px)
                 masked_count += 1
 
             dst_path = os.path.join(dst_dir, img_name)
@@ -238,7 +241,7 @@ def mask_dataset_kitti(dataset_dir, detection_dir, output_dir):
     return True
 
 
-def mask_dataset_euroc(dataset_dir, detection_dir, output_dir):
+def mask_dataset_euroc(dataset_dir, detection_dir, output_dir, dilate_px=DEFAULT_DILATE_PX):
     """Mask an EuRoC MAV dataset.
 
     EuRoC directory layout:
@@ -277,7 +280,7 @@ def mask_dataset_euroc(dataset_dir, detection_dir, output_dir):
 
             dets = det_map.get(frame_id, [])
             if dets:
-                mask_image(img, dets)
+                mask_image(img, dets, dilate_px)
                 masked_count += 1
 
             dst_path = os.path.join(dst_dir, img_name)
@@ -321,12 +324,14 @@ def detect_dataset_type(dataset_dir):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Mask dynamic regions in datasets (Plan C)")
+    parser = argparse.ArgumentParser(description="Mask dynamic regions in datasets (offline dynamic-region masking)")
     parser.add_argument("--detections", help="detection JSON directory")
     parser.add_argument("--dataset", help="source dataset directory")
     parser.add_argument("--output", help="output directory for the masked dataset")
     parser.add_argument("--dataset-type", choices=["tum", "kitti", "euroc", "auto"],
                         default="auto", help="dataset type (default: auto detect)")
+    parser.add_argument("--dilate-px", type=int, default=DEFAULT_DILATE_PX,
+                        help="bbox expansion in pixels (default: 3)")
     parser.add_argument("--all", action="store_true",
                         help="batch process all known sequences")
     parser.add_argument("--datasets", default="data/datasets",
@@ -356,11 +361,11 @@ def main():
     print(f"  Detections: {args.detections}")
 
     if ds_type == "tum":
-        ok = mask_dataset_tum(args.dataset, args.detections, args.output)
+        ok = mask_dataset_tum(args.dataset, args.detections, args.output, args.dilate_px)
     elif ds_type == "kitti":
-        ok = mask_dataset_kitti(args.dataset, args.detections, args.output)
+        ok = mask_dataset_kitti(args.dataset, args.detections, args.output, args.dilate_px)
     elif ds_type == "euroc":
-        ok = mask_dataset_euroc(args.dataset, args.detections, args.output)
+        ok = mask_dataset_euroc(args.dataset, args.detections, args.output, args.dilate_px)
     else:
         print(f"[ERROR] unsupported dataset type: {ds_type}")
         sys.exit(1)
@@ -414,11 +419,11 @@ def batch_mask_all(args):
         print(f"{'='*60}")
 
         if ds_type == "tum":
-            ok = mask_dataset_tum(ds_path, det_path, out_path)
+            ok = mask_dataset_tum(ds_path, det_path, out_path, args.dilate_px)
         elif ds_type == "kitti":
-            ok = mask_dataset_kitti(ds_path, det_path, out_path)
+            ok = mask_dataset_kitti(ds_path, det_path, out_path, args.dilate_px)
         elif ds_type == "euroc":
-            ok = mask_dataset_euroc(ds_path, det_path, out_path)
+            ok = mask_dataset_euroc(ds_path, det_path, out_path, args.dilate_px)
         else:
             ok = False
 

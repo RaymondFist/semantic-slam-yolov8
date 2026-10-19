@@ -139,15 +139,7 @@ public:
             // No need to call submitFrame manually
 
             auto t0 = std::chrono::high_resolution_clock::now();
-            if (i < 5 || i % 100 == 0) {
-                std::cout << "[DEBUG] Frame " << i << "/" << assoc.size()
-                          << " size=" << imRGB.cols << "x" << imRGB.rows
-                          << " calling TrackRGBD..." << std::flush;
-            }
             Sophus::SE3f Tcw = SLAM.TrackRGBD(imRGB, imDepth, ts);
-            if (i < 5 || i % 100 == 0) {
-                std::cout << " OK" << std::endl;
-            }
             auto t1 = std::chrono::high_resolution_clock::now();
 
             total_time += std::chrono::duration<double>(t1 - t0).count();

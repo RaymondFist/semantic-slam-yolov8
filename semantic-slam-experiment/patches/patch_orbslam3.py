@@ -307,33 +307,25 @@ def patch_tracking_cc():
     semantic_filter_block = (
         '    // SEMANTIC_SLAM_PATCH_TRACKING_CC: Semantic filtering\n'
         '    if(mpSemanticSLAM && !mImGray.empty()) {\n'
-        '        fprintf(stderr, "[DEBUG_TRACK] Frame %lld: submitFrame+getDetectionResult\\n", (long long)mCurrentFrame.mnId);\n'
         '        mpSemanticSLAM->submitFrame(mImGray, mCurrentFrame.mTimeStamp, mCurrentFrame.mnId);\n'
         '        auto det = mpSemanticSLAM->getDetectionResult(mCurrentFrame.mnId, 50.0);\n'
-        '        fprintf(stderr, "[DEBUG_TRACK] Frame %lld: det.valid=%d instances=%zu lastFrame.empty=%d\\n",\n'
-        '                (long long)mCurrentFrame.mnId, (int)det.valid, det.instances.size(), (int)mLastFrameImage.empty());\n'
         '        if(det.valid && !det.instances.empty()\n'
         '           && !mLastFrameImage.empty()\n'
         '           && !mCurrentFrame.mvKeysUn.empty()\n'
         '           && mLastFrameImage.size() == mImGray.size()\n'
         '           && mLastFrameImage.type() == mImGray.type()) {\n'
-        '            fprintf(stderr, "[DEBUG_TRACK] Frame %lld: entering filter block\\n", (long long)mCurrentFrame.mnId);\n'
         '            // SEMANTIC_SLAM_FIX: try-catch to prevent segfault from\n'
         '            // filterDynamicFeatures (e.g. invalid detection data, OpenCV\n'
         '            // optical flow failure). On exception, skip filtering and\n'
         '            // continue with normal tracking.\n'
         '            try {\n'
-        '                fprintf(stderr, "[DEBUG_TRACK] Frame %lld: calling filterDynamicFeatures\\n", (long long)mCurrentFrame.mnId);\n'
         '                // Pass empty prev/curr points so processFrameMasked computes\n'
         '                // optical flow internally (backward flow: curr -> prev)\n'
         '                std::vector<cv::Point2f> no_prev_pts, no_curr_pts;\n'
         '                auto dynamic_mask = mpSemanticSLAM->filterDynamicFeatures(\n'
         '                    mImGray, mLastFrameImage, det,\n'
         '                    mCurrentFrame.mvKeysUn, no_prev_pts, no_curr_pts);\n'
-        '                fprintf(stderr, "[DEBUG_TRACK] Frame %lld: filterDynamicFeatures returned size=%zu\\n",\n'
-        '                        (long long)mCurrentFrame.mnId, dynamic_mask.size());\n'
         '                mCurrentFrame.SetDynamicMask(dynamic_mask);\n'
-        '                fprintf(stderr, "[DEBUG_TRACK] Frame %lld: SetDynamicMask done\\n", (long long)mCurrentFrame.mnId);\n'
         '                // NOTE: Do NOT mark dynamic features as mvbOutlier.\n'
         '                // mvbOutlier is used by PoseOptimization which relies on\n'
         '                // a valid g2o internal state. Marking too many outliers\n'
@@ -345,7 +337,7 @@ def patch_tracking_cc():
         '                std::cerr << "[SemanticSLAM] filterDynamicFeatures exception: "\n'
         '                          << e.what() << " - skipping dynamic filtering" << std::endl;\n'
         '                // CRITICAL: Initialize empty mask on exception to prevent\n'
-        '                // mvDynamicMask from being empty (causes g2o crash)\n'
+        '                // mvDynamicMask from being left unset\n'
         '                std::vector<bool> empty_mask(mCurrentFrame.mvKeysUn.size(), false);\n'
         '                mCurrentFrame.SetDynamicMask(empty_mask);\n'
         '            } catch(...) {\n'
@@ -355,7 +347,6 @@ def patch_tracking_cc():
         '                mCurrentFrame.SetDynamicMask(empty_mask);\n'
         '            }\n'
         '        } else {\n'
-        '            fprintf(stderr, "[DEBUG_TRACK] Frame %lld: SKIPPED filter block, initializing empty mask\\n", (long long)mCurrentFrame.mnId);\n'
         '            // CRITICAL: Always initialize mvDynamicMask, even when no detections exist.\n'
         '            // An empty mvDynamicMask causes g2o LinearSolverDense double-free\n'
         '            // in PoseOptimization (SIGSEGV). The mask must always be sized to\n'
@@ -364,7 +355,6 @@ def patch_tracking_cc():
         '            mCurrentFrame.SetDynamicMask(empty_mask);\n'
         '        }\n'
         '        mLastFrameImage = mImGray.clone();\n'
-        '        fprintf(stderr, "[DEBUG_TRACK] Frame %lld: semantic filter done\\n", (long long)mCurrentFrame.mnId);\n'
         '    }\n'
     )
 
@@ -732,19 +722,16 @@ def patch_optimizer_cc():
 
 
 # ============================================================================
-# Patch 7b: Optimizer.cc - Fix PoseOptimization g2o crash (BUG FIX #2)
+# Patch 7b: Optimizer.cc - Use LinearSolverEigen in PoseOptimization
 #
-# The patched ORB-SLAM3 crashes with SIGSEGV in PoseOptimization:
+# PoseOptimization builds its solver on the Eigen LDLT decomposition:
 #   Eigen::LDLT::compute() -> g2o::LinearSolverDense::solve()
 #
-# Root cause: LinearSolverDense uses LDLT decomposition which requires
-# positive-definite matrices. When the Hessian becomes singular (e.g.,
-# due to degenerate features), LDLT crashes with SIGSEGV instead of
-# returning a numerical error.
-#
-# Fix: Replace LinearSolverDense with LinearSolverEigen in PoseOptimization.
-# LinearSolverEigen uses ColPivHouseholderQR for dense matrices, which is
-# robust to singular matrices and will not crash.
+# LDLT requires a positive-definite matrix, which the Hessian is not
+# guaranteed to satisfy for degenerate feature configurations. This patch
+# replaces LinearSolverDense with LinearSolverEigen in PoseOptimization.
+# LinearSolverEigen uses ColPivHouseholderQR for dense matrices, which
+# handles singular matrices robustly.
 # ============================================================================
 def patch_optimizer_pose_optimization():
     filepath = os.path.join(ORB_SLAM3_ROOT, "src", "Optimizer.cc")
@@ -811,19 +798,15 @@ def patch_optimizer_pose_optimization():
 
 
 # ============================================================================
-# Patch 7c: Optimizer.cc - Fix OptimizeSim3 g2o crash (BUG FIX #4)
+# Patch 7c: Optimizer.cc - Use LinearSolverEigen in OptimizeSim3
 #
-# OptimizeSim3 also uses LinearSolverDense with BlockSolverX,
-# causing the same Eigen::LDLT::compute SIGSEGV as PoseOptimization
-# when the Hessian matrix becomes singular during loop closing.
-#
-# Backtrace (captured from runtime crash logs):
+# OptimizeSim3 also uses LinearSolverDense with BlockSolverX:
 #   Eigen::LDLT::compute() -> g2o::LinearSolverDense::solve()
 #     -> OptimizationAlgorithmLevenberg::solve() -> SparseOptimizer::optimize()
 #     -> Optimizer::OptimizeSim3() -> LoopClosing::DetectCommonRegionsFromBoW()
 #     -> LoopClosing::NewDetectCommonRegions() -> LoopClosing::Run()
 #
-# Fix: Replace LinearSolverDense with LinearSolverEigen in OptimizeSim3.
+# This patch replaces LinearSolverDense with LinearSolverEigen in OptimizeSim3.
 # BlockSolverX is used only in OptimizeSim3 (Global/Local BA use BlockSolver_6_3),
 # so replacing all BlockSolverX occurrences is safe.
 # ============================================================================
@@ -1006,7 +989,7 @@ def patch_mlpnpsolver():
                     '\n'
                 )
                 content = content[:nl + 1] + guard + content[nl + 1:]
-                print("  [OK] Added comprehensive guards in MLPnPsolver::computePose")
+                print("  [OK] Added guards in MLPnPsolver::computePose")
             else:
                 print("  [WARN] No newline after MLPnPsolver::computePose opening brace")
         else:
